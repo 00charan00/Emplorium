@@ -36,7 +36,7 @@ public class MeetingService {
         meetingRepository.save(meeting);
         return "Meeting cancelled";
     }
-
+    //only staff id is shown alter it to show staff name also
     public List<Meeting> getActiveMeetings() {
         return meetingRepository.findAllByMeetingStatus(Meeting.MeetingStatus.ACTIVE);
     }
