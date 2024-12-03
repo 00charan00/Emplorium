@@ -1,19 +1,26 @@
 /* General Styles */
-* {
+.login-page{
+  background-image: url("../assets/signupBG.jpg");
+
+}
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+
+} */
 
 .login-container,
 .register-container {
-  max-width: 400px;
+  max-width: 300px;
+  height: 350px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #002b5b; /* Navy blue border */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #ffffff; /* White background */
+  margin-top: 200px;
 }
 
 h2 {
@@ -51,6 +58,7 @@ input:focus {
 }
 
 button {
+  margin-top: 25px;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
