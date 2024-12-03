@@ -10,10 +10,7 @@ import {NgIf} from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-// export class AppComponent {
-//   title = 'client';
-//
-// }
+
 export class AppComponent implements OnInit {
   showHeaderFooter: boolean = true;
 
