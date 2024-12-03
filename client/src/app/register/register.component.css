@@ -7,13 +7,14 @@
 
 .login-container,
 .register-container {
-  max-width: 400px;
+  max-width: 350px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #002b5b; /* Navy blue border */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #ffffff; /* White background */
+  margin-top: 150px;
 }
 
 h2 {
@@ -60,6 +61,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
 button:hover {
