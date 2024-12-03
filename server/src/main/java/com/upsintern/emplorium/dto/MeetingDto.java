@@ -18,4 +18,5 @@ public class MeetingDto {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm a")
     Timestamp meetingDateTime;
     String meetingOwner;
+    String meetingLink;
 }

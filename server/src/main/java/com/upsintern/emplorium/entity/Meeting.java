@@ -23,6 +23,7 @@ public class Meeting {
     String meetingOwner;
     @Enumerated(EnumType.STRING)
     MeetingStatus meetingStatus;
+    String meetingLink;
 
     public enum MeetingStatus{
         ACTIVE,

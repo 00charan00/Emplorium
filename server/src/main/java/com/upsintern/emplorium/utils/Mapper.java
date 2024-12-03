@@ -38,7 +38,8 @@ public class Mapper {
                 meetingDto.getEmpIdList(),
                 meetingDto.getMeetingDateTime(),
                 meetingDto.getMeetingOwner(),
-                Meeting.MeetingStatus.ACTIVE
+                Meeting.MeetingStatus.ACTIVE,
+                meetingDto.getMeetingLink()
         );
     }
 }

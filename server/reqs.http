@@ -3,9 +3,9 @@ POST http://localhost:8080/staff/add
 Content-Type: application/json
 
 {
-  "staffName": "Jessi",
-  "staffEmail": "jessi@gmail.com",
-  "staffPass": "jessi"
+  "staffName": "testemp",
+  "staffEmail": "testemp@gmail.com",
+  "staffPass": "testemp"
 }
 
 ### delete staff
@@ -42,16 +42,17 @@ Authorization: Basic jessi@gmail.com jessi
 
 ### create meeting
 POST http://localhost:8080/meet/create
-Authorization: Basic jessi@gmail.com jessi
+Authorization: Basic testemp@gmail.com testemp
 Content-Type: application/json
 
 {
-  "meetingName": "Saran Raj Bday",
-  "meetingDescription": "Treat",
+  "meetingName": "Meeting With Link",
+  "meetingDescription": "Gmeet link",
   "empIdList": [
     "empIdList_576dbecd2a4f"
   ],
   "meetingDateTime": "2025-10-10 09:09 PM",
+  "meetingLink": "https://meet.google.com/cub-ubor-mjy",
   "meetingOwner": "Charan"
 }
 
