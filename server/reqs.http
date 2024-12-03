@@ -57,8 +57,16 @@ Content-Type: application/json
 }
 
 
-### cancel meetimg
+### cancel meeting
 
 POST http://localhost:8080/meet/cancel?meetingId=Meeting:d0bc1edf-adbe-46ab-ad97-1dab6751f188
 Authorization: Basic testemp@gmail.com testemp
 Content-Type: application/json
+
+
+
+### getActiveMeetings
+GET http://localhost:8080/meet/active
+Authorization: Basic testemp@gmail.com testemp
+Content-Type: application/json
+

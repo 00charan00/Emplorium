@@ -2,11 +2,14 @@ package com.upsintern.emplorium.controller;
 
 
 import com.upsintern.emplorium.dto.MeetingDto;
+import com.upsintern.emplorium.entity.Meeting;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.service.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("meet")
@@ -25,5 +28,11 @@ public class MeetingController {
     public ResponseEntity<ResponseBase> cancelMeeting(@RequestParam String meetingId){
         ResponseBase responseBase = new ResponseBase(meetingService.cancelMeeting(meetingId), true);
         return ResponseEntity.ok(responseBase);
+    }
+
+    @GetMapping("active")
+    public ResponseEntity<List<Meeting>> getActiveMeetings() {
+        List<Meeting> activeMeetings = meetingService.getActiveMeetings();
+        return ResponseEntity.ok(activeMeetings);
     }
 }

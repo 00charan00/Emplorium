@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class MeetingService {
@@ -34,5 +35,9 @@ public class MeetingService {
         meeting.setMeetingStatus(Meeting.MeetingStatus.CANCELLED);
         meetingRepository.save(meeting);
         return "Meeting cancelled";
+    }
+
+    public List<Meeting> getActiveMeetings() {
+        return meetingRepository.findAllByMeetingStatus(Meeting.MeetingStatus.ACTIVE);
     }
 }
