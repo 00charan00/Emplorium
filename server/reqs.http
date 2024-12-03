@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ### delete staff
 DELETE http://localhost:8080/staff/del?staffId=Staff:9f2e07c2-5c02-4d0d-a4fb-f52489e3bd70
-Authorization: Basic jessi@gmail.com jessi
+Authorization: Basic testemp@gmail.com testemp
 
 ### staff login
 POST http://localhost:8080/staff/login
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 ### ADD EVENT
 POST http://localhost:8080/event/addEvent
-Authorization: Basic jessi@gmail.com jessi
+Authorization: Basic testemp@gmail.com testemp
 Content-Type: application/json
 
 {
@@ -35,7 +35,7 @@ Content-Type: application/json
 
 ### Get Events
 GET http://localhost:8080/event/getEvent
-Authorization: Basic jessi@gmail.com jessi
+Authorization: Basic testemp@gmail.com testemp
 
 
 
@@ -60,5 +60,5 @@ Content-Type: application/json
 ### cancel meetimg
 
 POST http://localhost:8080/meet/cancel?meetingId=Meeting:d0bc1edf-adbe-46ab-ad97-1dab6751f188
-Authorization: Basic jessi@gmail.com jessi
+Authorization: Basic testemp@gmail.com testemp
 Content-Type: application/json
