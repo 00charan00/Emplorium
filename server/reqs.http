@@ -3,9 +3,9 @@ POST http://localhost:8080/staff/add
 Content-Type: application/json
 
 {
-  "staffName": "testemp",
-  "staffEmail": "testemp@gmail.com",
-  "staffPass": "testemp"
+  "staffName": "test",
+  "staffEmail": "test@gmail.com",
+  "staffPass": "test"
 }
 
 ### delete staff
@@ -17,8 +17,8 @@ POST http://localhost:8080/staff/login
 Content-Type: application/json
 
 {
-  "staffEmail": "charan@gmail.com",
-  "staffPass": "char0an"
+  "staffEmail": "test@gmail.com",
+  "staffPass": "test"
 }
 
 ### ADD EVENT
@@ -27,10 +27,10 @@ Authorization: Basic testemp@gmail.com testemp
 Content-Type: application/json
 
 {
-  "eventName": "Mine Birthday",
-  "eventVenue": "Porur",
-  "eventDate": "05-12-2024 03:35 AM",
-  "eventDescription": "jollya iruppom"
+  "eventName": "TestEvent2",
+  "eventVenue": "TestLocation2",
+  "eventDate": "05-12-2024 03:35 PM",
+  "eventDescription": "TestDesc2"
 }
 
 ### Get Events
@@ -47,13 +47,13 @@ Content-Type: application/json
 
 {
   "meetingName": "Meeting With Link",
-  "meetingDescription": "Gmeet link",
+  "meetingDescription": "Gmeet link-Test",
   "empIdList": [
-    "empIdList_576dbecd2a4f"
+    "Staff:75d0aae1-0e3a-4049-bcaf-4589981d2c0b"
   ],
   "meetingDateTime": "2025-10-10 09:09 PM",
   "meetingLink": "https://meet.google.com/cub-ubor-mjy",
-  "meetingOwner": "Charan"
+  "meetingOwner": "test"
 }
 
 
