@@ -1,0 +1,63 @@
+### save staff
+POST http://localhost:8080/staff/add
+Content-Type: application/json
+
+{
+  "staffName": "Jessi",
+  "staffEmail": "jessi@gmail.com",
+  "staffPass": "jessi"
+}
+
+### delete staff
+DELETE http://localhost:8080/staff/del?staffId=Staff:9f2e07c2-5c02-4d0d-a4fb-f52489e3bd70
+Authorization: Basic jessi@gmail.com jessi
+
+### staff login
+POST http://localhost:8080/staff/login
+Content-Type: application/json
+
+{
+  "staffEmail": "charan@gmail.com",
+  "staffPass": "char0an"
+}
+
+### ADD EVENT
+POST http://localhost:8080/event/addEvent
+Authorization: Basic jessi@gmail.com jessi
+Content-Type: application/json
+
+{
+  "eventName": "Mine Birthday",
+  "eventVenue": "Porur",
+  "eventDate": "05-12-2024 03:35 AM",
+  "eventDescription": "jollya iruppom"
+}
+
+### Get Events
+GET http://localhost:8080/event/getEvent
+Authorization: Basic jessi@gmail.com jessi
+
+
+
+
+### create meeting
+POST http://localhost:8080/meet/create
+Authorization: Basic jessi@gmail.com jessi
+Content-Type: application/json
+
+{
+  "meetingName": "Saran Raj Bday",
+  "meetingDescription": "Treat",
+  "empIdList": [
+    "empIdList_576dbecd2a4f"
+  ],
+  "meetingDateTime": "2025-10-10 09:09 PM",
+  "meetingOwner": "Charan"
+}
+
+
+### cancel meetimg
+
+POST http://localhost:8080/meet/cancel?meetingId=Meeting:d0bc1edf-adbe-46ab-ad97-1dab6751f188
+Authorization: Basic jessi@gmail.com jessi
+Content-Type: application/json

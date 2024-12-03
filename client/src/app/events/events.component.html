@@ -1,0 +1,42 @@
+<div class="events-page">
+
+  <div class="upcoming-events">
+    <h2>Upcoming Events</h2>
+
+    @if (events != null) {
+      @for (event of events; track event.eventId) {
+        <div class="event-card">
+          <h3>Event Name: {{ event.eventName }}</h3>
+          <p><strong>Location:</strong> {{ event.eventVenue }}</p>
+          <p><strong>Date & Time:</strong> {{ event.eventDate | date:'dd/MM/yyyy HH:mm a'}} </p>
+          <p><strong>Description:</strong> {{ event.eventDescription }}</p>
+        </div>
+      }
+    } @else {
+        <h3 style="color: brown;font-style: italic">No Events</h3>
+    }
+
+  </div>
+
+  <!-- Add Event Section -->
+  <div class="add-event">
+    <h2>Add New Event</h2>
+    <form [formGroup]="eventForm">
+      <label for="event-name">Event Name:</label>
+      <input id="event-name" type="text" placeholder="Enter event name" required [formControl]="eventForm.controls.eventName"/>
+
+      <label for="location">Location:</label>
+      <input id="location" type="text" placeholder="Enter location" required [formControl]="eventForm.controls.eventLocation"/>
+
+      <label for="date-time">Date & Time:</label>
+      <input id="date-time" type="datetime-local" required [formControl]="eventForm.controls.eventDate" />
+<!--      <label for="date-time">Date & Time:</label>-->
+<!--      <input id="date-time" type="datetime-local" required [formControl]="eventForm.controls.eventDate" />-->
+
+      <label for="description">Description:</label>
+      <textarea id="description" rows="4" placeholder="Enter event description" required [formControl]="eventForm.controls.eventDescription"></textarea>
+
+      <button type="submit" (click)="postEvent()">Add Event</button>
+    </form>
+  </div>
+</div>

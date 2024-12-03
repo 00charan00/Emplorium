@@ -1,0 +1,118 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Events Page Layout */
+.events-page {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Split into 2:1 columns */
+    gap: 20px;
+    padding: 20px;
+}
+
+.upcoming-events {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming-events h2 {
+    margin-bottom: 20px;
+    color: #002b5b; /* StaffSync Navy Blue */
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.event-card {
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-card h3 {
+    font-size: 1.2rem;
+    color: #002b5b; /* Navy Blue */
+    margin-bottom: 5px;
+}
+
+.event-card p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555; /* Neutral text color */
+}
+
+/* Add Event Section */
+.add-event {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-event h2 {
+    margin-bottom: 20px;
+    color: #002b5b; /* StaffSync Navy Blue */
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #002b5b; /* Navy Blue */
+    text-transform: uppercase;
+}
+
+input, textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f4f4f9; /* Light Gray Background */
+    color: #002b5b; /* Navy Blue Text */
+}
+
+textarea {
+    resize: none;
+}
+
+/* Submit Button */
+button {
+    background-color: #ffcc00; /* StaffSync Yellow */
+    color: #002b5b; /* Navy Blue */
+    padding: 12px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #e5b100; /* Darker Yellow */
+    transform: scale(1.05); /* Slight Button Zoom */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .events-page {
+        grid-template-columns: 1fr; /* Single-column layout */
+    }
+}

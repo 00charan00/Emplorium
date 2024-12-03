@@ -1,0 +1,100 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-container,
+.register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #002b5b; /* Navy blue border */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* White background */
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #002b5b; /* Navy blue text */
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  color: #555; /* Subtle gray for labels */
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+input:focus {
+  border-color: #002b5b; /* Navy blue on focus */
+  outline: none;
+  background-color: #ffffff;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #002b5b; /* Navy blue */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ffcc00; /* Yellow on hover */
+  color: #002b5b; /* Navy blue text */
+}
+
+a {
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  color: #ffcc00; /* Yellow link text */
+  text-decoration: none;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #002b5b; /* Navy blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container,
+  .register-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  input,
+  button {
+    font-size: 14px;
+  }
+}
