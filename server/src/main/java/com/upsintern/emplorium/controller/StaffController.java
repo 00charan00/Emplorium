@@ -19,8 +19,7 @@ public class StaffController {
 
     @PostMapping("add")
     public ResponseEntity<LoginRegisterResponse> addNewStaff(@RequestBody StaffDto staffDto){
-        LoginRegisterResponse response = new LoginRegisterResponse(staffService.saveNewStaff(staffDto),true, Staff.StaffRole.ROLE_EMPLOYEE);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(staffService.saveNewStaff(staffDto));
     }
 
     @PutMapping("update/{staffId}")

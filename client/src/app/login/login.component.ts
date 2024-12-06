@@ -33,11 +33,12 @@ export class LoginComponent {
       ).subscribe({
         next : value => {
           let role = value.role
+          console.log(value);
           if(value.status){
             if(role == StaffRole.ROLE_EMPLOYEE){
-              this.authService.login(this.email,this.password);
+              this.authService.login(this.email,this.password,value.userName);
             }else if(role == StaffRole.ROLE_ADMIN){
-              this.authService.adminLogin(this.email,this.password)
+              this.authService.adminLogin(this.email,this.password,value.userName)
             }
           }else{
             console.log(value.msg)

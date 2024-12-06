@@ -9,4 +9,9 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
 
+    protected readonly localStorage = localStorage;
+
+  logout() {
+    localStorage.clear();
+  }
 }

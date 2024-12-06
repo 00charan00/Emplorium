@@ -21,10 +21,16 @@ public class StaffService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public String saveNewStaff(StaffDto staffDto){
+    public LoginRegisterResponse saveNewStaff(StaffDto staffDto){
         Staff staff = Mapper.staffMapper(staffDto);
         staff.setStaffPass(passwordEncoder.encode(staff.getStaffPass()));
-        return staffRepository.save(staff).getStaffId();
+        Staff savedStaff = staffRepository.save(staff);
+        return new LoginRegisterResponse(
+                savedStaff.getStaffId(),
+                true,
+                Staff.StaffRole.ROLE_EMPLOYEE,
+                savedStaff.getStaffName()
+        );
     }
 
     public String deleteStaff(String staffId){
@@ -60,7 +66,7 @@ public class StaffService {
             String actualPass = staff.getStaffPass();
             boolean isValidPass = passwordEncoder.matches(pass, actualPass);
             if(isValidPass){
-                return new LoginRegisterResponse(staff.getStaffId(),true,staff.getStaffRole());
+                return new LoginRegisterResponse(staff.getStaffId(),true,staff.getStaffRole(), staff.getStaffName());
             }
             else throw new InvalidDataException("Incorrect password");
         }else throw new InvalidDataException("Provide Proper details");

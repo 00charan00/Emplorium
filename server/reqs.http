@@ -46,8 +46,8 @@ Authorization: Basic testemp@gmail.com testemp
 Content-Type: application/json
 
 {
-  "meetingName": "Meeting With Link",
-  "meetingDescription": "Gmeet link-Test",
+  "meetingName": "saran raj",
+  "meetingDescription": "sdvsdvsv",
   "empIdList": [
     "Staff:75d0aae1-0e3a-4049-bcaf-4589981d2c0b"
   ],
@@ -58,8 +58,7 @@ Content-Type: application/json
 
 
 ### cancel meeting
-
-POST http://localhost:8080/meet/cancel?meetingId=Meeting:d0bc1edf-adbe-46ab-ad97-1dab6751f188
+POST http://localhost:8080/meet/cancel?meetingId=Meeting:d75cdf9d-8b13-4443-914a-8a39cf591c4c
 Authorization: Basic testemp@gmail.com testemp
 Content-Type: application/json
 

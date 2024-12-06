@@ -13,16 +13,16 @@ export class AuthService {
   }
 
   // Call this method when the user successfully logs in
-  login(mail:string,pass:string): void {
+  login(mail:string,pass:string,username:string): void {
     this.loggedIn = true;
-    this.saveCredentials(mail, pass);
+    this.saveCredentials(mail, pass, username);
     this.router.navigate(['']);
   }
 
-  adminLogin(mail:string,pass:string){
+  adminLogin(mail:string,pass:string, username:string){
     this.loggedIn = true;
     this.isAdmin = true;
-    this.saveCredentials(mail, pass);
+    this.saveCredentials(mail, pass,username);
     this.router.navigate(['/admin'])
   }
   // Call this method when the user logs out
@@ -39,8 +39,9 @@ export class AuthService {
   isAdministrator():boolean{
     return this.isAdmin;
   }
-  saveCredentials(userName:string, password:string){
+  saveCredentials(userName:string, password:string, name:string){
     localStorage.setItem("username",userName);
+    localStorage.setItem("name",name);
     localStorage.setItem("password",password);
   }
 

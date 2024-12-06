@@ -9,7 +9,12 @@
           <a routerLink="/events" >Events</a>
           <a routerLink="/progress">Progress</a>
           <a >Teams</a>
-          <a routerLink="/register">Signup</a>
+          @if (localStorage.getItem("name")==null){
+            <a routerLink="/register">Signup</a>
+          } @else {
+            <a>{{localStorage.getItem("name")}}</a>
+            <button (click)="logout()">Logout</button>
+          }
         </nav>
       </div>
 </header>

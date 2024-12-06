@@ -12,4 +12,5 @@ public class LoginRegisterResponse{
     String msg;
     boolean status;
     Staff.StaffRole role;
+    String userName;
 }
