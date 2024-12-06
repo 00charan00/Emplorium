@@ -1,5 +1,6 @@
 package com.upsintern.emplorium.controller;
 
+import com.upsintern.emplorium.exception.DataNotFoundException;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.exception.InvalidDataException;
 import com.upsintern.emplorium.exception.StaffNotFoundException;
@@ -19,8 +20,8 @@ public class StaffExceptionHandler {
         return new ResponseEntity<>(responseBase, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(InvalidDataException.class)
-    public ResponseEntity<ResponseBase> handleInvalid(InvalidDataException exception){
+    @ExceptionHandler({InvalidDataException.class, DataNotFoundException.class})
+    public ResponseEntity<ResponseBase> handleInvalid(Exception exception){
         ResponseBase responseBase = new ResponseBase(exception.getMessage(),false);
         return new ResponseEntity<>(responseBase, HttpStatus.BAD_REQUEST);
     }

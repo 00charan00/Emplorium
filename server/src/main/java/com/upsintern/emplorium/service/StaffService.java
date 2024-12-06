@@ -78,4 +78,11 @@ public class StaffService {
         }else throw new InvalidDataException("Provide Proper details");
     }
 
+    public List<Staff> getStaffsByIds(List<String> teamMembers) {
+        return staffRepository.findAllById(teamMembers);
+    }
+
+    public Staff getStaffById(String teamLeader) {
+        return staffRepository.findById(teamLeader).orElseThrow(() -> new StaffNotFoundException("No such staff with id: "+teamLeader));
+    }
 }
