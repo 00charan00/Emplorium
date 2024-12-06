@@ -3,14 +3,32 @@ POST http://localhost:8080/staff/add
 Content-Type: application/json
 
 {
-  "staffName": "denver",
-  "staffEmail": "denver@gmail.com",
-  "staffPass": "denver"
+  "staffName": "UpdateOnly",
+  "staffEmail": "updateonly@gmail.com",
+  "staffPass": "updateonly"
 }
 
+
+
+
+### update staff
+PUT http://localhost:8080/staff/update?staffId=Staff:d4ac8e76-9d10-481f-bdbb-b10d0a61db8c
+Content-Type: application/json
+Authorization: Basic admin@gmail.com admin
+
+{
+  "staffName": "UpdateOnlyUser",
+  "staffEmail": "updateonlyuser@gmail.com",
+  "staffPass": "updateonlyuser"
+}
+
+
+### get all staff
+GET http://localhost:8080/staff/all
+
 ### delete staff
-DELETE http://localhost:8080/staff/del?staffId=Staff:9f2e07c2-5c02-4d0d-a4fb-f52489e3bd70
-Authorization: Basic testemp@gmail.com testemp
+DELETE http://localhost:8080/staff/del?staffId=Staff:d1c50018-629e-41af-b957-885df3bad914
+Authorization: Basic admin@gmail.com admin
 
 ### staff login
 POST http://localhost:8080/staff/login

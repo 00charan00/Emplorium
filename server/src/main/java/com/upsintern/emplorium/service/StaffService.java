@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class StaffService {
@@ -33,6 +35,10 @@ public class StaffService {
         );
     }
 
+    public List<Staff> getAllStaff(){
+        return staffRepository.findAll();
+    }
+
     public String deleteStaff(String staffId){
         staffRepository.deleteById(staffId);
         return "Staff Removed";
@@ -50,7 +56,7 @@ public class StaffService {
         }
         tempVal = staffDto.getStaffPass();
         if(tempVal != null && !tempVal.isEmpty()){
-            staff.setStaffPass(tempVal);
+            staff.setStaffPass(passwordEncoder.encode(tempVal));
         }
         staffRepository.save(staff);
         return "Staff data updated";

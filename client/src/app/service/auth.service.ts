@@ -9,7 +9,9 @@ export class AuthService {
   private isAdmin: boolean = false;
 
   constructor(private router: Router) {
-    this.loggedIn = (localStorage.getItem("username") != null && localStorage.getItem("password") != null)
+    this.loggedIn = (localStorage.getItem("username") != null && localStorage.getItem("password") != null);
+    this.isAdmin = this.loggedIn && (localStorage.getItem("name") == "Admin");
+    console.log(this.loggedIn);
   }
 
   // Call this method when the user successfully logs in

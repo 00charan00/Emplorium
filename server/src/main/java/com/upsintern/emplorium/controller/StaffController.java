@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("staff")
 @CrossOrigin
@@ -22,8 +24,13 @@ public class StaffController {
         return ResponseEntity.ok(staffService.saveNewStaff(staffDto));
     }
 
-    @PutMapping("update/{staffId}")
-    public ResponseEntity<ResponseBase> updateStaff(@PathVariable String staffId, @RequestBody StaffDto staffDto){
+    @GetMapping("all")
+    public ResponseEntity<List<Staff>> getAllStaff(){
+        return ResponseEntity.ok(staffService.getAllStaff());
+    }
+
+    @PutMapping("update")
+    public ResponseEntity<ResponseBase> updateStaff(@RequestParam String staffId, @RequestBody StaffDto staffDto){
         ResponseBase response = new ResponseBase(staffService.updateStaff(staffId,staffDto),true);
         return ResponseEntity.ok(response);
     }
