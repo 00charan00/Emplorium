@@ -61,14 +61,14 @@ public class StaffService {
         String pass = staffDto.getStaffPass();
         if(mail != null && !mail.isEmpty() && pass != null && !pass.isEmpty()){
             boolean isExist = staffRepository.existsByStaffEmail(mail);
-            if(!isExist) throw new StaffNotFoundException("no staff with email id : "+mail);
+            if(!isExist) throw new StaffNotFoundException("No staff with email Id: ("+mail+") Check email Id.");
             Staff staff = staffRepository.findByStaffEmail(mail);
             String actualPass = staff.getStaffPass();
             boolean isValidPass = passwordEncoder.matches(pass, actualPass);
             if(isValidPass){
                 return new LoginRegisterResponse(staff.getStaffId(),true,staff.getStaffRole(), staff.getStaffName());
             }
-            else throw new InvalidDataException("Incorrect password");
+            else throw new InvalidDataException("Incorrect password: ("+pass+")");
         }else throw new InvalidDataException("Provide Proper details");
     }
 

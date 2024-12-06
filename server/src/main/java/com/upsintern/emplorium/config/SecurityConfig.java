@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         req -> {
-                            req.requestMatchers("/staff/**").permitAll();
+                            req.requestMatchers("/staff/del", "/staff/update").hasRole("ADMIN");
                             req.requestMatchers("/event/**","/meet/**").authenticated();
                             req.requestMatchers("/staff/add","/staff/login","/**").permitAll();
                         }

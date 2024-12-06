@@ -3,9 +3,9 @@ POST http://localhost:8080/staff/add
 Content-Type: application/json
 
 {
-  "staffName": "test",
-  "staffEmail": "test@gmail.com",
-  "staffPass": "test"
+  "staffName": "denver",
+  "staffEmail": "denver@gmail.com",
+  "staffPass": "denver"
 }
 
 ### delete staff
@@ -17,8 +17,8 @@ POST http://localhost:8080/staff/login
 Content-Type: application/json
 
 {
-  "staffEmail": "test@gmail.com",
-  "staffPass": "test"
+  "staffEmail": "denver@gmail.com",
+  "staffPass": "denver"
 }
 
 ### ADD EVENT
