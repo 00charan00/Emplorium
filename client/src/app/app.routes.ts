@@ -14,8 +14,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'events', component: EventsComponent , canActivate:[AuthGuard]},
-  // { path: 'signup', component: RegisterComponent },
-  { path: 'admin', component: AdminHomeComponent, canActivate: [AdminGuard] },  // Protect admin route
+  { path: 'admin', component: AdminHomeComponent },  // Protect admin route
   { path: 'employee', component: EmpHomeComponent },  // Protect employee route
   { path: '**', redirectTo: '' }
 ];

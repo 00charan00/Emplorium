@@ -8,6 +8,5 @@ import {EventsComponent} from '../events/events.component';
   imports: [
     RouterLink,
   ],
-  styleUrls: ['./emp-home.component.css']
 })
 export class EmpHomeComponent {}

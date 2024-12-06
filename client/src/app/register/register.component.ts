@@ -11,8 +11,7 @@ import {AuthService} from '../service/auth.service';
   imports: [
     FormsModule,
     RouterLink
-  ],
-  styleUrls: ['./register.component.css'] // Corrected property name
+  ]
 })
 export class RegisterComponent {
   name: string = '';

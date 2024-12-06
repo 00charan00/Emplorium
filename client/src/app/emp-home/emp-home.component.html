@@ -1,62 +1,50 @@
 <div class="content">
   <!-- Hero Section -->
-  <div class="hero-section">
-    <h1>Welcome to <span>Emplorium</span></h1>
-    <p>Your trusted platform for effective employee management.</p>
-    <a routerLink="/signup" class="cta-button">Get Started</a>
+  <div class="hero-section bg-blue-600 text-white py-16 px-8 text-center">
+    <h1 class="text-4xl font-extrabold mb-4">Welcome to <span class="text-yellow-400">Emplorium</span></h1>
+    <p class="text-xl mb-6">Your trusted platform for effective employee management.</p>
+    <a routerLink="/signup" class="cta-button bg-yellow-400 text-blue-600 py-2 px-6 rounded-full text-lg font-semibold hover:bg-yellow-500 hover:text-white transition">Get Started</a>
   </div>
 
-  <!-- Key Features Section -->
-  <div class="features">
-    <h2>Key Features</h2>
-    <div class="feature-cards">
-      <div class="feature-card">
-        <h3>Manage Schedules</h3>
+  <!-- Features Section -->
+  <div class="features py-16 px-8">
+    <h2 class="text-3xl font-semibold text-center mb-8">Key Features</h2>
+    <div class="feature-cards grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="feature-card bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Manage Schedules</h3>
         <p>Organize shifts, holidays, and work hours efficiently with StaffSync.</p>
       </div>
-      <div class="feature-card">
-        <h3>Track Progress</h3>
+      <div class="feature-card bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Track Progress</h3>
         <p>Monitor team performance and ensure project deadlines are met.</p>
       </div>
-      <div class="feature-card">
-        <h3>Team Collaboration</h3>
+      <div class="feature-card bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Team Collaboration</h3>
         <p>Communicate seamlessly with your team, anytime, anywhere.</p>
       </div>
     </div>
   </div>
 
-  <div class="stats">
-    <div class="stat">
-      <h3>100+</h3>
-      <p>Organizations Using StaffSync</p>
-    </div>
-    <div class="stat">
-      <h3>50%</h3>
-      <p>Increase in Team Productivity</p>
-    </div>
-    <div class="stat">
-      <h3>98%</h3>
-      <p>Customer Satisfaction Rate</p>
-    </div>
-  </div>
-
-
-  <!-- Testimonials Section -->
-  <div class="testimonials">
-    <h2>What Our Users Say</h2>
-    <div class="testimonial-card">
-      <p>"StaffSync has completely transformed how we manage our team. It's intuitive and saves us a lot of time."</p>
-      <h4>Jane Doe, HR Manager</h4>
-    </div>
-    <div class="testimonial-card">
-      <p>"The progress tracking feature is a game-changer. I can see how my team is performing in real-time."</p>
-      <h4>John Smith, Team Lead</h4>
+  <!-- Stats Section -->
+  <div class="stats py-16 px-8 bg-gray-50">
+    <div class="flex justify-around items-center text-center">
+      <div class="stat">
+        <h3 class="text-3xl font-bold text-blue-600">100+</h3>
+        <p class="text-lg text-gray-700">Organizations Using StaffSync</p>
+      </div>
+      <div class="stat">
+        <h3 class="text-3xl font-bold text-blue-600">50%</h3>
+        <p class="text-lg text-gray-700">Increase in Team Productivity</p>
+      </div>
+      <div class="stat">
+        <h3 class="text-3xl font-bold text-blue-600">98%</h3>
+        <p class="text-lg text-gray-700">Customer Satisfaction Rate</p>
+      </div>
     </div>
   </div>
-
-  <!-- Call to Action Section -->
-  <div class="cta-section">
-    <h2>Ready to take your employee management to the next level?</h2>
-    <a routerLink="/signup" class="cta-button">Join Now</a>
+  <!-- CTA Section -->
+  <div class="cta-section py-16 px-8 bg-blue-600 text-white text-center">
+    <h2 class="text-3xl font-semibold mb-4">Ready to take your employee management to the next level?</h2>
+    <a routerLink="/signup" class="cta-button bg-yellow-400 text-blue-600 py-2 px-6 rounded-full text-lg font-semibold hover:bg-yellow-500 hover:text-white transition">Join Now</a>
   </div>
 </div>

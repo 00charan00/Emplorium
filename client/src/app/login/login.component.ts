@@ -3,7 +3,6 @@ import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {RegisterReq, StaffRole} from '../model/register-req';
 import {StaffService} from '../service/staff.service';
-import {AboutComponent} from '../about/about.component';
 import {AuthService} from '../service/auth.service';
 import {LoginRegisterResponse} from '../model/login-register-response';
 
@@ -14,7 +13,6 @@ import {LoginRegisterResponse} from '../model/login-register-response';
     FormsModule,
     RouterLink
   ],
-  styleUrls: ['./login.component.css'] // Correct style property name
 })
 export class LoginComponent {
   email: string = '';

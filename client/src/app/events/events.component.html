@@ -1,42 +1,46 @@
-<div class="events-page">
+<div class="events-page flex flex-col lg:flex-row gap-8">
 
-  <div class="upcoming-events">
-    <h2>Upcoming Events</h2>
+  <!-- Upcoming Events Section (Left Side) -->
+  <div class="upcoming-events flex-1 my-5">
+    <div class="event-card p-6 bg-white rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Upcoming Events</h2>
 
-    @if (events != null) {
-      @for (event of events; track event.eventId) {
-        <div class="event-card">
-          <h3>Event Name: {{ event.eventName }}</h3>
-          <p><strong>Location:</strong> {{ event.eventVenue }}</p>
-          <p><strong>Date & Time:</strong> {{ event.eventDate | date:'dd/MM/yyyy HH:mm a'}} </p>
-          <p><strong>Description:</strong> {{ event.eventDescription }}</p>
-        </div>
+      <!-- Upcoming Events List -->
+      @if (events != null) {
+        @for (event of events; track event.eventId) {
+          <div class="event-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-xl font-bold mb-2">Event Name: {{ event.eventName }}</h3>
+            <p><strong class="font-semibold">Location:</strong> {{ event.eventVenue }}</p>
+            <p><strong class="font-semibold">Date & Time:</strong> {{ event.eventDate | date:'dd/MM/yyyy HH:mm a'}} </p>
+            <p><strong class="font-semibold">Description:</strong> {{ event.eventDescription }}</p>
+          </div>
+        }
+      } @else {
+        <h3 class="text-brown-600 italic">No Events</h3>
       }
-    } @else {
-        <h3 style="color: brown;font-style: italic">No Events</h3>
-    }
-
+    </div>
   </div>
 
-  <!-- Add Event Section -->
-  <div class="add-event">
-    <h2>Add New Event</h2>
-    <form [formGroup]="eventForm">
-      <label for="event-name">Event Name:</label>
-      <input id="event-name" type="text" placeholder="Enter event name" required [formControl]="eventForm.controls.eventName"/>
+  <!-- Add Event Section (Right Side) -->
+  <div class="add-event flex-1 my-5">
+    <div class="event-card p-4 bg-white rounded-lg shadow-lg max-w-sm mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Add New Event</h2>
+      <form [formGroup]="eventForm">
+        <label for="event-name" class="block mb-2 font-semibold">Event Name:</label>
+        <input id="event-name" type="text" placeholder="Enter event name" required [formControl]="eventForm.controls.eventName" class="w-full p-2 mb-4 border rounded-md"/>
 
-      <label for="location">Location:</label>
-      <input id="location" type="text" placeholder="Enter location" required [formControl]="eventForm.controls.eventLocation"/>
+        <label for="location" class="block mb-2 font-semibold">Location:</label>
+        <input id="location" type="text" placeholder="Enter location" required [formControl]="eventForm.controls.eventLocation" class="w-full p-2 mb-4 border rounded-md"/>
 
-      <label for="date-time">Date & Time:</label>
-      <input id="date-time" type="datetime-local" required [formControl]="eventForm.controls.eventDate" />
-<!--      <label for="date-time">Date & Time:</label>-->
-<!--      <input id="date-time" type="datetime-local" required [formControl]="eventForm.controls.eventDate" />-->
+        <label for="date-time" class="block mb-2 font-semibold">Date & Time:</label>
+        <input id="date-time" type="datetime-local" required [formControl]="eventForm.controls.eventDate" class="w-full p-2 mb-4 border rounded-md"/>
 
-      <label for="description">Description:</label>
-      <textarea id="description" rows="4" placeholder="Enter event description" required [formControl]="eventForm.controls.eventDescription"></textarea>
+        <label for="description" class="block mb-2 font-semibold">Description:</label>
+        <textarea id="description" rows="4" placeholder="Enter event description" required [formControl]="eventForm.controls.eventDescription" class="w-full p-2 mb-4 border rounded-md"></textarea>
 
-      <button type="submit" (click)="postEvent()">Add Event</button>
-    </form>
+        <button type="submit" (click)="postEvent()" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300">Add Event</button>
+      </form>
+    </div>
   </div>
+
 </div>

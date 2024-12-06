@@ -12,10 +12,8 @@ import {EventDto} from '../model/event-dto';
     ReactiveFormsModule,
     FormsModule,
     DatePipe
-
   ],
-  templateUrl: './events.component.html',
-  styleUrl: './events.component.css'
+  templateUrl: './events.component.html'
 })
 export class EventsComponent implements OnInit{
 
