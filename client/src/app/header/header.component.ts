@@ -8,6 +8,11 @@ import {NgIf} from '@angular/common';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
 
     protected readonly localStorage = localStorage;
 
