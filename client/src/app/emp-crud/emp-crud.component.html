@@ -1,27 +1,83 @@
-<div class="p-6 max-w-6xl mx-auto bg-gray-50 rounded-lg shadow-lg">
-  <div class="flex justify-between items-center mb-6">
+<!--<div class="p-6 max-w-6xl mx-auto bg-gray-50 rounded-lg shadow-lg">-->
+<!--  <div class="flex justify-between items-center mb-6">-->
+<!--    <h1 class="text-3xl font-bold text-gray-800">Add Staff</h1>-->
+<!--    <button class="bg-blue-900 text-white px-6 py-2 rounded hover:bg-blue-600">-->
+<!--      Add Staff-->
+<!--    </button>-->
+<!--  </div>-->
+<!--  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">-->
+<!--    <div class="bg-white p-6 rounded-lg shadow-md">-->
+<!--      <div class="mb-10">-->
+<!--        <p class="text-lg font-medium text-gray-800">Name: John Doe</p>-->
+<!--        <p class="text-gray-600">Email: john.doeexample.com</p>-->
+<!--      </div>-->
+<!--      <div class="flex justify-between">-->
+<!--        <button class="bg-yellow-400 text-white px-4 py-2 rounded hover:bg-yellow-500">-->
+<!--          Edit-->
+<!--        </button>-->
+<!--        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">-->
+<!--          Delete-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="p-8 max-w-6xl mx-auto bg-gray-50 rounded-xl shadow-lg">
+  <div class="flex justify-between items-center mb-8">
     <h1 class="text-3xl font-bold text-gray-800">Add Staff</h1>
-    <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition duration-300">
       Add Staff
     </button>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="bg-white p-6 rounded-lg shadow-md">
-      <div class="mb-10">
-        <p class="text-lg font-medium text-gray-800">Name: John Doe</p>
-        <p class="text-gray-600">Email: john.doeexample.com</p>
+  <div class="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto">
+    <div class="bg-white w-60 p-4 rounded-xl shadow-md flex flex-col items-center">
+      <!-- Circular Photo -->
+      <div class="w-20 h-20 rounded-full mb-4">
+        <img ngSrc="../src/app/assets/profile.png" alt="Employee Photo" class="w-full h-full object-cover" height="512"
+             width="512"/>
       </div>
-      <div class="flex justify-between">
-        <button class="bg-yellow-400 text-white px-4 py-2 rounded hover:bg-yellow-500">
+      <!-- Name and Role -->
+      <div class="text-center mb-4">
+        <p class="text-lg font-semibold text-gray-800">John Doe</p>
+        <p class="text-gray-600 text-sm">Software Developer</p>
+      </div>
+      <!-- Email and Team -->
+      <div class="text-center mb-2">
+        <p class="text-gray-600 text-sm">Email: john.doeexample.com</p>
+        <p class="text-gray-600 text-sm">Team: Development</p>
+      </div>
+      <!-- Edit and Delete Buttons -->
+      <div class="flex gap-2 mt-2">
+        <button class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300">
           Edit
         </button>
-        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+        <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
+          Delete
+        </button>
+      </div>
+    </div>
+    <!-- Example: Add another employee card -->
+    <div class="bg-white w-60 p-4 rounded-xl shadow-md flex flex-col items-center">
+      <div class="w-20 h-20 rounded-full overflow-hidden mb-4">
+        <img src="https://via.placeholder.com/80" alt="Employee Photo" class="w-full h-full object-cover" />
+      </div>
+      <div class="text-center mb-4">
+        <p class="text-lg font-semibold text-gray-800">Jane Smith</p>
+        <p class="text-gray-600 text-sm">Marketing Manager</p>
+      </div>
+      <div class="text-center mb-2">
+        <p class="text-gray-600 text-sm">Email: jane.smithexample.com</p>
+        <p class="text-gray-600 text-sm">Team: Marketing</p>
+      </div>
+      <div class="flex gap-2 mt-2">
+        <button class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300">
+          Edit
+        </button>
+        <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
           Delete
         </button>
       </div>
     </div>
   </div>
 </div>
-
-
-
