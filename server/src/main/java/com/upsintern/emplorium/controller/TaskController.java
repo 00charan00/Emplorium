@@ -8,6 +8,8 @@ import com.upsintern.emplorium.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RestController
@@ -49,9 +51,11 @@ public class TaskController {
     public ResponseEntity<ResponseBase> updateModuleProgress(
             @RequestParam String taskId,
             @RequestParam String moduleName,
-            @RequestParam Task.ProgressStatus progressStatus
+            @RequestParam Task.ProgressStatus progressStatus,
+            @RequestParam("refs") MultipartFile[] referencePics,
+            @RequestParam String comment
     ){
-        return taskService.updateModuleProgress(taskId, moduleName, progressStatus);
+        return taskService.updateModuleProgress(taskId, moduleName, progressStatus, referencePics, comment);
     }
 
     @PutMapping("progress")

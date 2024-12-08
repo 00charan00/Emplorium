@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -84,5 +85,19 @@ public class StaffService {
 
     public Staff getStaffById(String teamLeader) {
         return staffRepository.findById(teamLeader).orElseThrow(() -> new StaffNotFoundException("No such staff with id: "+teamLeader));
+    }
+
+    public void createAdminAccount(){
+        if(!staffRepository.existsByStaffEmail("admin@gmail.com")) {
+            staffRepository.save(
+                    new Staff(
+                            "Admin:" + UUID.randomUUID(),
+                            "Admin",
+                            "admin@gmail.com",
+                            passwordEncoder.encode("admin"),
+                            Staff.StaffRole.ROLE_ADMIN
+                    )
+            );
+        }
     }
 }

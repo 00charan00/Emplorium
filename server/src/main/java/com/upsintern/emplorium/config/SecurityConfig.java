@@ -12,6 +12,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    private static final String[] adminEndPoints = {
+            "/staff/del",
+            "/staff/all",
+            "/staff/update",
+            "/task/create",
+            "/task/all",
+            "/task/assign"
+    };
+
+    private static final String[] authEndPoints = {
+            "/event/",
+            "/meet/",
+            "/team/",
+            "/task/module/progress"};
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -20,8 +35,8 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         req -> {
-                            req.requestMatchers("/staff/del", "/staff/update").hasRole("ADMIN");
-                            req.requestMatchers("/event/**","/meet/**").authenticated();
+                            req.requestMatchers(adminEndPoints).hasRole("ADMIN");
+                            req.requestMatchers(authEndPoints).authenticated();
                             req.requestMatchers("/staff/add","/staff/login","/**").permitAll();
                         }
                 )

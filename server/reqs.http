@@ -3,9 +3,9 @@ POST http://localhost:8080/staff/add
 Content-Type: application/json
 
 {
-  "staffName": "UpdateOnly",
-  "staffEmail": "updateonly@gmail.com",
-  "staffPass": "updateonly"
+  "staffName": "Jesii2",
+  "staffEmail": "jessi2@gmail.com",
+  "staffPass": "jessi"
 }
 
 

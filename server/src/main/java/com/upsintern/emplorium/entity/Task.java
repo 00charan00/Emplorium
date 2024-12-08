@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 @Entity
@@ -25,6 +26,8 @@ public class Task {
     ProgressStatus taskProgress;
     double progressPercent;
     boolean teamAssigned;
+    @OneToMany(fetch = FetchType.EAGER)
+    Set<ProgressInfo> progressDetails;
 
     public enum ProgressStatus{
         INITIATED,
