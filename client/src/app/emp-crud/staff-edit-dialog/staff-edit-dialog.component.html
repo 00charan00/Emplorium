@@ -1,0 +1,12 @@
+
+
+<div style="background: lightcyan;border-radius: 5px;display: flex;flex-direction: column;gap: 20px;padding: 10px">
+  <p class="text-red-500">Edit Staff Details!</p>
+  <input type="text" [formControl]="editStaffForm.controls.staffName" class="border-black">
+  <input type="text" [formControl]="editStaffForm.controls.staffEmail" class="border-black">
+  <input placeholder="try or change new password" type="text" [formControl]="editStaffForm.controls.staffPassword" class="border-black">
+
+  <button style="background: green;color: white;border-radius: 5px;" mat-raised-button (click)="updateStaff()">Update</button>
+</div>
+
+

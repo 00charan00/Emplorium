@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, inject, OnInit} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
 import {Staff} from '../model/staff';
 import {StaffService} from '../service/staff.service';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {StaffEditDialogComponent} from './staff-edit-dialog/staff-edit-dialog.component';
 
 @Component({
   selector: 'app-emp-crud',
@@ -13,6 +15,7 @@ import {StaffService} from '../service/staff.service';
 export class EmpCrudComponent implements OnInit{
 
   staffs?:Staff[];
+  dialog = inject(MatDialog)
 
   constructor(private staffService:StaffService) {
   }
@@ -24,10 +27,10 @@ export class EmpCrudComponent implements OnInit{
       });
   }
 
-  openUserEdit() {
-
-
-
+  openUserEdit(staff:Staff) {
+    this.dialog.open(StaffEditDialogComponent,{
+      data:{staffDet:staff}
+    });
   }
 
   deleteStaff(staffId: string) {

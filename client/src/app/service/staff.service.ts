@@ -20,7 +20,13 @@ export class StaffService {
   }
 
   updateStaff(staffId:string, staffDetails:RegisterReq){
-    return this.http.put<ResponseBase>(this.API_BASE_URL+ `update/${staffId}`,staffDetails);
+    let url = `${this.API_BASE_URL}update`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password')
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Accept','application/json');
+    return this.http.put<ResponseBase>(url,staffDetails,{params:{staffId:staffId},headers:headerVals});
   }
 
   deleteStaff(staffId:string){
@@ -31,8 +37,6 @@ export class StaffService {
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
     return this.http.delete<ResponseBase>(url,{params: {staffId:staffId},headers:headerVals});
-    window.location.reload();
-
   }
 
   loginStaff(loginReq:RegisterReq){
