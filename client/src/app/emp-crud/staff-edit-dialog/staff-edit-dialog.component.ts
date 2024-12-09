@@ -10,8 +10,7 @@ import {RegisterReq} from '../../model/register-req';
 @Component({
   selector: 'app-staff-edit-dialog',
   imports: [
-    ReactiveFormsModule,
-    MatButton
+    ReactiveFormsModule
   ],
   templateUrl: './staff-edit-dialog.component.html',
 })
