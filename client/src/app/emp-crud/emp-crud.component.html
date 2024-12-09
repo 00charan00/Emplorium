@@ -6,24 +6,22 @@
     </button>
   </div>
 
-
-  <div class="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto">
-    @for (staff of staffs;track staff.staffId){
-      <div class="bg-white w-60 p-4 rounded-s shadow-md flex flex-col items-center">
+  <div class="grid grid-cols-4 gap-4">
+    @for (staff of staffs; track staff.staffId) {
+      <div class="bg-white w-60 p-4 rounded shadow-md flex flex-col items-center">
         <div class="w-20 h-20 rounded-full mb-4">
-          <img ngSrc="assets/profile.png" alt="Employee Photo" class="w-full h-full object-cover" height="512"
-               width="512"/>
+          <img ngSrc="assets/profile.png" alt="Employee Photo" class="w-full h-full object-cover" height="512" width="512" />
         </div>
         <div class="text-center mb-4">
           <p class="text-lg font-semibold text-gray-800">{{staff.staffName}}</p>
           <p class="text-gray-600 text-sm">{{staff.staffRole}}</p>
         </div>
         <div class="text-center mb-2">
-          <p class="text-gray-600 text-sm">Email:{{staff.staffEmail}}</p>
+          <p class="text-gray-600 text-sm">Email: {{staff.staffEmail}}</p>
           <p class="text-gray-600 text-sm">Team: Development</p>
         </div>
         <div class="flex gap-2 mt-2">
-          <button (click)="openUserEdit(staff)" class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300"  >
+          <button (click)="openUserEdit(staff)" class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300">
             Edit
           </button>
           <button (click)="deleteStaff(staff.staffId)" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
@@ -32,9 +30,6 @@
         </div>
       </div>
     }
-
   </div>
-
-
-
 </div>
+
