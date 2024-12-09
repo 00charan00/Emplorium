@@ -39,4 +39,8 @@ export class EmpCrudComponent implements OnInit{
     });
 
   }
+
+  addNewStaff() {
+
+  }
 }

@@ -7,7 +7,7 @@ import {EmpCrudComponent} from '../emp-crud/emp-crud.component';
   templateUrl: './admin-home.component.html',
   imports: [
     RouterLink,
-    EmpCrudComponent
+    // EmpCrudComponent
   ],
 })
 export class AdminHomeComponent {}
