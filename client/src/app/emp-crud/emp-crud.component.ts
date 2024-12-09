@@ -4,6 +4,7 @@ import {Staff} from '../model/staff';
 import {StaffService} from '../service/staff.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {StaffEditDialogComponent} from './staff-edit-dialog/staff-edit-dialog.component';
+import {StaffAddComponent} from './staff-add/staff-add.component';
 
 @Component({
   selector: 'app-emp-crud',
@@ -41,6 +42,6 @@ export class EmpCrudComponent implements OnInit{
   }
 
   addNewStaff() {
-
+    this.dialog.open(StaffAddComponent)
   }
 }

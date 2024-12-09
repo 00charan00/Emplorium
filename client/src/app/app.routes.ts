@@ -18,8 +18,10 @@ export const routes: Routes = [
   { path: 'meeting', component: MeetingComponent },
   { path: 'empcrud', component: EmpCrudComponent },
   { path: 'events', component: EventsComponent , canActivate:[AuthGuard]},
-  { path: 'admin', component: AdminHomeComponent,canActivate:[AdminGuard] },  // Protect admin route
-  { path: 'employee', component: EmpHomeComponent },  // Protect employee route
+  { path: 'admin', component: AdminHomeComponent,canActivate:[AdminGuard] },
+  { path: 'employee', component: EmpHomeComponent },
   { path: '**', redirectTo: '' }
+
+
 
 ];

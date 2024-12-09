@@ -13,12 +13,14 @@
           <a routerLink="/admin" class="hover:text-yellow-400 transition">Home</a>
           <a routerLink="/about" class="hover:text-yellow-400 transition">About</a>
           <a routerLink="/empcrud" class="hover:text-yellow-400 transition">Staff-Details</a>
+          <a routerLink="/meeting" class="hover:text-yellow-400 transition">Meetings</a>
           <a routerLink="/events" class="hover:text-yellow-400 transition">Events</a>
           <a routerLink="/progress" class="hover:text-yellow-400 transition">Progress</a>
           <a routerLink="/" class="hover:text-yellow-400 transition">Teams</a>
         } @else {
           <a routerLink="/" class="hover:text-yellow-400 transition">Home</a>
           <a routerLink="/about" class="hover:text-yellow-400 transition">About</a>
+          <a routerLink="/meeting" class="hover:text-yellow-400 transition">Meetings</a>
           <a routerLink="/events" class="hover:text-yellow-400 transition">Events</a>
           <a routerLink="/progress" class="hover:text-yellow-400 transition">Progress</a>
           <a routerLink="/" class="hover:text-yellow-400 transition">Teams</a>
@@ -48,6 +50,7 @@
     @if (localStorage.getItem('name')=="Admin") {
       <a routerLink="/admin" class="block hover:text-yellow-400 transition">Home</a>
       <a routerLink="/about" class="block hover:text-yellow-400 transition">About</a>
+      <a routerLink="/meeting" class="block hover:text-yellow-400 transition">Meetings</a>
       <a routerLink="/empcrud" class="block hover:text-yellow-400 transition">Staff-Details</a>
       <a routerLink="/events" class="block hover:text-yellow-400 transition">Events</a>
       <a routerLink="/progress" class="block hover:text-yellow-400 transition">Progress</a>
@@ -55,6 +58,7 @@
     } @else {
       <a routerLink="/" class="block hover:text-yellow-400 transition">Home</a>
       <a routerLink="/about" class="block hover:text-yellow-400 transition">About</a>
+      <a routerLink="/meeting" class="block hover:text-yellow-400 transition">Meetings</a>
       <a routerLink="/events" class="block hover:text-yellow-400 transition">Events</a>
       <a routerLink="/progress" class="block hover:text-yellow-400 transition">Progress</a>
       <a routerLink="/" class="block hover:text-yellow-400 transition">Teams</a>
