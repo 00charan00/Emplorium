@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("meet")
+@CrossOrigin
 public class MeetingController {
 
     @Autowired
@@ -34,5 +35,20 @@ public class MeetingController {
     public ResponseEntity<List<Meeting>> getActiveMeetings() {
         List<Meeting> activeMeetings = meetingService.getActiveMeetings();
         return ResponseEntity.ok(activeMeetings);
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<List<Meeting>> getAllMeetings() {
+        List<Meeting> meetings = meetingService.getAllMeetings();
+        return ResponseEntity.ok(meetings);
+    }
+
+    @GetMapping("mine")
+    public ResponseEntity<List<Meeting>> getMyMeetings(
+            @RequestParam String staffId,
+            @RequestParam String staffMail
+    ) {
+        List<Meeting> meetings = meetingService.getMyMeetings(staffId, staffMail);
+        return ResponseEntity.ok(meetings);
     }
 }

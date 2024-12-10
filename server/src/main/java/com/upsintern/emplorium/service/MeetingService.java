@@ -39,4 +39,16 @@ public class MeetingService {
     public List<Meeting> getActiveMeetings() {
         return meetingRepository.findAllByMeetingStatus(Meeting.MeetingStatus.ACTIVE);
     }
+
+    public List<Meeting> getAllMeetings() {
+        return meetingRepository.findAll();
+    }
+
+    public List<Meeting> getMyMeetings(String staffId,String staffEmail){
+        return meetingRepository.findAll().stream().filter(
+                m -> m.getEmpIdList().contains(staffId) ||
+                        m.getMeetingOwner().equals(staffEmail)
+                )
+                .toList();
+    }
 }

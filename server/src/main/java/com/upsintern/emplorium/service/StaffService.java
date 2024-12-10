@@ -1,5 +1,7 @@
 package com.upsintern.emplorium.service;
 
+import com.upsintern.emplorium.dto.AdminStaffDto;
+import com.upsintern.emplorium.dto.StaffBase;
 import com.upsintern.emplorium.dto.StaffDto;
 import com.upsintern.emplorium.entity.Staff;
 import com.upsintern.emplorium.exception.InvalidDataException;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -99,5 +102,29 @@ public class StaffService {
                     )
             );
         }
+    }
+
+    public LoginRegisterResponse saveNewStaffByAdmin(AdminStaffDto staffDto) {
+        Staff staff = staffRepository.save(new Staff(
+                "Staff:"+UUID.randomUUID(),
+                staffDto.getStaffName(),
+                staffDto.getStaffEmail(),
+                passwordEncoder.encode(staffDto.getStaffPass()),
+                staffDto.getStaffRole()
+
+        ));
+        return new LoginRegisterResponse(
+               staff.getStaffId(),
+               true,
+               staff.getStaffRole(),
+               staff.getStaffName()
+        );
+    }
+
+    public List<StaffBase> getAllStaffBasic(){
+        return getAllStaff().stream().map(st -> new StaffBase(
+                st.getStaffId(),
+                st.getStaffName()
+        )).toList();
     }
 }

@@ -32,9 +32,9 @@ export class RegisterComponent {
       ).subscribe(res => {
         if(res.status){
           if(res.role == StaffRole.ROLE_ADMIN){
-            this.authService.adminLogin(this.email,this.password,res.userName);
+            this.authService.adminLogin(this.email,this.password,res.userName,res.role,res.msg);
           }else if(res.role == StaffRole.ROLE_EMPLOYEE){
-            this.authService.login(this.email,this.password,res.userName);
+            this.authService.login(this.email,this.password,res.userName,res.role,res.msg);
           }
         }else{
           console.log(false)

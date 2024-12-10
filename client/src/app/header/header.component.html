@@ -1,7 +1,7 @@
 <header class="bg-gray-800 text-white shadow-md">
   <div class="header flex justify-between items-center px-8 py-4">
     <div class="logo">
-      @if(localStorage.getItem('name')=="Admin"){
+      @if(localStorage.getItem('role')=="ROLE_ADMIN"){
         <h1 class="text-2xl font-bold">Emplorium-Admin</h1>
       } @else {
         <h1 class="text-2xl font-bold">Emplorium</h1>
@@ -9,7 +9,7 @@
     </div>
     <nav class="navbar flex items-center space-x-6">
       <div class="hidden md:flex space-x-6">
-        @if (localStorage.getItem('name')=="Admin") {
+        @if (localStorage.getItem('role')=="ROLE_ADMIN") {
           <a routerLink="/admin" class="hover:text-yellow-400 transition">Home</a>
           <a routerLink="/about" class="hover:text-yellow-400 transition">About</a>
           <a routerLink="/empcrud" class="hover:text-yellow-400 transition">Staff-Details</a>
@@ -47,7 +47,7 @@
     </nav>
   </div>
   <div *ngIf="menuOpen" class="md:hidden bg-gray-800 text-white px-8 py-4 space-y-4">
-    @if (localStorage.getItem('name')=="Admin") {
+    @if (localStorage.getItem('role')=="ROLE_ADMIN") {
       <a routerLink="/admin" class="block hover:text-yellow-400 transition">Home</a>
       <a routerLink="/about" class="block hover:text-yellow-400 transition">About</a>
       <a routerLink="/meeting" class="block hover:text-yellow-400 transition">Meetings</a>

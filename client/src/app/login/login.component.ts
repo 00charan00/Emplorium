@@ -35,9 +35,9 @@ export class LoginComponent {
             const role = value.role;
             if (value.status) {
               if (role === StaffRole.ROLE_EMPLOYEE) {
-                this.authService.login(this.email, this.password, value.userName);
+                this.authService.login(this.email, this.password, value.userName,value.role,value.msg);
               } else if (role === StaffRole.ROLE_ADMIN) {
-                this.authService.adminLogin(this.email, this.password, value.userName);
+                this.authService.adminLogin(this.email, this.password, value.userName,value.role,value.msg);
               }
             } else {
               this.errorMessage = value.msg;

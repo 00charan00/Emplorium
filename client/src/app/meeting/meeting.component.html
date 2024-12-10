@@ -3,54 +3,55 @@
   <div class="static-meetings flex-1 my-5">
     <div class="meeting-card p-6 bg-white rounded-lg shadow-lg">
       <h2 class="text-2xl font-semibold mb-4">Meetings</h2>
-
-      <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
-        <h3 class="text-xl font-bold mb-2">Meeting Name: Project Kickoff</h3>
-        <p><strong class="font-semibold">Date & Time:</strong> 15/12/2024 10:00 AM</p>
-        <p><strong class="font-semibold">Status:</strong> Scheduled</p>
-        <div class="flex gap-4 mt-2">
-          <button class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Join</button>
-          <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Status</button>
+      @for (meet of meetings; track meet.meetingId) {
+        <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+          <h3 class="text-xl font-bold mb-2">Meeting Name: {{meet.meetingName}}</h3>
+          <p><strong class="font-semibold">Date & Time:</strong> {{meet.meetingDateTime | date:'dd-MM-yyyy HH:mm:ss a'}}</p>
+          <p><strong class="font-semibold">Status:</strong> {{meet.meetingStatus}}</p>
+          <div class="flex gap-4 mt-2">
+            <button class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Join</button>
+            <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Status</button>
+          </div>
         </div>
-      </div>
-
-      <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
-        <h3 class="text-xl font-bold mb-2">Meeting Name: Sprint Planning</h3>
-        <p><strong class="font-semibold">Date & Time:</strong> 16/12/2024 2:00 PM</p>
-        <p><strong class="font-semibold">Status:</strong> Scheduled</p>
-        <div class="flex gap-4 mt-2">
-          <button class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Join</button>
-          <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Status</button>
-        </div>
-      </div>
+      }
     </div>
   </div>
 
   <div class="schedule-meeting flex-1 my-5">
     <div class="meeting-card p-6 bg-white rounded-lg shadow-lg max-w-sm mx-auto">
       <h2 class="text-2xl font-semibold mb-4">Schedule New Meeting</h2>
-      <form>
+      <form [formGroup]="meetingDetails">
 
         <label for="meeting-name" class="block mb-2 font-semibold">Meeting Name:</label>
-        <input id="meeting-name" type="text" placeholder="Enter meeting name" class="w-full p-2 mb-4 border rounded-md"/>
+        <input [formControl]="meetingDetails.controls.meetingName" id="meeting-name" type="text" placeholder="Enter meeting name" class="w-full p-2 mb-4 border rounded-md"/>
 
         <label for="meeting-desc" class="block mb-2 font-semibold">Description</label>
-        <input id="meeting-desc" type="text" placeholder="Enter the description" class="w-full p-2 mb-4 border rounded-md"/>
+        <input [formControl]="meetingDetails.controls.meetingDescription" id="meeting-desc" type="text" placeholder="Enter the description" class="w-full p-2 mb-4 border rounded-md"/>
 
         <label for="meeting-date" class="block mb-2 font-semibold">Date & Time:</label>
-        <input id="meeting-date" type="datetime-local" class="w-full p-2 mb-4 border rounded-md"/>
+        <input [formControl]="meetingDetails.controls.meetingDateTime" id="meeting-date" type="datetime-local" class="w-full p-2 mb-4 border rounded-md"/>
 
-        <label for="employee" class="block mb-2 font-semibold">Select Employee:</label>
-        <select id="employee" class="w-full p-2 mb-4 border rounded-md">
-          <option value="" disabled selected>Select employee</option>
-          <option value="John">John Doe</option>
-          <option value="Jane">Jane Smith</option>
-        </select>
+
+
+          <mat-accordion class="m-1">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> Select Staffs  </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div style="display: flex;flex-direction: column;">
+                <input (input)="filterList($event)" placeholder="search staff" type="text" style="margin: 10px;border-radius: 5px;height: 40px;padding: 5px;color: black" />
+                @for (staff of listFiltered;track staff.staffId){
+                  <mat-checkbox [id]="staff.staffId" (input)="checkChange($event)">{{staff.staffName}}</mat-checkbox>
+                }
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
 
         <label for="meeting-link" class="block mb-2 font-semibold">Meeting Link:</label>
-        <input id="meeting-link" type="text" placeholder="Enter meeting link" class="w-full p-2 mb-4 border rounded-md"/>
+        <input [formControl]="meetingDetails.controls.meetingLink" id="meeting-link" type="text" placeholder="Enter meeting link" class="w-full p-2 mb-4 border rounded-md"/>
 
-        <button type="submit" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300">
+        <button type="submit" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300" (click)="createMeeting()">
           Schedule Meeting
         </button>
       </form>

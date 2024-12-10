@@ -5,6 +5,8 @@ import {ResponseBase} from '../model/response-base';
 import {LoginRegisterResponse} from '../model/login-register-response';
 import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {Staff} from '../model/staff';
+import {AdminStaffDto} from '../model/admin-staff-dto';
+import {StaffBase} from '../model/staff-base';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +53,26 @@ export class StaffService {
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
     return this.http.get<Staff[]>(url,{headers:headerVals});
+  }
+
+  getAllStaffBasic() {
+    let url = `${this.API_BASE_URL}all-basic`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password')
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Accept','application/json');
+    return this.http.get<StaffBase[]>(url,{headers:headerVals});
+  }
+
+  addNewStaffByAdmin(staff:AdminStaffDto){
+    let url = `${this.API_BASE_URL}adminAdd`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password')
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Accept','application/json');
+    return this.http.post(url,staff,{headers:headerVals});
   }
 
 

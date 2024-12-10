@@ -7,7 +7,7 @@
       <input
         type="text"
         id="name"
-        [(ngModel)]="employee.name"
+        [(ngModel)]="staff.name"
         name="name"
         required
         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -20,7 +20,7 @@
       <input
         type="email"
         id="email"
-        [(ngModel)]="employee.email"
+        [(ngModel)]="staff.email"
         name="email"
         required
         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -33,7 +33,7 @@
       <input
         type="password"
         id="password"
-        [(ngModel)]="employee.password"
+        [(ngModel)]="staff.password"
         name="password"
         required
         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -48,7 +48,7 @@
           type="radio"
           name="role"
           value="ROLE_ADMIN"
-          [(ngModel)]="employee.role"
+          [(ngModel)]="staff.role"
           class="form-radio text-indigo-600"
         >
         <span class="ml-2">Admin</span>
@@ -58,7 +58,7 @@
           type="radio"
           name="role"
           value="ROLE_EMPLOYEE"
-          [(ngModel)]="employee.role"
+          [(ngModel)]="staff.role"
           class="form-radio text-indigo-600"
         >
         <span class="ml-2">Employee</span>

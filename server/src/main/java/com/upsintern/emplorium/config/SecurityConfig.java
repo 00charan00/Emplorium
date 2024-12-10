@@ -22,8 +22,8 @@ public class SecurityConfig {
     };
 
     private static final String[] authEndPoints = {
-            "/event/",
-            "/meet/",
+            "/event/**",
+            "/meet/**",
             "/team/",
             "/task/module/progress"};
 

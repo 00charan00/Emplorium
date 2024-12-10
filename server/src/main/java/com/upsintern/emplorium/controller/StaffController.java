@@ -1,5 +1,7 @@
 package com.upsintern.emplorium.controller;
 
+import com.upsintern.emplorium.dto.AdminStaffDto;
+import com.upsintern.emplorium.dto.StaffBase;
 import com.upsintern.emplorium.entity.Staff;
 import com.upsintern.emplorium.responsemodel.LoginRegisterResponse;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
@@ -24,9 +26,19 @@ public class StaffController {
         return ResponseEntity.ok(staffService.saveNewStaff(staffDto));
     }
 
+    @PostMapping("adminAdd")
+    public ResponseEntity<LoginRegisterResponse> addNewStaff(@RequestBody AdminStaffDto staffDto){
+        return ResponseEntity.ok(staffService.saveNewStaffByAdmin(staffDto));
+    }
+
     @GetMapping("all")
     public ResponseEntity<List<Staff>> getAllStaff(){
         return ResponseEntity.ok(staffService.getAllStaff());
+    }
+
+    @GetMapping("all-basic")
+    public ResponseEntity<List<StaffBase>> getAllStaffBasic(){
+        return ResponseEntity.ok(staffService.getAllStaffBasic());
     }
 
     @PutMapping("update")
