@@ -98,7 +98,7 @@ export class MeetingComponent implements OnInit {
   }
 
   checkChange(event:any) {
-    let valueId = event.target.id;
+    let valueId = event.target.value;
     if(event.target.checked){
       this.meetingDetails.controls.empIdList.value?.push(valueId);
     }else{

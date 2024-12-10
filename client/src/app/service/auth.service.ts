@@ -49,4 +49,10 @@ export class AuthService {
     localStorage.setItem("id",msg);
   }
 
+  exitAuth() {
+    this.loggedIn=false;
+    this.isAdmin=false;
+    localStorage.clear();
+
+  }
 }

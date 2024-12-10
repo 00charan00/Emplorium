@@ -41,7 +41,7 @@
               <div style="display: flex;flex-direction: column;">
                 <input (input)="filterList($event)" placeholder="search staff" type="text" style="margin: 10px;border-radius: 5px;height: 40px;padding: 5px;color: black" />
                 @for (staff of listFiltered;track staff.staffId){
-                  <mat-checkbox [id]="staff.staffId" (input)="checkChange($event)">{{staff.staffName}}</mat-checkbox>
+                  <mat-checkbox [id]="staff.staffId" [value]="staff.staffId"  (input)="checkChange($event)">{{staff.staffName}}</mat-checkbox>
                 }
               </div>
             </mat-expansion-panel>

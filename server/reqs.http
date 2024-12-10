@@ -60,14 +60,14 @@ Authorization: Basic testemp@gmail.com testemp
 
 ### create meeting
 POST http://localhost:8080/meet/create
-Authorization: Basic testemp@gmail.com testemp
+Authorization: Basic denver@gmail.com denver
 Content-Type: application/json
 
 {
   "meetingName": "saran raj",
   "meetingDescription": "sdvsdvsv",
   "empIdList": [
-    "Staff:75d0aae1-0e3a-4049-bcaf-4589981d2c0b"
+
   ],
   "meetingDateTime": "2025-10-10 09:09 PM",
   "meetingLink": "https://meet.google.com/cub-ubor-mjy",
