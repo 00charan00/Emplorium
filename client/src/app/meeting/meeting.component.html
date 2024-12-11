@@ -7,10 +7,19 @@
         <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
           <h3 class="text-xl font-bold mb-2">Meeting Name: {{meet.meetingName}}</h3>
           <p><strong class="font-semibold">Date & Time:</strong> {{meet.meetingDateTime | date:'dd-MM-yyyy HH:mm:ss a'}}</p>
-          <p><strong class="font-semibold">Status:</strong> {{meet.meetingStatus}}</p>
+          <p><strong class="font-semibold">Meeting Description:</strong> {{meet.meetingDescription}}</p>
           <div class="flex gap-4 mt-2">
-            <button class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Join</button>
-            <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Status</button>
+            @if (meet.meetingStatus=="ACTIVE"){
+            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300">ACTIVE</button>
+            }
+            @else{
+            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">ACTIVE</button>
+            }
+            <button
+              (click)="joinMeet(meet.meetingLink)"
+              class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+              Join
+            </button>
           </div>
         </div>
       }

@@ -109,6 +109,15 @@ export class MeetingComponent implements OnInit {
 
     }
   }
+
+  joinMeet(meetingLink: string): void {
+    if (meetingLink) {
+      console.log(meetingLink);
+      window.open(meetingLink, '_blank');
+    } else {
+      alert('Meeting link is not available');
+    }
+  }
 }
 
 
