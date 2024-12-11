@@ -16,6 +16,8 @@ import {EventDto} from '../model/event-dto';
   templateUrl: './events.component.html'
 })
 export class EventsComponent implements OnInit{
+  currentDateTime: string;
+  currentDateTimeDisplay: string;
 
   events?:Events[];
   eventForm = new FormGroup({
@@ -25,7 +27,13 @@ export class EventsComponent implements OnInit{
     eventDescription: new FormControl(''),
   })
 
-  constructor(private eventService:EventsService) {
+  constructor(private eventService:EventsService,private datePipe: DatePipe) {
+    this.currentDateTime = this.getCurrentDateTime();
+    this.currentDateTimeDisplay = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm:ss') || '';
+  }
+  getCurrentDateTime(): string {
+    const now = new Date();
+    return now.toISOString().slice(0, 16);
   }
 
   ngOnInit(): void {

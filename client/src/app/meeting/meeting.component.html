@@ -38,10 +38,12 @@
         <input [formControl]="meetingDetails.controls.meetingDescription" id="meeting-desc" type="text" placeholder="Enter the description" class="w-full p-2 mb-4 border rounded-md"/>
 
         <label for="meeting-date" class="block mb-2 font-semibold">Date & Time:</label>
-        <input [formControl]="meetingDetails.controls.meetingDateTime" id="meeting-date" type="datetime-local" class="w-full p-2 mb-4 border rounded-md"/>
-
-
-
+        <p class="text-sm text-gray-500 mt-2">Current Date & Time: {{ currentDateTimeDisplay }}</p>
+        <input [formControl]="meetingDetails.controls.meetingDateTime"
+               id="meeting-date"
+               type="datetime-local"
+               [min]="currentDateTime"
+               class="w-full p-2 mb-4 border rounded-md"/>
           <mat-accordion class="m-1">
             <mat-expansion-panel>
               <mat-expansion-panel-header>

@@ -24,6 +24,10 @@ import {StaffBase} from '../model/staff-base';
   templateUrl: './meeting.component.html'
 })
 export class MeetingComponent implements OnInit {
+  currentDateTime: string;
+  currentDateTimeDisplay: string;
+
+
 
   staffs: StaffBase[] = [];
   meetings: Meeting[] = [];
@@ -36,9 +40,17 @@ export class MeetingComponent implements OnInit {
     meetingDateTime: new FormControl(''),
     meetingLink: new FormControl(''),
   });
-
-  constructor(private meetingService: MeetingService, private staffService: StaffService) {
+  constructor(private meetingService: MeetingService, private staffService: StaffService, private datePipe: DatePipe) {
+    this.currentDateTime = this.getCurrentDateTime();
+    this.currentDateTimeDisplay = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm:ss') || '';
   }
+
+
+  getCurrentDateTime(): string {
+    const now = new Date();
+    return now.toISOString().slice(0, 16);
+  }
+
 
   ngOnInit(): void {
     let meetingFetch = this.meetingService.getAllMeeting();

@@ -33,7 +33,9 @@
         <input id="location" type="text" placeholder="Enter location" required [formControl]="eventForm.controls.eventLocation" class="w-full p-2 mb-4 border rounded-md"/>
 
         <label for="date-time" class="block mb-2 font-semibold">Date & Time:</label>
-        <input id="date-time" type="datetime-local" required [formControl]="eventForm.controls.eventDate" class="w-full p-2 mb-4 border rounded-md"/>
+        <p class="text-sm text-gray-500 mt-2">Current Date & Time: {{ currentDateTimeDisplay }}</p>
+        <input id="date-time" [min]="currentDateTime" type="datetime-local" required [formControl]="eventForm.controls.eventDate" class="w-full p-2 mb-4 border rounded-md"/>
+
 
         <label for="description" class="block mb-2 font-semibold">Description:</label>
         <textarea id="description" rows="4" placeholder="Enter event description" required [formControl]="eventForm.controls.eventDescription" class="w-full p-2 mb-4 border rounded-md"></textarea>
