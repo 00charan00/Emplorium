@@ -9,6 +9,7 @@ import {AdminGuard} from './guards/admin.guard';
 import {AuthGuard} from './guards/auth.guard';
 import {EmpCrudComponent} from './emp-crud/emp-crud.component';
 import {MeetingComponent} from './meeting/meeting.component';
+import {TeamComponent} from './team/team.component';
 
 export const routes: Routes = [
   { path: '', component: EmpHomeComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'meeting', component: MeetingComponent,canActivate:[AuthGuard] },
+  { path: 'team', component: TeamComponent,canActivate:[AdminGuard] },
   { path: 'empcrud', component: EmpCrudComponent,canActivate:[AdminGuard] },
   { path: 'events', component: EventsComponent , canActivate:[AuthGuard]},
   { path: 'admin', component: AdminHomeComponent,canActivate:[AdminGuard] },

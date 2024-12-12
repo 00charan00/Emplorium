@@ -1,0 +1,70 @@
+<p>Teams</p>
+
+<div class="meeting-page flex flex-col lg:flex-row gap-8 p-8">
+
+  <div class="static-meetings flex-1 my-5">
+    <div class="meeting-card p-6 bg-white rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Meetings</h2>
+      @for (team of teams; track team.teamId) {
+        <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+          <h3 class="text-xl mb-2">Team Name: <strong>{{team.teamName}}</strong></h3>
+          <div>Team Leader:
+          <p class="bg-red-200 text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{team.teamLeader.staffName}}</p>
+          </div>
+          <p>Team Members:</p>
+          <div class="flex gap-4 mt-2">
+            @for (staff of team.teamMembers;track staff.staffId){
+              <p class="bg-blue-100 text-black px-4 py-2 rounded-lg transition duration-300 font-bold">{{staff.staffName}}</p>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="flex-1 my-5">
+    <div class="meeting-card p-6 bg-white rounded-lg shadow-lg max-w-sm mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Create New Team</h2>
+      <form [formGroup]="teamDetails">
+
+        <label for="meeting-name" class="block mb-2 font-semibold">Team Name:</label>
+        <input [formControl]="teamDetails.controls.teamName" id="meeting-name" type="text" placeholder="Enter meeting name" class="w-full p-2 mb-4 border rounded-md"/>
+
+        <mat-accordion class="m-1">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Select Leader:  </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div style="display: flex;flex-direction: column;">
+              <input (input)="filterList($event)" placeholder="search staff" type="text" style="margin: 10px;border-radius: 5px;height: 40px;padding: 5px;color: black" />
+              <mat-radio-group style="display: flex;flex-direction: column;" [formControl]="teamDetails.controls.teamLeader">
+                @for (staff of listFiltered;track staff.staffId){
+                  <mat-radio-button [id]="staff.staffId" [value]="staff.staffId" >{{staff.staffName}}</mat-radio-button>
+                }
+              </mat-radio-group>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-accordion class="m-1">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Select Members:  </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div style="display: flex;flex-direction: column;">
+              <input (input)="filterList($event)" placeholder="search staff" type="text" style="margin: 10px;border-radius: 5px;height: 40px;padding: 5px;color: black" />
+              @for (staff of listFiltered;track staff.staffId){
+                <mat-checkbox [id]="staff.staffId" [value]="staff.staffId"  (input)="checkChange($event)">{{staff.staffName}}</mat-checkbox>
+              }
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <button type="submit" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300 m-5" (click)="createTeam()">
+          Create
+        </button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
