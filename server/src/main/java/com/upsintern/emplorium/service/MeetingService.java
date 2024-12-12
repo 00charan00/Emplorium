@@ -5,6 +5,7 @@ import com.upsintern.emplorium.dto.MeetingDto;
 import com.upsintern.emplorium.entity.Meeting;
 import com.upsintern.emplorium.repository.MeetingRepository;
 import com.upsintern.emplorium.utils.Mapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,9 @@ public class MeetingService {
     }
     private void notifyMeetingAll(Meeting meeting){
     }
-
+    @Transactional
     public void deleteExpiredMeetings(){
-        meetingRepository.deleteMeetingByMeetingDateTimeLessThan(Timestamp.from(Instant.now()));
+        meetingRepository.deleteMeetingByMeetingDateTimeBefore(Timestamp.from(Instant.now()));
     }
 
     public String cancelMeeting(String meetingId){
