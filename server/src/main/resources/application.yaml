@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: Saranrajece10@
-    url: jdbc:mysql://localhost:3306/emplorium
+    password: 1030
+    url: jdbc:mysql://localhost:3306/staffsync
   jpa:
     show-sql: true
     hibernate:
