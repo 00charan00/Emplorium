@@ -12,6 +12,6 @@ import java.util.List;
 public interface MeetingRepository extends JpaRepository<Meeting,String> {
     List<Meeting> findAllByMeetingStatus(Meeting.MeetingStatus meetingStatus);
 
-    void deleteMeetingByMeetingDateTimeLessThan(Timestamp date);
+    void deleteMeetingByMeetingDateTimeBefore(Timestamp date);
 
 }
