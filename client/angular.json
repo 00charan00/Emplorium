@@ -30,7 +30,9 @@
               "@angular/material/prebuilt-themes/cyan-orange.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/preline/preline.js"
+            ]
           },
           "configurations": {
             "production": {
