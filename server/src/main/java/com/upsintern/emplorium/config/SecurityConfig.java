@@ -12,20 +12,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private static final String[] adminEndPoints = {
+    private static final String[] staffAdminAuthEndPoints = {
             "/staff/del",
             "/staff/all",
-            "/staff/update",
-            "/task/create",
-            "/task/all",
-            "/task/assign"
+            "/staff/update"
     };
 
-    private static final String[] authEndPoints = {
-            "/event/**",
-            "/meet/**",
+    private static final String[] teamAdminAuthEndPoints = {
             "/team/",
-            "/task/module/progress"};
+    };
+
+    private static final String[] taskAdminAuthEndPoints = {
+            "/task/create",
+            "/task/all",
+            "/task/get/",
+            "/task/get/",
+            "/task/in-review",
+            "/task/approve",
+            "/task/assign",
+    };
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,9 +40,11 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         req -> {
-                            req.requestMatchers(adminEndPoints).hasRole("ADMIN");
-                            req.requestMatchers(authEndPoints).authenticated();
-                            req.requestMatchers("/staff/add","/staff/login","/**").permitAll();
+                            req.requestMatchers(staffAdminAuthEndPoints).hasRole("ADMIN");
+                            req.requestMatchers(teamAdminAuthEndPoints).hasRole("ADMIN");
+                            req.requestMatchers(taskAdminAuthEndPoints).hasRole("ADMIN");
+                            req.requestMatchers("/staff/add","/staff/login").permitAll();
+                            req.anyRequest().authenticated();
                         }
                 )
                 .build();

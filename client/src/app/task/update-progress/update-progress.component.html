@@ -1,0 +1,54 @@
+<div class="meeting-card p-6 bg-white rounded-lg shadow-lg max-w-sm mx-auto h-10">
+  <h2 class="text-2xl font-semibold mb-4">New Progress Update</h2>
+  <form [formGroup]="taskProgressDetails">
+
+    <mat-accordion class="m-1">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Select Module:  </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div style="display: flex;flex-direction: column;">
+          <mat-radio-group style="display: flex;flex-direction: column;" [formControl]="taskProgressDetails.controls.module">
+            @for (modu of taskDetails.modules;track $index){
+              <mat-radio-button [value]="modu" >{{modu}}</mat-radio-button>
+            }
+          </mat-radio-group>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion class="m-1">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Select Progress Status:  </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div style="display: flex;flex-direction: column;">
+          <mat-radio-group style="display: flex;flex-direction: column;" [formControl]="taskProgressDetails.controls.progress">
+            @for (prog of progressStatusList; track $index){
+              <mat-radio-button [value]="prog">{{prog}}</mat-radio-button>
+            }
+          </mat-radio-group>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+
+    <label for="task-comment" class="block mb-2 font-semibold">Comment:</label>
+    <textarea [formControl]="taskProgressDetails.controls.comment" id="task-comment" type="text" placeholder="Comments" class="w-full p-2 mb-4 border rounded-md"></textarea>
+
+    <label for="task-progress-refs" class="block mb-2 font-semibold">Comment:</label>
+    <input id="task-progress-refs" type="file" [multiple]="true" accept="image/*" placeholder="Comments" class="w-full p-2 mb-4 border rounded-md" (change)="onSelectImages($event)"/>
+
+
+
+    <button type="submit" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300 m-5" (click)="updateTaskProgressToServer()">
+      Update Progress
+    </button>
+  </form>
+</div>
+
+
+
+
+

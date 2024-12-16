@@ -84,10 +84,10 @@ export class TeamComponent implements OnInit{
   }
 
   createTeam() {
-    console.log(this.teamDetails.controls.teamMembers.value);
-    let teamName = this.teamDetails.controls.teamName.value
-    let teamLeaderId = this.teamDetails.controls.teamLeader.value
-    let teamMembersIds = this.teamDetails.controls.teamMembers.value
+    // console.log(this.teamDetails.controls.teamLeader.value);
+    let teamName = this.teamDetails.controls.teamName.value;
+    let teamLeaderId = this.teamDetails.controls.teamLeader.value;
+    let teamMembersIds = this.teamDetails.controls.teamMembers.value;
     if (teamName != null && teamLeaderId != null && teamMembersIds != null &&
       teamName != '' && teamLeaderId != '') {
       teamMembersIds = teamMembersIds.filter(s => s!='');

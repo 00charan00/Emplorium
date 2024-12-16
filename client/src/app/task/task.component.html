@@ -1,0 +1,138 @@
+
+
+<div class="meeting-page flex flex-col lg:flex-row gap-8 p-8">
+
+    <div class="static-meetings flex-1 my-5">
+      <div class="meeting-card p-6 bg-white rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold mb-4">Tasks</h2>
+        @for (task of tasks; track task.taskId) {
+          <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4" [routerLink]="['/taskinfo',task.taskId]">
+
+            <div style="display: flex;justify-content: space-between;align-items: center">
+              <div style="display: flex;flex-direction: column">
+                <h3 class="text-xl mb-2">Task : <strong>{{task.taskTittle}}</strong></h3>
+                <div>Task Description:
+                  <p class="text-black px-4 py-2 rounded-lg transition duration-300 font-normal w-max">{{task.taskDescription}}</p>
+                </div>
+                <div>Team Leader:
+                  <p class="bg-red-200 text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{task.team.teamLeader.staffName}}</p>
+                </div>
+                <p>Team Members:</p>
+                <div class="flex gap-4 mt-2">
+                  @for (staff of task.team.teamMembers;track staff.staffId){
+                    <p class="bg-blue-100 text-black px-4 py-2 rounded-lg transition duration-300 font-bold">{{staff.staffName}}</p>
+                  }
+                </div>
+              </div>
+
+              <div style="display: flex;flex-direction: column">
+                <div style="display: grid">
+                  <mat-progress-spinner style="grid-column: 1;grid-row: 1;--mdc-circular-progress-active-indicator-color: #dfe7d3" mode="determinate" value="100"></mat-progress-spinner>
+                  <mat-progress-spinner style="grid-column: 1;grid-row: 1;--mdc-circular-progress-active-indicator-color: #4a7301" mode="determinate" value="{{task.progressPercent}}"></mat-progress-spinner>
+                </div>
+                <p>Progress {{task.progressPercent}}%</p>
+              </div>
+
+
+            </div>
+
+          </div>
+        }
+      </div>
+    </div>
+
+
+<div class="flex-1 my-5">
+  <div class="meeting-card p-6 bg-white rounded-lg shadow-lg max-w-sm mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Create New Task</h2>
+    <form [formGroup]="taskDetails">
+
+      <label for="task-name" class="block mb-2 font-semibold">Task Tittle:</label>
+      <input [formControl]="taskDetails.controls.taskTittle" id="task-name" type="text" placeholder="Enter Task tittle"
+             class="w-full p-2 mb-4 border rounded-md"/>
+
+      <label for="team_desc" class="block mb-2 font-semibold">Task Description:</label>
+      <input [formControl]="taskDetails.controls.taskDescription" id="team_desc" type="text"
+             placeholder="Enter Task Description" class="w-full p-2 mb-4 border rounded-md"/>
+
+      <label for="modules_det" class="block mb-2 font-semibold">Modules:</label>
+      <div id="modules_det">
+        @for (m of taskDetails.controls.modules.controls; track $index) {
+          <div style="display: flex;justify-content: center;align-items: center">
+            <input type="text" placeholder="Enter Module name"
+                   class="w-full p-2 border rounded-md" [formControl]="m.controls.moduleName" />
+            <mat-icon (click)="removeModule($index)" fontIcon="delete"></mat-icon>
+          </div>
+          <mat-divider></mat-divider>
+        }
+        <div style="display: flex;margin: 5px;justify-content: center;align-items: center">
+          <mat-icon style="background: orange;color: white" (click)="addMore()" fontIcon="add"></mat-icon>
+          <p style="margin: 5px">Add Module</p>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items: center;margin: 15px">
+          <label class="block font-semibold">Team:</label>
+          <mat-slide-toggle style="color: black" labelPosition="before" [formControl]="this.taskDetails.controls.enableTeamCreate"></mat-slide-toggle>
+        </div>
+
+        @if (this.taskDetails.controls.enableTeamCreate.value) {
+          <mat-selection-list style="background: black" [formControl]="this.taskDetails.controls.createOrAssign" [multiple]="false">
+              @for(l of teamAssignOrCreateOptions;track $index){
+                <mat-list-option style="color: red" [value]="l">{{l}}</mat-list-option>
+              }
+          </mat-selection-list>
+          @if(this.taskDetails.controls.createOrAssign.value?.includes('New Team')){
+          <div class="flex-1 my-5">
+            <div class="meeting-card p-6 bg-white rounded-lg shadow-lg max-w-sm mx-auto">
+              <h2 class="text-2xl font-semibold mb-4">Create New Team</h2>
+              <form [formGroup]="teamDetails">
+
+                <label for="meeting-name" class="block mb-2 font-semibold">Team Name:</label>
+                <input [formControl]="teamDetails.controls.teamName" id="meeting-name" type="text" placeholder="Enter Team name" class="w-full p-2 mb-4 border rounded-md"/>
+
+                <mat-accordion class="m-1">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title> Select Leader:  </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div style="display: flex;flex-direction: column;">
+                      <input (input)="filterList($event)" placeholder="search staff" type="text" style="margin: 10px;border-radius: 5px;height: 40px;padding: 5px;color: black" />
+                      <mat-radio-group style="display: flex;flex-direction: column;" [formControl]="teamDetails.controls.teamLeader">
+                        @for (staff of listFiltered;track staff.staffId){
+                          <mat-radio-button [id]="staff.staffId" [value]="staff.staffId" >{{staff.staffName}}</mat-radio-button>
+                        }
+                      </mat-radio-group>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+                <mat-accordion class="m-1">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title> Select Members:  </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div style="display: flex;flex-direction: column;">
+                      <input (input)="filterList($event)" placeholder="search staff" type="text" style="margin: 10px;border-radius: 5px;height: 40px;padding: 5px;color: black" />
+                      @for (staff of listFiltered;track staff.staffId){
+                        <mat-checkbox [id]="staff.staffId" [value]="staff.staffId"  (input)="checkChange($event)">{{staff.staffName}}</mat-checkbox>
+                      }
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </form>
+            </div>
+          </div>
+          }
+        }
+
+      </div>
+
+      <button type="submit"
+              class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300 m-5"
+              (click)="createTask()">
+        Create
+      </button>
+    </form>
+  </div>
+</div>
+</div>
