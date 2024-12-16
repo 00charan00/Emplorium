@@ -2,9 +2,11 @@ package com.upsintern.emplorium.controller;
 
 
 import com.upsintern.emplorium.dto.TaskDto;
+import com.upsintern.emplorium.entity.Meeting;
 import com.upsintern.emplorium.entity.Task;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.service.TaskService;
+import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("task")
+@CrossOrigin
 public class TaskController {
 
     @Autowired
@@ -27,6 +30,13 @@ public class TaskController {
     @GetMapping("all")
     public ResponseEntity<List<Task>> getTasks(){
         return taskService.getAllTasks();
+    }
+
+    @GetMapping("mine")
+    public ResponseEntity<List<Task>> getMyTasks(
+            @RequestParam(required = false) String staffId
+    ) {
+        return taskService.getMyTasks(staffId);
     }
 
     @GetMapping("get/{taskId}")
@@ -58,12 +68,25 @@ public class TaskController {
         return taskService.updateModuleProgress(taskId, moduleName, progressStatus, referencePics, comment);
     }
 
-    @PutMapping("progress")
+    @PutMapping("updateProgress")
     public ResponseEntity<ResponseBase> updateTaskProgress(
             @RequestParam String taskId,
             @RequestParam Task.ProgressStatus progressStatus
     ){
         return taskService.updateTaskCompletionOrApproval(taskId, progressStatus);
     }
+
+    @PutMapping("approve")
+    public ResponseEntity<ResponseBase> approveTaskProgress(
+            @RequestParam String taskId
+    ){
+        return taskService.updateTaskCompletionOrApproval(taskId, Task.ProgressStatus.APPROVED);
+    }
+
+    @GetMapping("in-review")
+    public ResponseEntity<List<Task>> getAllTasksInReview(){
+        return taskService.getAllTasksInReview();
+    }
+
 
 }

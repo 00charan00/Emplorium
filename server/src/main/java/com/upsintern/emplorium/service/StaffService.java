@@ -27,6 +27,9 @@ public class StaffService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    NotificationService notificationService;
+
     public LoginRegisterResponse saveNewStaff(StaffDto staffDto){
         Staff staff = Mapper.staffMapper(staffDto);
         staff.setStaffPass(passwordEncoder.encode(staff.getStaffPass()));
@@ -114,10 +117,10 @@ public class StaffService {
 
         ));
         return new LoginRegisterResponse(
-               staff.getStaffId(),
-               true,
-               staff.getStaffRole(),
-               staff.getStaffName()
+                staff.getStaffId(),
+                true,
+                staff.getStaffRole(),
+                staff.getStaffName()
         );
     }
 
@@ -126,5 +129,13 @@ public class StaffService {
                 st.getStaffId(),
                 st.getStaffName()
         )).toList();
+    }
+
+
+    public void sendNotificationsToStaffs(List<String> staffIds,String message,String subject){
+        staffIds.forEach(staffId ->{
+            Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new StaffNotFoundException("No staff with Id : "+staffId));
+            notificationService.sendEmail(staff.getStaffEmail(),subject,message);
+        });
     }
 }

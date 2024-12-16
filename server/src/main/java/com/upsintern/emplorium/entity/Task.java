@@ -28,11 +28,14 @@ public class Task {
     boolean teamAssigned;
     @OneToMany(fetch = FetchType.EAGER)
     Set<ProgressInfo> progressDetails;
+    @ElementCollection
+    List<String> modules;
 
     public enum ProgressStatus{
         INITIATED,
-        ONGOING,
+        IN_PROGRESS,
         DONE,
+        IN_REVIEW,
         APPROVED
     }
 }

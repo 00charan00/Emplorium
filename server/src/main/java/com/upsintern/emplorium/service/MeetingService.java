@@ -18,6 +18,9 @@ public class MeetingService {
     @Autowired
     MeetingRepository meetingRepository;
 
+    @Autowired
+    StaffService staffService;
+
     public String createNewMeeting(MeetingDto meetingDto){
         Meeting meeting= Mapper.meetingMapper(meetingDto);
         String meetingId=meetingRepository.save(meeting).getMeetingId();
@@ -25,6 +28,18 @@ public class MeetingService {
         return meetingId;
     }
     private void notifyMeetingAll(Meeting meeting){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Meeting Details:\n")
+                .append("-------------------\n")
+                .append("Meeting ID: ").append(meeting.getMeetingId()).append("\n")
+                .append("Meeting Name: ").append(meeting.getMeetingName()).append("\n")
+                .append("Description: ").append(meeting.getMeetingDescription()).append("\n")
+                .append("Date and Time: ").append(meeting.getMeetingDateTime()).append("\n")
+                .append("Meeting Link: ").append(meeting.getMeetingLink()).append("\n")
+                .append("Owner: ").append(meeting.getMeetingOwner()).append("\n")
+                .append("Participants: ").append(String.join(", ", meeting.getEmpIdList())).append("\n")
+                .append("\nPlease make sure to attend on time.\n");
+        staffService.sendNotificationsToStaffs(meeting.getEmpIdList(), sb.toString(), meeting.getMeetingName());
     }
     @Transactional
     public void deleteExpiredMeetings(){
@@ -47,8 +62,8 @@ public class MeetingService {
 
     public List<Meeting> getMyMeetings(String staffId,String staffEmail){
         return meetingRepository.findAll().stream().filter(
-                m -> m.getEmpIdList().contains(staffId) ||
-                        m.getMeetingOwner().equals(staffEmail)
+                        m -> m.getEmpIdList().contains(staffId) ||
+                                m.getMeetingOwner().equals(staffEmail)
                 )
                 .toList();
     }

@@ -12,3 +12,18 @@ spring:
       hibernate:
         jdbc:
           time_zone: UTC
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nodemailercharan@gmail.com
+    password: brftpryzsogquwjk
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB

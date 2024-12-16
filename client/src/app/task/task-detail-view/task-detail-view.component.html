@@ -1,0 +1,260 @@
+<!--<h2 class="text-4xl m-2 text-green-700 font-bold">Task Details</h2>-->
+<!--@if (staffTask.taskProgress.toString() === 'IN_REVIEW' && this.isAdmin && staffTask.taskProgress.toString() != 'APPROVED') {-->
+<!--  <div style="display: flex;justify-content: end">-->
+<!--    <button mat-fab extended (click)="approveTask()">-->
+<!--      <mat-icon fontIcon="add"></mat-icon>-->
+<!--      Approve-->
+<!--    </button>-->
+<!--  </div>-->
+<!--}-->
+<!--<div style="margin: 10px;padding: 10px">-->
+<!--  <div style="display: flex;justify-content: space-between;align-items: center">-->
+<!--    <div style="display: flex;flex-direction: column">-->
+<!--      <h3 class="text-xl mb-2 text-red-950 font-bold">Task Id : <span-->
+<!--        class="text-black font-normal">{{ staffTask.taskId }}</span></h3>-->
+<!--      <h3 class="text-xl mb-2 text-red-950 font-bold">Task Tittle : <span-->
+<!--        class="text-black font-normal">{{ staffTask.taskTittle }}</span></h3>-->
+<!--      <div class="text-xl mb-2 text-red-950 font-bold">Task Description:-->
+<!--        <p-->
+<!--          class="text-black px-4 py-2 rounded-lg transition duration-300 font-normal w-max">{{ staffTask.taskDescription }}</p>-->
+<!--      </div>-->
+
+<!--      <div class="text-xl mb-2 text-red-950 font-bold">Module Details:-->
+<!--        @for (modu of staffTask.modules; track $index) {-->
+<!--          <span class="text-black font-normal">{{ modu }} | </span>-->
+<!--        }-->
+<!--      </div>-->
+
+<!--      @if (staffTask.teamAssigned) {-->
+
+<!--        <div class="text-xl mb-2 text-red-950 font-bold">Team Details:-->
+<!--          <h3 class="text-xl mb-2 text-red-950 font-normal">Team Leader : <span-->
+<!--            class="text-black font-normal">{{ staffTask.team.teamLeader.staffName }}</span></h3>-->
+<!--          <div class="text-xl mb-2 text-red-950 font-normal">Team Members:-->
+<!--            @for (staff of staffTask.team.teamMembers; track staff.staffId) {-->
+<!--              <span class="text-black font-normal">{{ staff.staffName }} | </span>-->
+<!--            }-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="text-xl mb-2 text-red-950 font-bold">Progress Details:-->
+<!--          <h2 class="text-lg mb-2 text-orange-700 font-bold">Module Level Progress:</h2>-->
+<!--          @for (modProg of staffTask.moduleLevelProgress | keyvalue; track modProg.key) {-->
+<!--            <h3 class="text-xl mb-2 text-red-950 font-normal">{{ modProg.key }} : <span-->
+<!--              class="text-black font-normal">{{ modProg.value }}</span></h3>-->
+<!--          }-->
+<!--        </div>-->
+
+<!--        <h3 class="text-xl mb-2 text-red-950 font-normal">Task Overall Progress :-->
+<!--          <p-->
+<!--            class="bg-yellow-800 text-sm text-white px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{ staffTask.taskProgress }}</p>-->
+<!--        </h3>-->
+
+
+<!--        <div class="text-lg mb-2 text-orange-700 font-bold">Progress Updates:-->
+<!--          @for (progressInfo of staffTask.progressDetails; track progressInfo.progressInfoId) {-->
+
+<!--            <mat-card style="&#45;&#45;mdc-elevated-card-container-color: white;padding: 10px;margin: 10px">-->
+<!--              <h3 class="text-xl mb-2 text-red-950 font-normal">ProgressUpdate Id : <span-->
+<!--                class="text-black font-normal">{{ progressInfo.progressInfoId }}</span></h3>-->
+<!--              <h3 class="text-xl mb-2 text-red-950 font-normal">Comment : <span-->
+<!--                class="text-black font-normal">{{ progressInfo.comment }}</span></h3>-->
+<!--              <h3 class="text-xl mb-2 text-red-950 font-normal">Updated By :-->
+<!--                <p-->
+<!--                  class="bg-green-200 text-sm text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{ progressInfo.updatedUser }}</p>-->
+<!--              </h3>-->
+<!--              <h3 class="text-xl mb-2 text-red-950 font-normal">Updated At :-->
+<!--                <p-->
+<!--                  class="bg-blue-200 text-sm text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{ progressInfo.updatedTime | date:'dd-MM-yyyy  HH:mm:ss' }}</p>-->
+<!--              </h3>-->
+
+<!--              <div style="display: flex">Reference Images:-->
+<!--                @for (picRef of progressInfo.references; track picRef.imageId) {-->
+<!--                  <img (click)="openPicView(picRef.image)" height="100px" width="100px" style="margin: 5px"-->
+<!--                       src="{{getPicImg(picRef.image)}}" alt="">-->
+<!--                }-->
+<!--              </div>-->
+
+<!--            </mat-card>-->
+
+<!--            <mat-divider></mat-divider>-->
+
+<!--          }-->
+
+
+<!--          @if (staffTask.taskProgress != ProgressStatus.IN_REVIEW && staffTask.taskProgress != ProgressStatus.APPROVED) {-->
+<!--            <button type="submit"-->
+<!--                    class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300 m-5"-->
+<!--                    (click)="newProgressUpdate()">Add Progress Update-->
+<!--            </button>-->
+<!--          }-->
+<!--        </div>-->
+
+<!--      } @else {-->
+<!--        <p class="bg-red-200 text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">Team Not-->
+<!--          Assigned</p>-->
+<!--      }-->
+<!--    </div>-->
+
+<!--    <div style="display: flex;flex-direction: column">-->
+<!--      <div style="display: grid">-->
+<!--        <mat-progress-spinner-->
+<!--          style="grid-column: 1;grid-row: 1;&#45;&#45;mdc-circular-progress-active-indicator-color: #dfe7d3"-->
+<!--          mode="determinate" value="100"></mat-progress-spinner>-->
+<!--        <mat-progress-spinner-->
+<!--          style="grid-column: 1;grid-row: 1;&#45;&#45;mdc-circular-progress-active-indicator-color: #4a7301"-->
+<!--          mode="determinate" value="{{staffTask.progressPercent}}"></mat-progress-spinner>-->
+<!--      </div>-->
+<!--      <p>Progress {{ staffTask.progressPercent }}%</p>-->
+<!--    </div>-->
+
+
+<!--  </div>-->
+
+<!--</div>-->
+
+
+
+
+
+<div class="container mx-auto p-4">
+  <!-- Task Details Card -->
+  <div class="bg-blue-50 shadow-lg rounded-lg p-6 mb-6">
+    <h2 class="text-4xl text-yellow-600 font-bold mb-4">Task Details</h2>
+
+    @if (staffTask.taskProgress.toString() === 'IN_REVIEW' && this.isAdmin && staffTask.taskProgress.toString() != 'APPROVED') {
+      <div class="flex justify-end mb-4">
+        <button mat-fab extended (click)="approveTask()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg px-4 py-2 flex items-center space-x-2">
+          <mat-icon fontIcon="add"></mat-icon>
+          <span>Approve</span>
+        </button>
+      </div>
+    }
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Left Section -->
+      <div>
+        <h3 class="text-xl text-yellow-700 font-bold">
+          Task Id: <span class="text-blue-800 font-normal">{{ staffTask.taskId }}</span>
+        </h3>
+        <h3 class="text-xl text-yellow-700 font-bold">
+          Task Title: <span class="text-blue-800 font-normal">{{ staffTask.taskTittle }}</span>
+        </h3>
+        <div class="text-xl text-yellow-700 font-bold">
+          Task Description:
+          <p class="text-blue-800 bg-yellow-100 px-4 py-2 rounded-lg font-normal mt-2">
+            {{ staffTask.taskDescription }}
+          </p>
+        </div>
+        <div class="text-xl text-yellow-700 font-bold mt-4">
+          Module Details:
+          @for (modu of staffTask.modules; track $index) {
+            <span class="text-blue-800 font-normal">{{ modu }} | </span>
+          }
+        </div>
+
+        @if (staffTask.teamAssigned) {
+          <!-- Team Details Card -->
+          <div class="bg-yellow-50 shadow-md rounded-lg p-4 mt-6">
+            <h3 class="text-xl text-yellow-700 font-bold mb-4">Team Details</h3>
+            <h4 class="text-yellow-700 font-bold">Team Leader:</h4>
+            <p class="text-blue-800 font-normal">{{ staffTask.team.teamLeader.staffName }}</p>
+
+            <h4 class="text-yellow-700 font-bold mt-4">Team Members:</h4>
+            <p class="text-blue-800 font-normal">
+              @for (staff of staffTask.team.teamMembers; track staff.staffId) {
+                {{ staff.staffName }} |
+              }
+            </p>
+          </div>
+        } @else {
+          <p class="bg-red-200 text-blue-800 px-4 py-2 rounded-lg font-bold mt-6">Team Not Assigned</p>
+        }
+      </div>
+
+      <!-- Right Section: Progress -->
+      <div>
+        <!-- Progress Spinner -->
+        <div class="flex justify-center mb-6">
+          <div class="relative w-24 h-24 grid">
+            <!-- Background Full Progress Spinner -->
+            <mat-progress-spinner
+              mode="determinate"
+              value="100"
+              strokeWidth="8"
+              style="--mdc-circular-progress-active-indicator-color: #facc15;grid-row: 1;grid-column: 1; /* Yellow */;">
+            </mat-progress-spinner>
+
+            <!-- Foreground Partial Progress Spinner -->
+            <mat-progress-spinner
+              mode="determinate"
+              [value]="staffTask.progressPercent"
+              strokeWidth="8"
+              style="--mdc-circular-progress-active-indicator-color: #2563eb;grid-row: 1;grid-column: 1; /* Blue */;">
+            </mat-progress-spinner>
+          </div>
+        </div>
+        <!-- Progress Percentage -->
+        <p class="text-center text-xl text-blue-700 font-semibold">
+          Progress: {{ staffTask.progressPercent }}%
+        </p>
+        <div class="ml-80 mt-40">
+          <!-- Task Overall Progress -->
+          <h3 class="text-yellow-700 font-bold mt-4">Task Overall Progress:</h3>
+          <p class="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold w-max">
+            {{ staffTask.taskProgress }}
+          </p>
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Progress Updates Section -->
+  <div class="bg-blue-50 shadow-lg rounded-lg p-6">
+    <h3 class="text-2xl text-yellow-600 font-bold mb-4">Progress Updates</h3>
+
+    @for (progressInfo of staffTask.progressDetails; track progressInfo.progressInfoId) {
+      <!-- Individual Progress Update Card -->
+      <div class="bg-yellow-50 shadow-md rounded-lg p-4 mb-4">
+        <h4 class="text-xl text-yellow-700 font-bold mb-2">ProgressUpdate Id:</h4>
+        <p class="text-blue-800 font-normal">{{ progressInfo.progressInfoId }}</p>
+
+        <h4 class="text-yellow-700 font-bold mt-4">Comment:</h4>
+        <p class="text-blue-800 font-normal">{{ progressInfo.comment }}</p>
+
+        <h4 class="text-yellow-700 font-bold mt-4">Updated By:</h4>
+        <p class="bg-blue-200 text-blue-800 px-4 py-2 rounded-lg font-bold">{{ progressInfo.updatedUser }}</p>
+
+        <h4 class="text-yellow-700 font-bold mt-4">Updated At:</h4>
+        <p class="bg-yellow-200 text-blue-800 px-4 py-2 rounded-lg font-bold">{{ progressInfo.updatedTime | date:'dd-MM-yyyy HH:mm:ss' }}</p>
+
+        <!-- Reference Images -->
+        <div class="flex flex-wrap items-center mt-4">
+          <span class="text-yellow-700 font-bold mr-2">Reference Images:</span>
+          @for (picRef of progressInfo.references; track picRef.imageId) {
+            <img
+              (click)="openPicView(picRef.image)"
+              class="h-24 w-24 object-cover rounded-lg m-2 cursor-pointer"
+              src="{{ getPicImg(picRef.image) }}"
+              alt="">
+          }
+        </div>
+      </div>
+    }
+
+    @if (staffTask.taskProgress != ProgressStatus.IN_REVIEW && staffTask.taskProgress != ProgressStatus.APPROVED) {
+      <button
+        type="submit"
+        class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300"
+        (click)="newProgressUpdate()">
+        Add Progress Update
+      </button>
+    }
+  </div>
+</div>
+
+
