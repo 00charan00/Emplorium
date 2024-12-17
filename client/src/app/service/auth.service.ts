@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private router: Router) {
     this.loggedIn = (localStorage.getItem("username") != null && localStorage.getItem("password") != null);
-    this.isAdmin = this.loggedIn && (localStorage.getItem("name") == "Admin");
+    this.isAdmin = this.loggedIn && (localStorage.getItem("role") == "ROLE_ADMIN");
     console.log(this.loggedIn);
   }
 
