@@ -2,6 +2,7 @@ package com.upsintern.emplorium.controller;
 
 import com.upsintern.emplorium.dto.AdminStaffDto;
 import com.upsintern.emplorium.dto.StaffBase;
+import com.upsintern.emplorium.dto.StaffUpdateDto;
 import com.upsintern.emplorium.entity.Staff;
 import com.upsintern.emplorium.responsemodel.LoginRegisterResponse;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
@@ -42,8 +43,8 @@ public class StaffController {
     }
 
     @PutMapping("update")
-    public ResponseEntity<ResponseBase> updateStaff(@RequestParam String staffId, @RequestBody StaffDto staffDto){
-        ResponseBase response = new ResponseBase(staffService.updateStaff(staffId,staffDto),true);
+    public ResponseEntity<ResponseBase> updateStaff(@RequestParam String staffId, @RequestBody StaffUpdateDto staffUpdateDto){
+        ResponseBase response = new ResponseBase(staffService.updateStaff(staffId,staffUpdateDto),true);
         return ResponseEntity.ok(response);
     }
 

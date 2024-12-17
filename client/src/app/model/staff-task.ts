@@ -25,6 +25,7 @@ export interface ProgressInfo {
   updatedTime:string;
   updatedUser:string
   references:ImageDetail[];
+  progressStatus:string;
 }
 
 export enum ProgressStatus{
@@ -32,5 +33,6 @@ export enum ProgressStatus{
   IN_PROGRESS,
   DONE,
   IN_REVIEW,
-  APPROVED
+  APPROVED,
+  REJECTED
 }

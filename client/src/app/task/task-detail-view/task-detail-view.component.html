@@ -122,14 +122,6 @@
   <div class="bg-blue-50 shadow-lg rounded-lg p-6 mb-6">
     <h2 class="text-4xl text-yellow-600 font-bold mb-4">Task Details</h2>
 
-    @if (staffTask.taskProgress.toString() === 'IN_REVIEW' && this.isAdmin && staffTask.taskProgress.toString() != 'APPROVED') {
-      <div class="flex justify-end mb-4">
-        <button mat-fab extended (click)="approveTask()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg px-4 py-2 flex items-center space-x-2">
-          <mat-icon fontIcon="add"></mat-icon>
-          <span>Approve</span>
-        </button>
-      </div>
-    }
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Left Section -->
@@ -216,15 +208,35 @@
   <!-- Progress Updates Section -->
   <div class="bg-blue-50 shadow-lg rounded-lg p-6">
     <h3 class="text-2xl text-yellow-600 font-bold mb-4">Progress Updates</h3>
-
     @for (progressInfo of staffTask.progressDetails; track progressInfo.progressInfoId) {
       <!-- Individual Progress Update Card -->
       <div class="bg-yellow-50 shadow-md rounded-lg p-4 mb-4">
         <h4 class="text-xl text-yellow-700 font-bold mb-2">ProgressUpdate Id:</h4>
         <p class="text-blue-800 font-normal">{{ progressInfo.progressInfoId }}</p>
 
-        <h4 class="text-yellow-700 font-bold mt-4">Comment:</h4>
-        <p class="text-blue-800 font-normal">{{ progressInfo.comment }}</p>
+      @if(progressInfo.progressStatus === 'IN_REVIEW'){
+        <div class="flex gap-1">
+          <button class="px-6 py-2 bg-green-800 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300" (click)="approveOrReject(progressInfo.progressInfoId,'APPROVED')">
+            Approve
+          </button>
+          <button class="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300" (click)="approveOrReject(progressInfo.progressInfoId,'REJECTED')">
+            Reject
+          </button>
+        </div>
+      }
+
+      <h4 class="text-yellow-700 font-bold mt-4">Comment:</h4>
+      <p class="text-green-800 font-normal ">{{ progressInfo.comment }}</p>
+
+      <h4 class="text-yellow-700 font-bold mt-4">Status:</h4>
+      @if(progressInfo.progressStatus === 'APPROVED'){
+        <p class="text-green-800 font-bold">{{ progressInfo.progressStatus }}</p>
+      } @else if (progressInfo.progressStatus === 'REJECTED'){
+        <p class="text-red-800 font-bold">{{ progressInfo.progressStatus }}</p>
+      } @else {
+        <p class="text-blue-800 font-normal">{{ progressInfo.progressStatus }}</p>
+      }
+
 
         <h4 class="text-yellow-700 font-bold mt-4">Updated By:</h4>
         <p class="bg-blue-200 text-blue-800 px-4 py-2 rounded-lg font-bold">{{ progressInfo.updatedUser }}</p>

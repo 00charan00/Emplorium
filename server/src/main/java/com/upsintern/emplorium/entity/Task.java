@@ -36,6 +36,7 @@ public class Task {
         IN_PROGRESS,
         DONE,
         IN_REVIEW,
-        APPROVED
+        APPROVED,
+        REJECTED
     }
 }

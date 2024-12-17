@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {StaffTask} from '../model/staff-task';
+import {ProgressStatus, StaffTask} from '../model/staff-task';
 import {ResponseBase} from '../model/response-base';
 import {AuthService} from './auth.service';
 import {Meeting} from '../model/meeting';
@@ -105,5 +105,15 @@ export class TaskService {
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
     return this.http.put<ResponseBase>(url,null,{headers:headerVals,params:{taskId:taskId}});
+  }
+
+  approveOrRejectModule(progressInfoId:string,progressStatus:string){
+    let url = `${this.API_BASE_URL}appr-rej-module`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password')
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Accept','application/json');
+    return this.http.put<ResponseBase>(url,null,{headers:headerVals,params:{progressInfoId:progressInfoId,progressStatus:progressStatus}});
   }
 }

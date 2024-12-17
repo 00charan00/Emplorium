@@ -8,13 +8,21 @@
 
   <div class="grid grid-cols-4 gap-4">
     @for (staff of staffs; track staff.staffId) {
-      <div class="bg-white w-60 p-4 rounded shadow-md flex flex-col items-center">
+      <div [ngClass]="{
+        'bg-red-100': staff.staffRole === 'ROLE_ADMIN',
+        'bg-white': staff.staffRole !== 'ROLE_ADMIN'
+      }" class="w-60 p-4 rounded shadow-md flex flex-col items-center">
         <div class="w-20 h-20 rounded-full mb-4">
           <img ngSrc="assets/profile.png" alt="Employee Photo" class="w-full h-full object-cover" height="512" width="512" />
         </div>
         <div class="text-center mb-4">
           <p class="text-lg font-semibold text-gray-800">{{staff.staffName}}</p>
-          <p class="text-gray-600 text-sm">{{staff.staffRole}}</p>
+          @if(staff.staffRole==="ROLE_ADMIN"){
+          <p class="text-black text-sm font-extrabold">{{staff.staffRole}}</p>
+          }
+          @else{
+            <p class="text-gray-600 text-sm font-bold">{{staff.staffRole}}</p>
+          }
         </div>
         <div class="text-center mb-2">
           <p class="text-gray-600 text-sm">Email: {{staff.staffEmail}}</p>

@@ -9,19 +9,6 @@ export class RegisterReq {
     this.staffEmail = staffEmail;
     this.staffPass = staffPass;
   }
-
-
-  get getStaffName(): String {
-    return this.  staffName;
-  }
-
-  get getStaffEmail(): String {
-    return this.staffEmail;
-  }
-
-  get getStaffPass(): String {
-    return this.staffPass;
-  }
 }
 
 export const enum StaffRole {

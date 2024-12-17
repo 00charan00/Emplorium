@@ -83,6 +83,14 @@ public class TaskController {
         return taskService.updateTaskCompletionOrApproval(taskId, Task.ProgressStatus.APPROVED);
     }
 
+    @PutMapping("appr-rej-module")
+    public ResponseEntity<ResponseBase> approveOrRejectModuleProgress(
+            @RequestParam String progressInfoId,
+            @RequestParam Task.ProgressStatus progressStatus
+    ){
+        return taskService.approveOrRejectModule(progressInfoId, progressStatus);
+    }
+
     @GetMapping("in-review")
     public ResponseEntity<List<Task>> getAllTasksInReview(){
         return taskService.getAllTasksInReview();

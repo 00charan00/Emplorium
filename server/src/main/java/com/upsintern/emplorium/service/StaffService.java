@@ -3,6 +3,7 @@ package com.upsintern.emplorium.service;
 import com.upsintern.emplorium.dto.AdminStaffDto;
 import com.upsintern.emplorium.dto.StaffBase;
 import com.upsintern.emplorium.dto.StaffDto;
+import com.upsintern.emplorium.dto.StaffUpdateDto;
 import com.upsintern.emplorium.entity.Staff;
 import com.upsintern.emplorium.exception.InvalidDataException;
 import com.upsintern.emplorium.exception.StaffNotFoundException;
@@ -51,20 +52,25 @@ public class StaffService {
         return "Staff Removed";
     }
 
-    public String updateStaff(String staffId, StaffDto staffDto){
+    public String updateStaff(String staffId, StaffUpdateDto staffUpdateDto){
         Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new StaffNotFoundException("No Staff Found with Id: "+staffId));
-        String tempVal = staffDto.getStaffEmail();
+        String tempVal = staffUpdateDto.getStaffEmail();
         if(tempVal != null && !tempVal.isEmpty()){
             staff.setStaffEmail(tempVal);
         }
-        tempVal = staffDto.getStaffName();
+        tempVal = staffUpdateDto.getStaffName();
         if(tempVal != null && !tempVal.isEmpty()){
             staff.setStaffName(tempVal);
         }
-        tempVal = staffDto.getStaffPass();
+        tempVal = staffUpdateDto.getStaffPass();
         if(tempVal != null && !tempVal.isEmpty()){
             staff.setStaffPass(passwordEncoder.encode(tempVal));
         }
+        tempVal = staffUpdateDto.getStaffRole();
+        if(tempVal != null && !tempVal.isEmpty()){
+            staff.setStaffRole(Staff.StaffRole.valueOf(tempVal));
+        }
+
         staffRepository.save(staff);
         return "Staff data updated";
     }

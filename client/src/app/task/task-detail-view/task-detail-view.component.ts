@@ -2,25 +2,19 @@ import {Component,OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ProgressStatus, StaffTask} from '../../model/staff-task';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {DatePipe, KeyValuePipe} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {TaskService} from '../../service/task.service';
 import {UpdateProgressComponent} from '../update-progress/update-progress.component';
-import {MatCard} from '@angular/material/card';
-import {MatDivider} from '@angular/material/divider';
 import {PicViewComponent} from '../pic-view/pic-view.component';
 import {AuthService} from '../../service/auth.service';
-import {MatFabButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-task-detail-view',
   imports: [
     MatProgressSpinner,
-    DatePipe,
-    MatFabButton,
-    MatIcon
+    DatePipe
   ],
   templateUrl: './task-detail-view.component.html'
 })
@@ -73,4 +67,11 @@ export class TaskDetailViewComponent implements OnInit{
       });
   }
 
+
+  approveOrReject(progressInfoId:string,resultStatus: string) {
+    this.taskService.approveOrRejectModule(progressInfoId,resultStatus)
+      .subscribe(res => {
+        console.log(res);
+      })
+  }
 }

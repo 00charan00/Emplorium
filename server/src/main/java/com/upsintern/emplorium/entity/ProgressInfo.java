@@ -31,4 +31,7 @@ public class ProgressInfo {
 
     @OneToMany(targetEntity = ImageDetail.class,fetch = FetchType.EAGER)
     List<ImageDetail> references = new ArrayList<>();
+
+    Task.ProgressStatus progressStatus;
+
 }

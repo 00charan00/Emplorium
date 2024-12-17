@@ -7,6 +7,7 @@ import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {Staff} from '../model/staff';
 import {AdminStaffDto} from '../model/admin-staff-dto';
 import {StaffBase} from '../model/staff-base';
+import {StaffUpdate} from '../model/staff-update';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class StaffService {
       return this.http.post<LoginRegisterResponse>(this.API_BASE_URL+'add',registerReq);
   }
 
-  updateStaff(staffId:string, staffDetails:RegisterReq){
+  updateStaff(staffId:string, staffDetails:StaffUpdate){
     let url = `${this.API_BASE_URL}update`;
     let username = localStorage.getItem('username');
     let pass = localStorage.getItem('password')

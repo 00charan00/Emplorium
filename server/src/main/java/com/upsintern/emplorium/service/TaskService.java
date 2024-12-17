@@ -128,7 +128,7 @@ public class TaskService {
         Map<String, Task.ProgressStatus> moduleProgress = task.getModuleLevelProgress();
         if (moduleProgress != null && moduleProgress.containsKey(moduleName)) {
             try {
-                ProgressInfo progressInfo = extractProgressInfo(referencePics, comment);
+                ProgressInfo progressInfo = extractProgressInfo(referencePics, comment, progressStatus.equals(Task.ProgressStatus.DONE) ? Task.ProgressStatus.IN_REVIEW : progressStatus, moduleName);
                 Set<ProgressInfo> preProgressInfo = task.getProgressDetails();
                 if (preProgressInfo == null) {
                     Set<ProgressInfo> progressInfoSet = new HashSet<>();
@@ -138,23 +138,26 @@ public class TaskService {
                     preProgressInfo.add(progressInfo);
                     task.setProgressDetails(preProgressInfo);
                 }
-                moduleProgress.put(moduleName, progressStatus);
+                if(progressStatus.equals(Task.ProgressStatus.DONE))moduleProgress.put(moduleName, Task.ProgressStatus.IN_REVIEW);
+                else moduleProgress.put(moduleName, progressStatus);
                 double modulesSize = moduleProgress.size();
-                double completedModuleSize = moduleProgress.values().stream().filter(m -> m.equals(Task.ProgressStatus.DONE)).count();
-                task.setProgressPercent((completedModuleSize / modulesSize) * 100);
-                task.setTaskProgress(Task.ProgressStatus.IN_PROGRESS);
+                double completedModuleSize = moduleProgress.values().stream().filter(m -> m.equals(Task.ProgressStatus.IN_REVIEW)).count();
+                double progressPercentage = (completedModuleSize / modulesSize) * 100;
+                task.setProgressPercent(progressPercentage);
+                if(progressPercentage == 100)task.setTaskProgress(Task.ProgressStatus.IN_REVIEW);
+                else task.setTaskProgress(Task.ProgressStatus.IN_PROGRESS);
 
             } catch (Exception e) {
                 throw new InvalidDataException("Invalid References");
             }
 
             taskRepository.save(task);
-        }
+        }else throw new InvalidDataException("Module Update is Incorrect");
 
         return ResponseEntity.ok(new ResponseBase("Task Progress updated", true));
     }
 
-    private ProgressInfo extractProgressInfo(MultipartFile[] referencePics, String comment) throws IOException {
+    private ProgressInfo extractProgressInfo(MultipartFile[] referencePics, String comment, Task.ProgressStatus progressStatus, String module) throws IOException {
         ProgressInfo progressInfo = new ProgressInfo();
         List<ImageDetail> imageDetails = new ArrayList<>();
         for (MultipartFile multipart : referencePics) {
@@ -171,6 +174,7 @@ public class TaskService {
         progressInfo.setProgressInfoId("ProInfo:" + UUID.randomUUID());
         progressInfo.setComment(comment);
         progressInfo.setReferences(imageDetails);
+        progressInfo.setProgressStatus(progressStatus);
         progressInfoRepository.save(progressInfo);
         return progressInfo;
     }
@@ -178,13 +182,18 @@ public class TaskService {
     public ResponseEntity<ResponseBase> updateTaskCompletionOrApproval(String taskId, Task.ProgressStatus progressStatus) {
         Task task = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("No such Task found"));
         if(task.getProgressPercent() == 100){
-            task.setTaskProgress(progressStatus);
-            if(progressStatus.equals(Task.ProgressStatus.DONE)){
-                task.setTaskProgress(Task.ProgressStatus.IN_REVIEW);
-            }
+            if(progressStatus.equals(Task.ProgressStatus.DONE))task.setTaskProgress(Task.ProgressStatus.IN_REVIEW);
+            else task.setTaskProgress(progressStatus);
         }
         taskRepository.save(task);
         return ResponseEntity.ok(new ResponseBase("Task Progress updated", true));
+    }
+
+    public ResponseEntity<ResponseBase> approveOrRejectModule(String progressId, Task.ProgressStatus progressStatus){
+        ProgressInfo progressInfo = progressInfoRepository.findById(progressId).orElseThrow(() -> new RuntimeException("No such Task found"));
+        progressInfo.setProgressStatus(progressStatus);
+        progressInfoRepository.save(progressInfo);
+        return ResponseEntity.ok(new ResponseBase("Module Progress updated.",true));
     }
 
     public ResponseEntity<List<Task>> getAllTasksInReview(){

@@ -22,6 +22,15 @@
       [formControl]="editStaffForm.controls.staffPassword"
       class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-primary focus:outline-none"
     />
+    <select
+      [formControl]="editStaffForm.controls.staffRole"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-primary focus:outline-none"
+    >
+      <option value="" disabled>Select Role</option>
+      <option value="ROLE_ADMIN">ADMIN</option>
+      <option value="ROLE_EMPLOYEE">EMPLOYEE</option>
+    </select>
+
     <button
       (click)="updateStaff()"
       class="bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-500 focus:ring-2 focus:ring-blue-500 transition-all"

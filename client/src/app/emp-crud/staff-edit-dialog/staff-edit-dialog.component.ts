@@ -1,11 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Staff} from '../../model/staff';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {MatButton} from '@angular/material/button';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {data} from 'autoprefixer';
 import {StaffService} from '../../service/staff.service';
-import {RegisterReq} from '../../model/register-req';
+import {StaffUpdate} from '../../model/staff-update';
 
 @Component({
   selector: 'app-staff-edit-dialog',
@@ -22,6 +20,7 @@ export class StaffEditDialogComponent implements OnInit{
     staffName : new FormControl(''),
     staffEmail : new FormControl(''),
     staffPassword : new FormControl(''),
+    staffRole : new FormControl(''),
   })
 
   constructor(@Inject(MAT_DIALOG_DATA)public data:{staffDet: Staff}, private staffService:StaffService) {
@@ -30,14 +29,16 @@ export class StaffEditDialogComponent implements OnInit{
 
   updateStaff(){
     let editedStaffName = this.editStaffForm.controls.staffName.value
-    let editedSatffEmail = this.editStaffForm.controls.staffEmail.value
-    let editedSatffPass = this.editStaffForm.controls.staffPassword.value
-    if(editedSatffEmail != null && editedStaffName != null && editedSatffPass != null) {
+    let editedStaffEmail = this.editStaffForm.controls.staffEmail.value
+    let editedStaffPass = this.editStaffForm.controls.staffPassword.value
+    let editedStaffRole = this.editStaffForm.controls.staffRole.value
+    if(editedStaffEmail != null && editedStaffName != null && editedStaffPass != null && editedStaffRole!=null) {
       this.staffService.updateStaff(this.staff.staffId,
-        new RegisterReq(
+        new StaffUpdate(
           editedStaffName,
-          editedSatffEmail,
-          editedSatffPass
+          editedStaffEmail,
+          editedStaffPass,
+          editedStaffRole
         )
       ).subscribe(res => {
         console.log(res);
