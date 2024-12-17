@@ -18,10 +18,7 @@ import {MatIcon} from '@angular/material/icon';
   selector: 'app-task-detail-view',
   imports: [
     MatProgressSpinner,
-    KeyValuePipe,
-    MatCard,
     DatePipe,
-    MatDivider,
     MatFabButton,
     MatIcon
   ],
