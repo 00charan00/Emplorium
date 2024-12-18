@@ -1,0 +1,33 @@
+<div class="p-8 w-96 max-w-6xl mx-auto bg-white rounded-xl shadow-xl">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-semibold text-yellow-400">Edit Staff Details</h1>
+  </div>
+  <div class="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col gap-6">
+    <p class="text-xl font-semibold text-red-600">Update Staff Information</p>
+    <input
+      type="text"
+      placeholder="Enter staff name"
+      [formControl]="editStaffForm.controls.staffName"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-primary focus:outline-none"
+    />
+    <input
+      type="email"
+      placeholder="Enter staff email"
+      [formControl]="editStaffForm.controls.staffEmail"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-primary focus:outline-none"
+    />
+    <input
+      type="password"
+      placeholder="Change or enter new password"
+      [formControl]="editStaffForm.controls.staffPassword"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-primary focus:outline-none"
+    />
+
+    <button
+      (click)="updateStaff()"
+      class="bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-500 focus:ring-2 focus:ring-blue-500 transition-all"
+    >
+      Update
+    </button>
+  </div>
+</div>

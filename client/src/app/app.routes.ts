@@ -12,11 +12,13 @@ import {MeetingComponent} from './meeting/meeting.component';
 import {TeamComponent} from './team/team.component';
 import {TaskComponent} from './task/task.component';
 import {TaskDetailViewComponent} from './task/task-detail-view/task-detail-view.component';
+import {ProfileComponent} from './profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: EmpHomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent},
   { path: 'task', component: TaskComponent, canActivate:[AuthGuard] },
   { path: 'taskinfo/:staffId', component: TaskDetailViewComponent, canActivate:[AuthGuard] },
   { path: 'about', component: AboutComponent },
