@@ -9,6 +9,8 @@ export class RegisterReq {
     this.staffEmail = staffEmail;
     this.staffPass = staffPass;
   }
+
+
 }
 
 export const enum StaffRole {

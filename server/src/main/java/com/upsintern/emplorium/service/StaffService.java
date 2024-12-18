@@ -75,6 +75,27 @@ public class StaffService {
         return "Staff data updated";
     }
 
+
+    public String updateStaffByUser(String staffId, StaffUpdateDto staffUpdateDto){
+        Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new StaffNotFoundException("No Staff Found with Id: "+staffId));
+        String tempVal = staffUpdateDto.getStaffEmail();
+        if(tempVal != null && !tempVal.isEmpty()){
+            staff.setStaffEmail(tempVal);
+        }
+        tempVal = staffUpdateDto.getStaffName();
+        if(tempVal != null && !tempVal.isEmpty()){
+            staff.setStaffName(tempVal);
+        }
+        tempVal = staffUpdateDto.getStaffPass();
+        if(tempVal != null && !tempVal.isEmpty()){
+            staff.setStaffPass(passwordEncoder.encode(tempVal));
+        }
+        staffRepository.save(staff);
+        return "Staff data updated";
+    }
+
+
+
     public LoginRegisterResponse staffLogin(StaffDto staffDto){
         String mail = staffDto.getStaffEmail();
         String pass = staffDto.getStaffPass();
@@ -136,8 +157,6 @@ public class StaffService {
                 st.getStaffName()
         )).toList();
     }
-
-
     public void sendNotificationsToStaffs(List<String> staffIds,String message,String subject){
         staffIds.forEach(staffId ->{
             Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new StaffNotFoundException("No staff with Id : "+staffId));

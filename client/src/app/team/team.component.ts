@@ -102,6 +102,7 @@ export class TeamComponent implements OnInit{
           )
         ).subscribe(res => {
           console.log(res);
+
         })
       }
     }else{

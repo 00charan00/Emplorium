@@ -48,6 +48,12 @@ public class StaffController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("updateByUser")
+    public ResponseEntity<ResponseBase> updateStaffByUser(@RequestParam String staffId, @RequestBody StaffUpdateDto staffUpdateDto){
+        ResponseBase response = new ResponseBase(staffService.updateStaff(staffId,staffUpdateDto),true);
+        return ResponseEntity.ok(response);
+    }
+
     @DeleteMapping("del")
     public ResponseEntity<ResponseBase> deleteStaff(@RequestParam String staffId){
         ResponseBase response = new ResponseBase(staffService.deleteStaff(staffId),true);

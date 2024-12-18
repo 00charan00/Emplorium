@@ -32,6 +32,16 @@ export class StaffService {
     return this.http.put<ResponseBase>(url,staffDetails,{params:{staffId:staffId},headers:headerVals});
   }
 
+  updateStaffByUser(staffId:string, staffDetails:RegisterReq){
+    let url = `${this.API_BASE_URL}updateByUser`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password')
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Accept','application/json');
+    return this.http.put<ResponseBase>(url,staffDetails,{params:{staffId:staffId},headers:headerVals});
+  }
+
   deleteStaff(staffId:string){
     let url = `${this.API_BASE_URL}del`;
     let username = localStorage.getItem('username');
