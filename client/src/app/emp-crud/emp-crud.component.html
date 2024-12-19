@@ -1,38 +1,56 @@
 <div class="p-8 max-w-6xl mx-auto bg-gray-50 rounded-xl shadow-lg">
-  <div class="flex justify-between items-center mb-8">
-    <h1 class="text-3xl font-bold text-gray-800">Add Staff</h1>
-    <button (click)="addNewStaff()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition duration-300">
+  <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+    <h1 class="text-3xl font-bold text-gray-800 text-center sm:text-left">Add Staff</h1>
+    <button
+      (click)="addNewStaff()"
+      class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition duration-300"
+    >
       Add Staff
     </button>
   </div>
 
-  <div class="grid grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     @for (staff of staffs; track staff.staffId) {
-      <div [ngClass]="{
-        'bg-red-100': staff.staffRole === 'ROLE_ADMIN',
-        'bg-white': staff.staffRole !== 'ROLE_ADMIN'
-      }" class="w-60 p-4 rounded shadow-md flex flex-col items-center">
-        <div class="w-20 h-20 rounded-full mb-4">
-          <img ngSrc="assets/profile.png" alt="Employee Photo" class="w-full h-full object-cover" height="512" width="512" />
+      <div
+        [ngClass]="{
+          'bg-red-100': staff.staffRole === 'ROLE_ADMIN',
+          'bg-white': staff.staffRole !== 'ROLE_ADMIN'
+        }"
+        class="w-full p-4 rounded shadow-md flex flex-col items-center"
+      >
+        <div class="w-20 h-20 rounded-full mb-4 overflow-hidden">
+          <img
+            ngSrc="assets/profile.png"
+            alt="Employee Photo"
+            class="w-full h-full object-cover"
+            height="512"
+            width="512"
+          />
         </div>
         <div class="text-center mb-4">
-          <p class="text-lg font-semibold text-gray-800">{{staff.staffName}}</p>
-          @if(staff.staffRole==="ROLE_ADMIN"){
-          <p class="text-black text-sm font-extrabold">{{staff.staffRole}}</p>
+          <p class="text-lg font-semibold text-gray-800">{{ staff.staffName }}</p>
+          @if (staff.staffRole === 'ROLE_ADMIN') {
+            <p class="text-black text-sm font-extrabold">{{ staff.staffRole }}</p>
           }
-          @else{
-            <p class="text-gray-600 text-sm font-bold">{{staff.staffRole}}</p>
+          @else {
+            <p class="text-gray-600 text-sm font-bold">{{ staff.staffRole }}</p>
           }
         </div>
         <div class="text-center mb-2">
-          <p class="text-gray-600 text-sm">Email: {{staff.staffEmail}}</p>
+          <p class="text-gray-600 text-sm">Email: {{ staff.staffEmail }}</p>
           <p class="text-gray-600 text-sm">Team: Development</p>
         </div>
-        <div class="flex gap-2 mt-2">
-          <button (click)="openUserEdit(staff)" class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300">
+        <div class="flex flex-wrap gap-2 mt-2 justify-center">
+          <button
+            (click)="openUserEdit(staff)"
+            class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition duration-300"
+          >
             Edit
           </button>
-          <button (click)="deleteStaff(staff.staffId)" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
+          <button
+            (click)="deleteStaff(staff.staffId)"
+            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
+          >
             Delete
           </button>
         </div>
@@ -40,4 +58,3 @@
     }
   </div>
 </div>
-

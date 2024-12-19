@@ -7,7 +7,7 @@
         <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
           <h3 class="text-xl font-bold mb-2">Meeting Name: {{meet.meetingName}}</h3>
           <p><strong class="font-semibold">Date:</strong> {{meet.meetingDateTime | date:'dd-MM-yyyy'}}</p>
-          <p><strong class="font-semibold">Time:</strong> {{meet.meetingDateTime | date:'HH:mm'}}</p>
+          <p><strong class="font-semibold">Time:</strong> {{meet.meetingDateTime | date:'HH:mm':'UTC'}}</p>
           <p><strong class="font-semibold">Meeting Description:</strong> {{meet.meetingDescription}}</p>
           <div class="flex gap-4 mt-2">
             @if (meet.meetingStatus=="ACTIVE"){
