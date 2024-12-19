@@ -1,5 +1,6 @@
 package com.upsintern.emplorium.service;
 
+import com.upsintern.emplorium.dto.StaffUpdateDto;
 import com.upsintern.emplorium.dto.TeamDto;
 import com.upsintern.emplorium.entity.Staff;
 import com.upsintern.emplorium.entity.Team;
@@ -32,6 +33,9 @@ public class TeamService {
         List<Staff> members = staffService.getStaffsByIds(teamDto.getTeamMembers());
         Staff leader = staffService.getStaffById(teamDto.getTeamLeader());
         if(members != null && leader != null){
+            StaffUpdateDto staffUpdateDto = new StaffUpdateDto();
+            staffUpdateDto.setStaffRole(Staff.StaffRole.ROLE_TL.toString());
+            staffService.updateStaff(teamDto.getTeamLeader(),staffUpdateDto);
             return teamRepository.save(new Team("Team"+ UUID.randomUUID(),teamDto.getTeamName(),members,leader));
         }else throw new InvalidDataException("Please provide team member and leader details");
     }

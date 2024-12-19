@@ -24,7 +24,8 @@ public class Staff {
 
     public enum StaffRole{
         ROLE_ADMIN,
-        ROLE_EMPLOYEE
+        ROLE_EMPLOYEE,
+        ROLE_TL
     }
 
 }

@@ -15,5 +15,6 @@ export class RegisterReq {
 
 export const enum StaffRole {
   ROLE_ADMIN = "ROLE_ADMIN",
-  ROLE_EMPLOYEE = "ROLE_EMPLOYEE"
+  ROLE_EMPLOYEE = "ROLE_EMPLOYEE",
+  ROLE_TL = "ROLE_TL"
 }

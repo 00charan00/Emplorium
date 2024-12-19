@@ -33,7 +33,7 @@ export class RegisterComponent {
         if(res.status){
           if(res.role == StaffRole.ROLE_ADMIN){
             this.authService.adminLogin(this.email,this.password,res.userName,res.role,res.msg);
-          }else if(res.role == StaffRole.ROLE_EMPLOYEE){
+          }else if(res.role == StaffRole.ROLE_EMPLOYEE || res.role === StaffRole.ROLE_TL){
             this.authService.login(this.email,this.password,res.userName,res.role,res.msg);
           }
         }else{

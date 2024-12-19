@@ -34,7 +34,7 @@ export class LoginComponent {
           next: (value) => {
             const role = value.role;
             if (value.status) {
-              if (role === StaffRole.ROLE_EMPLOYEE) {
+              if (role === StaffRole.ROLE_EMPLOYEE|| role == StaffRole.ROLE_TL) {
                 this.authService.login(this.email, this.password, value.userName,value.role,value.msg);
               } else if (role === StaffRole.ROLE_ADMIN) {
                 this.authService.adminLogin(this.email, this.password, value.userName,value.role,value.msg);
