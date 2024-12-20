@@ -22,9 +22,11 @@ export class TaskDetailViewComponent implements OnInit{
 
   staffTask!: StaffTask;
   isAdmin:boolean = false;
+  isTL:boolean = false;
 
   constructor(private route:ActivatedRoute, private taskService:TaskService,private matDialog:MatDialog,private authService:AuthService) {
-
+    this.isAdmin = this.authService.isAdministrator();
+    this.isTL = this.authService.isTL();
   }
 
   ngOnInit(): void {

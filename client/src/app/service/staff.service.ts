@@ -39,7 +39,7 @@ export class StaffService {
     const headerVals = new HttpHeaders()
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
-    return this.http.put<ResponseBase>(url,staffDetails,{params:{staffId:staffId},headers:headerVals});
+    return this.http.put<Staff>(url,staffDetails,{params:{staffId:staffId},headers:headerVals});
   }
 
   deleteStaff(staffId:string){

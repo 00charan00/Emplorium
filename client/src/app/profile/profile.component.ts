@@ -10,44 +10,27 @@ export class ProfileComponent implements OnInit{
 
   protected readonly localStorage = localStorage;
 
-  userName: string = '';
-  userEmail: string = '';
-  userPassword = '********';
-  staffId = localStorage.getItem('id');
+  userPassword = localStorage.getItem('password');
+  storedStaffId = localStorage.getItem('id');
+  storedName = localStorage.getItem('name');
+  storedEmail = localStorage.getItem('username');
 
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    const storedName = localStorage.getItem('name');
-    const storedEmail = localStorage.getItem('username');
-
-    console.log('Stored Name:', storedName);
-    console.log('Stored Email:', storedEmail);
 
   }
   openEditDialog() {
-
-    const dialogRef = this.dialog.open(ProfileEditComponent, {
+    this.dialog.open(ProfileEditComponent, {
       data: {
         staffDet: {
-          staffName: this.userName,
-          staffEmail: this.userEmail,
-          staffPassword: this.userPassword,
-          staffId: this.staffId
+          staffName: this.storedName,
+          staffEmail: this.storedEmail,
+          staffPass: this.userPassword,
+          staffId: this.storedStaffId
         }
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.userName = result.staffName;
-        this.userEmail = result.staffEmail;
-        this.userPassword = result.staffPassword;
-
-        localStorage.setItem('name', this.userName);
-        localStorage.setItem('username', this.userEmail);
-        localStorage.setItem('password', this.userPassword);
-      }
-    });
   }
 }

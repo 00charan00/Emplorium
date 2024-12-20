@@ -49,9 +49,8 @@ public class StaffController {
     }
 
     @PutMapping("updateByUser")
-    public ResponseEntity<ResponseBase> updateStaffByUser(@RequestParam String staffId, @RequestBody StaffUpdateDto staffUpdateDto){
-        ResponseBase response = new ResponseBase(staffService.updateStaff(staffId,staffUpdateDto),true);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Staff> updateStaffByUser(@RequestParam String staffId, @RequestBody StaffDto staffUpdateDto){
+        return ResponseEntity.ok(staffService.updateStaffByUser(staffId,staffUpdateDto));
     }
 
     @DeleteMapping("del")

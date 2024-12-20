@@ -36,6 +36,12 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getAllTeams());
     }
 
+    @GetMapping("mine")
+    public ResponseEntity<List<Team>> getMyTeams(@RequestParam String staffEmail){
+        return ResponseEntity.ok(teamService.getMyTeams(staffEmail));
+    }
+
+
     @GetMapping("tm/{teamId}")
     public ResponseEntity<Team> getTeam(String teamId){
         return ResponseEntity.ok(teamService.getTeamById(teamId));

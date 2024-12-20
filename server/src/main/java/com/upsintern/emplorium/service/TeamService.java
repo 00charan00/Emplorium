@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamService {
@@ -46,5 +47,14 @@ public class TeamService {
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
+    }
+
+    public List<Team> getMyTeams(String staffEmail) {
+        return teamRepository.findAll()
+                .stream().filter(team ->
+                        team.getTeamLeader().getStaffEmail().equals(staffEmail) ||
+                                team.getTeamMembers().stream().map(t -> t.getStaffEmail()).toList().contains(staffEmail)
+
+                ).collect(Collectors.toList());
     }
 }

@@ -76,22 +76,21 @@ public class StaffService {
     }
 
 
-    public String updateStaffByUser(String staffId, StaffUpdateDto staffUpdateDto){
+    public Staff updateStaffByUser(String staffId, StaffDto staffDto){
         Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new StaffNotFoundException("No Staff Found with Id: "+staffId));
-        String tempVal = staffUpdateDto.getStaffEmail();
+        String tempVal = staffDto.getStaffEmail();
         if(tempVal != null && !tempVal.isEmpty()){
             staff.setStaffEmail(tempVal);
         }
-        tempVal = staffUpdateDto.getStaffName();
+        tempVal = staffDto.getStaffName();
         if(tempVal != null && !tempVal.isEmpty()){
             staff.setStaffName(tempVal);
         }
-        tempVal = staffUpdateDto.getStaffPass();
+        tempVal = staffDto.getStaffPass();
         if(tempVal != null && !tempVal.isEmpty()){
             staff.setStaffPass(passwordEncoder.encode(tempVal));
         }
-        staffRepository.save(staff);
-        return "Staff data updated";
+        return staffRepository.save(staff);
     }
 
 
