@@ -14,9 +14,9 @@ public class MeetingScheduler {
     @Autowired
     MeetingService meetingService;
 
-    @Scheduled(fixedRate = 10000000)
+    @Scheduled(fixedRate = 1000*60*60)
     public void autoDeleteExpiredMeeting(){
-        log.info("meeting scheduler triggerred");
+        log.info("Meeting Scheduler Triggered - Every One Hour");
         meetingService.deleteExpiredMeetings();
     }
 }

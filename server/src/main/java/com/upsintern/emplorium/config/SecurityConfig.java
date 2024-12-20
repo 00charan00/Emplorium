@@ -15,7 +15,8 @@ public class SecurityConfig {
     private static final String[] staffAdminAuthEndPoints = {
             "/staff/del",
             "/staff/all",
-            "/staff/update"
+            "/staff/update",
+            "/team/**"
     };
 
     private static final String[] teamAdminAuthEndPoints = {

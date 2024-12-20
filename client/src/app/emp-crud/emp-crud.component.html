@@ -25,6 +25,7 @@
             class="w-full h-full object-cover"
             height="512"
             width="512"
+            priority
           />
         </div>
         <div class="text-center mb-4">
@@ -38,7 +39,15 @@
         </div>
         <div class="text-center mb-2">
           <p class="text-gray-600 text-sm">Email: {{ staff.staffEmail }}</p>
-          <p class="text-gray-600 text-sm">Team: Development</p>
+          @if (teams?.length==0){
+          <p class="text-gray-600 text-sm">Team Not Assigned</p>
+          }
+          @else{
+            @for (team of teams;track team.teamId){
+              <p class="text-gray-600 text-sm">{{team.teamName}}</p>
+            }
+          }
+
         </div>
         <div class="flex flex-wrap gap-2 mt-2 justify-center">
           <button

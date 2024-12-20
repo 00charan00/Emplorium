@@ -5,6 +5,8 @@ import { StaffService } from '../service/staff.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { StaffEditDialogComponent } from './staff-edit-dialog/staff-edit-dialog.component';
 import { StaffAddComponent } from './staff-add/staff-add.component';
+import {TeamService} from '../service/team.service';
+import {Team} from '../model/team';
 
 @Component({
   selector: 'app-emp-crud',
@@ -14,13 +16,18 @@ import { StaffAddComponent } from './staff-add/staff-add.component';
 export class EmpCrudComponent implements OnInit {
   staffs?: Staff[];
   dialog = inject(MatDialog);
+  teams?: Team[];
 
-  constructor(private staffService: StaffService) {}
+  constructor(private staffService: StaffService,private teamService:TeamService) {}
 
   ngOnInit(): void {
     this.staffService.getAllStaff().subscribe((res) => {
       this.staffs = this.sortStaffs(res);
+
     });
+    this.teamService.getMyTeams().subscribe((res=>{
+      this.teams=res;
+    }))
   }
 
   // Sorting logic: ROLE_ADMIN first, then ROLE_EMPLOYEE, and sort alphabetically by name

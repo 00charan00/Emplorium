@@ -1,38 +1,92 @@
-<div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8 border border-gray-200">
-  <!-- Profile Heading -->
-  <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Profile</h1>
+<!--<div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8 border border-gray-200">-->
+<!--  &lt;!&ndash; Profile Heading &ndash;&gt;-->
+<!--  <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Profile</h1>-->
 
-  <!-- Name -->
-  <div class="mb-6">
-    <label class="block text-sm font-medium text-gray-500 mb-1">Name</label>
-    <p class="text-lg font-semibold text-gray-800">{{ localStorage.getItem('name') }}</p>
-  </div>
+<!--  &lt;!&ndash; Name &ndash;&gt;-->
+<!--  <div class="mb-6">-->
+<!--    <label class="block text-sm font-medium text-gray-500 mb-1">Name</label>-->
+<!--    <p class="text-lg font-semibold text-gray-800">{{ localStorage.getItem('name') }}</p>-->
+<!--  </div>-->
 
-  <!-- Email -->
-  <div class="mb-6">
-    <label class="block text-sm font-medium text-gray-500 mb-1">Email</label>
-    <p class="text-lg font-semibold text-gray-800">{{ localStorage.getItem('username') }}</p>
-  </div>
+<!--  &lt;!&ndash; Email &ndash;&gt;-->
+<!--  <div class="mb-6">-->
+<!--    <label class="block text-sm font-medium text-gray-500 mb-1">Email</label>-->
+<!--    <p class="text-lg font-semibold text-gray-800">{{ localStorage.getItem('username') }}</p>-->
+<!--  </div>-->
 
-  <!-- Role -->
-  <div class="mb-6">
-    <label class="block text-sm font-medium text-gray-500 mb-1">Role</label>
-    <p class="text-lg font-semibold text-gray-800">{{ localStorage.getItem('role') }}</p>
-  </div>
+<!--  &lt;!&ndash; Role &ndash;&gt;-->
+<!--  <div class="mb-6">-->
+<!--    <label class="block text-sm font-medium text-gray-500 mb-1">Role</label>-->
+<!--    <p class="text-lg font-semibold text-gray-800">{{ localStorage.getItem('role') }}</p>-->
+<!--  </div>-->
 
-  <!-- Password -->
-  <div class="mb-6">
-    <label class="block text-sm font-medium text-gray-500 mb-1">Password</label>
-    <p class="text-lg font-semibold text-gray-800">{{ userPassword }}</p>
-  </div>
+<!--  &lt;!&ndash; Password &ndash;&gt;-->
+<!--  <div class="mb-6">-->
+<!--    <label class="block text-sm font-medium text-gray-500 mb-1">Password</label>-->
+<!--    <p class="text-lg font-semibold text-gray-800">{{ userPassword }}</p>-->
+<!--  </div>-->
 
-  <!-- Edit Button -->
-  <div class="mt-8 text-center">
-    <button
-      class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-md transition-all duration-200"
-      (click)="openEditDialog()"
-    >
-      Edit Profile
-    </button>
+<!--  &lt;!&ndash; Edit Button &ndash;&gt;-->
+<!--  <div class="mt-8 text-center">-->
+<!--    <button-->
+<!--      class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-md transition-all duration-200"-->
+<!--      (click)="openEditDialog()"-->
+<!--    >-->
+<!--      Edit Profile-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<body class="bg-cover bg-center" style="background-image: url('/assets/profilebg.jpg');">
+<div class="relative min-h-screen">
+  <!-- Overlay with reduced opacity -->
+  <div class="absolute inset-0 bg-black opacity-50"></div>
+
+  <!-- Profile Box -->
+  <div class="absolute inset-0 flex justify-center items-center">
+    <div class="p-8 w-96 max-w-6xl bg-white rounded-xl shadow-xl">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-semibold text-yellow-400 text-center">Profile</h1>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col gap-6">
+        <div class="flex justify-center mb-6">
+          <img src="assets/profile.png" alt="Profile Photo" class="w-24 h-24 rounded-full shadow-md" />
+        </div>
+
+        <!-- Name -->
+        <div class="flex items-center">
+          <label class="block text-sm font-medium text-gray-500 mb-2 w-1/3">Name</label>
+          <p class="text-lg font-medium text-gray-800 w-2/3">{{ localStorage.getItem('name') }}</p>
+        </div>
+
+        <!-- Email -->
+        <div class="flex items-center">
+          <label class="block text-sm font-medium text-gray-500 mb-2 w-1/3">Email</label>
+          <p class="text-lg font-medium text-gray-800 w-2/3">{{ localStorage.getItem('username') }}</p>
+        </div>
+
+        <!-- Role -->
+        <div class="flex items-center">
+          <label class="block text-sm font-medium text-gray-500 mb-2 w-1/3">Role</label>
+          <p class="text-lg font-medium text-gray-800 w-2/3">{{ localStorage.getItem('role') }}</p>
+        </div>
+
+        <!-- Password -->
+        <div class="flex items-center">
+          <label class="block text-sm font-medium text-gray-500 mb-2 w-1/3">Password</label>
+          <p class="text-lg font-medium text-gray-800 w-2/3">{{ userPassword }}</p>
+        </div>
+
+        <!-- Edit Button -->
+        <button
+          (click)="openEditDialog()"
+          class="bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-500 focus:ring-2 focus:ring-blue-500 transition-all"
+        >
+          Edit Profile
+        </button>
+      </div>
+    </div>
   </div>
 </div>
+</body>

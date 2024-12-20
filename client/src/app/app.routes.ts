@@ -18,18 +18,15 @@ export const routes: Routes = [
   { path: '', component: EmpHomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
   { path: 'task', component: TaskComponent, canActivate:[AuthGuard] },
   { path: 'taskinfo/:staffId', component: TaskDetailViewComponent, canActivate:[AuthGuard] },
   { path: 'about', component: AboutComponent },
   { path: 'meeting', component: MeetingComponent,canActivate:[AuthGuard] },
-  { path: 'team', component: TeamComponent,canActivate:[AdminGuard] },
+  { path: 'team', component: TeamComponent,canActivate:[AuthGuard] },
   { path: 'empcrud', component: EmpCrudComponent,canActivate:[AdminGuard] },
   { path: 'events', component: EventsComponent , canActivate:[AuthGuard]},
   { path: 'admin', component: AdminHomeComponent,canActivate:[AdminGuard] },
   { path: 'employee', component: EmpHomeComponent },
   { path: '**', redirectTo: '' }
-
-
-
 ];
