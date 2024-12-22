@@ -44,7 +44,7 @@ public class TaskController {
         return taskService.getTaskById(taskId);
     }
 
-    @DeleteMapping("get/{taskId}")
+    @DeleteMapping("del/{taskId}")
     public ResponseEntity<ResponseBase> deleteTask(@PathVariable String taskId){
         return taskService.deleteTask(taskId);
     }
@@ -85,16 +85,16 @@ public class TaskController {
 
     @PutMapping("appr-rej-module")
     public ResponseEntity<ResponseBase> approveOrRejectModuleProgress(
+            @RequestParam String taskId,
             @RequestParam String progressInfoId,
             @RequestParam Task.ProgressStatus progressStatus
     ){
-        return taskService.approveOrRejectModule(progressInfoId, progressStatus);
+        return taskService.approveOrRejectModule(taskId,progressInfoId, progressStatus);
     }
 
     @GetMapping("in-review")
     public ResponseEntity<List<Task>> getAllTasksInReview(){
         return taskService.getAllTasksInReview();
     }
-
 
 }

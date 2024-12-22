@@ -17,4 +17,5 @@ public class EventDto {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm a")
     private Date eventDate;
     String eventDescription;
+    String eventPoster;
 }

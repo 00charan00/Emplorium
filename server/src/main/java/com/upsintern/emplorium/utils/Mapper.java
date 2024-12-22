@@ -26,7 +26,9 @@ public class Mapper {
                 eventDto.getEventName(),
                 eventDto.getEventVenue(),
                 eventDto.getEventDate(),
-                eventDto.getEventDescription()
+                eventDto.getEventDescription(),
+                Event.EventStatus.ACTIVE,
+                eventDto.getEventPoster()
         );
     }
 

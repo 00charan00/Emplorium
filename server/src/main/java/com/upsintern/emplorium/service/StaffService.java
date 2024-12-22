@@ -11,6 +11,7 @@ import com.upsintern.emplorium.repository.StaffRepository;
 import com.upsintern.emplorium.responsemodel.LoginRegisterResponse;
 import com.upsintern.emplorium.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -154,8 +155,9 @@ public class StaffService {
         return getAllStaff().stream().map(st -> new StaffBase(
                 st.getStaffId(),
                 st.getStaffName()
-        )).toList();
+        )).collect(Collectors.toList());
     }
+
     public void sendNotificationsToStaffs(List<String> staffIds,String message,String subject){
         staffIds.forEach(staffId ->{
             Staff staff = staffRepository.findById(staffId).orElseThrow(() -> new StaffNotFoundException("No staff with Id : "+staffId));

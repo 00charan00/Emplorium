@@ -25,12 +25,6 @@ public class MeetingController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("cancel")
-    public ResponseEntity<ResponseBase> cancelMeeting(@RequestParam String meetingId){
-        ResponseBase responseBase = new ResponseBase(meetingService.cancelMeeting(meetingId), true);
-        return ResponseEntity.ok(responseBase);
-    }
-
     @GetMapping("active")
     public ResponseEntity<List<Meeting>> getActiveMeetings() {
         List<Meeting> activeMeetings = meetingService.getActiveMeetings();
@@ -50,5 +44,10 @@ public class MeetingController {
     ) {
         List<Meeting> meetings = meetingService.getMyMeetings(staffId, staffMail);
         return ResponseEntity.ok(meetings);
+    }
+
+    @PutMapping("cancel/{meetId}")
+    public ResponseEntity<ResponseBase> cancelMeet(@PathVariable String meetId){
+        return ResponseEntity.ok(meetingService.cancelMeeting(meetId));
     }
 }

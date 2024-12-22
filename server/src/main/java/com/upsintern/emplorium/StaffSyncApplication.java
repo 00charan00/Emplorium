@@ -6,12 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-
+@EnableAsync
 public class StaffSyncApplication implements CommandLineRunner {
     @Autowired
     StaffService staffService;

@@ -140,12 +140,6 @@ public class TaskService {
                 }
                 if(progressStatus.equals(Task.ProgressStatus.DONE))moduleProgress.put(moduleName, Task.ProgressStatus.IN_REVIEW);
                 else moduleProgress.put(moduleName, progressStatus);
-                double modulesSize = moduleProgress.size();
-                double completedModuleSize = moduleProgress.values().stream().filter(m -> m.equals(Task.ProgressStatus.IN_REVIEW)).count();
-                double progressPercentage = (completedModuleSize / modulesSize) * 100;
-                task.setProgressPercent(progressPercentage);
-                if(progressPercentage == 100)task.setTaskProgress(Task.ProgressStatus.IN_REVIEW);
-                else task.setTaskProgress(Task.ProgressStatus.IN_PROGRESS);
 
             } catch (Exception e) {
                 throw new InvalidDataException("Invalid References");
@@ -189,10 +183,22 @@ public class TaskService {
         return ResponseEntity.ok(new ResponseBase("Task Progress updated", true));
     }
 
-    public ResponseEntity<ResponseBase> approveOrRejectModule(String progressId, Task.ProgressStatus progressStatus){
+    public ResponseEntity<ResponseBase> approveOrRejectModule(String taskId,String progressId, Task.ProgressStatus progressStatus){
         ProgressInfo progressInfo = progressInfoRepository.findById(progressId).orElseThrow(() -> new RuntimeException("No such Task found"));
         progressInfo.setProgressStatus(progressStatus);
         progressInfoRepository.save(progressInfo);
+        if(progressStatus.equals(Task.ProgressStatus.APPROVED)) {
+            Task task = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("No such Task found"));
+            Map<String, Task.ProgressStatus> moduleProgress = task.getModuleLevelProgress();
+            double modulesSize = moduleProgress.size();
+            double completedModuleSize = moduleProgress.values().stream().filter(m -> m.equals(Task.ProgressStatus.IN_REVIEW)).count();
+            double progressPercentage = (completedModuleSize / modulesSize) * 100;
+            task.setProgressPercent(progressPercentage);
+            if (progressPercentage == 100) task.setTaskProgress(Task.ProgressStatus.DONE);
+            else task.setTaskProgress(Task.ProgressStatus.IN_PROGRESS);
+
+            taskRepository.save(task);
+        }
         return ResponseEntity.ok(new ResponseBase("Module Progress updated.",true));
     }
 

@@ -2,6 +2,8 @@ package com.upsintern.emplorium.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +24,14 @@ public class Event {
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm a")
     private Date eventDate;
     String eventDescription;
+    @Enumerated(EnumType.STRING)
+    EventStatus eventStatus;
+    String eventPoster;
+
+
+    public enum EventStatus{
+        ACTIVE,
+        CANCELLED,
+        COMPLETED
+    }
 }
