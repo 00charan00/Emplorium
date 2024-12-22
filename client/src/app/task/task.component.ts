@@ -23,6 +23,7 @@ import {TaskDto} from '../model/task-dto';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatDialog} from '@angular/material/dialog';
 import {RouterLink} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 
 @Component({
@@ -71,6 +72,7 @@ export class TaskComponent implements OnInit{
   })
 
   teamAssignOrCreateOptions = ['New Team','Assign Existing'];
+  currentDateTime: any;
 
   constructor(private taskService:TaskService,private authService:AuthService,private teamService:TeamService,private staffService:StaffService,private matDialog:MatDialog) {
   }
@@ -91,10 +93,12 @@ export class TaskComponent implements OnInit{
     if(this.authService.isAdministrator()) {
       this.teams = this.allTeams;
     }else if(this.authService.isAuthenticated()){
-      this.teamService.getMyTeams()
-        .subscribe(res => {
+      let teamGet = this.teamService.getMyTeams();
+      if(teamGet != null) {
+        teamGet.subscribe(res => {
           this.teams = res;
         })
+      }
     }
     this.staffService.getAllStaffBasic()
       .subscribe(res => {
@@ -102,6 +106,13 @@ export class TaskComponent implements OnInit{
         this.listFiltered = this.staffs;
       })
   }
+
+
+  getCurrentDateTime(): string {
+    const now = new Date();
+    return now.toISOString().slice(0, 16);
+  }
+
 
   createTask(){
 

@@ -39,4 +39,15 @@ export class MeetingService {
       return null;
     }
   }
+
+  cancelMeet(meetingId: string) {
+    let url = `${this.BASE_URL}cancel/${meetingId}`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password')
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Accept','application/json');
+    return this.http.put<ResponseBase>(url,null, {headers: headerVals});
+
+  }
 }

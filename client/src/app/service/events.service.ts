@@ -32,4 +32,14 @@ export class EventsService {
       .set('Content-Type','application/json');
     return this.http.post<ResponseBase>(url,event,{headers:headerVals});
   }
+
+  cancelEvent(eventId: String) {
+    let url = `${this.API_BASE_URL}cancel/${eventId}`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password');
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Content-Type','application/json');
+    return this.http.put<ResponseBase>(url,null,{headers: headerVals});
+  }
 }

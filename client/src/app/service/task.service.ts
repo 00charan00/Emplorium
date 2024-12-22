@@ -107,13 +107,13 @@ export class TaskService {
     return this.http.put<ResponseBase>(url,null,{headers:headerVals,params:{taskId:taskId}});
   }
 
-  approveOrRejectModule(progressInfoId:string,progressStatus:string){
+  approveOrRejectModule(taskId:string,progressInfoId:string,progressStatus:string){
     let url = `${this.API_BASE_URL}appr-rej-module`;
     let username = localStorage.getItem('username');
     let pass = localStorage.getItem('password')
     const headerVals = new HttpHeaders()
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
-    return this.http.put<ResponseBase>(url,null,{headers:headerVals,params:{progressInfoId:progressInfoId,progressStatus:progressStatus}});
+    return this.http.put<ResponseBase>(url,null,{headers:headerVals,params:{taskId:taskId,progressInfoId:progressInfoId,progressStatus:progressStatus}});
   }
 }

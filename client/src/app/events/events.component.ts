@@ -4,15 +4,21 @@ import {Events} from '../model/event';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe, formatDate, NgIf} from '@angular/common';
 import {EventDto} from '../model/event-dto';
+import {MatIcon} from "@angular/material/icon";
+import {MatIconButton} from "@angular/material/button";
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-events',
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    DatePipe,
-    NgIf
-  ],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        DatePipe,
+        NgIf,
+        MatIcon,
+        MatIconButton,
+        MatTooltip
+    ],
   templateUrl: './events.component.html'
 })
 export class EventsComponent implements OnInit {
@@ -58,23 +64,26 @@ export class EventsComponent implements OnInit {
 
     if (name && location && date && desc) {
       const formattedDate = formatDate(date, 'dd-MM-yyyy HH:mm a', 'en-US');
-      const event = new EventDto(name, location, formattedDate, desc);
+      let uname = localStorage.getItem('username');
+      if (uname != null) {
+        const event = new EventDto(name, location, formattedDate, desc, uname);
 
-      this.eventService.postEvent(event).subscribe(
-        res => {
-          console.log(res);
-          this.showToastMessage('Event added successfully!');
-          this.eventForm.reset();
-          // Clear the form
-          this.loadEvents(); // Reload the events list
-        },
-        err => {
-          console.error(err);
-          this.showToastMessage('Failed to add event. Please try again.');
-        }
-      );
-    } else {
-      this.showToastMessage('Please fill out all the fields.');
+        this.eventService.postEvent(event).subscribe(
+          res => {
+            console.log(res);
+            this.showToastMessage('Event added successfully!');
+            this.eventForm.reset();
+            // Clear the form
+            this.loadEvents(); // Reload the events list
+          },
+          err => {
+            console.error(err);
+            this.showToastMessage('Failed to add event. Please try again.');
+          }
+        );
+      } else {
+        this.showToastMessage('Please fill out all the fields.');
+      }
     }
   }
 
@@ -85,5 +94,14 @@ export class EventsComponent implements OnInit {
     setTimeout(() => {
       this.showToast = false;
     }, 3000); // Toast disappears after 3 seconds
+  }
+
+    protected readonly localStorage = localStorage;
+
+  cancelEvent(eventId: String) {
+    this.eventService.cancelEvent(eventId)
+      .subscribe(res=>{
+        console.log(res);
+      })
   }
 }

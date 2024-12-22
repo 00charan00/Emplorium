@@ -5,23 +5,32 @@
       <h2 class="text-2xl font-semibold mb-4">Meetings</h2>
       @for (meet of meetings; track meet.meetingId) {
         <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+          @if(meet.meetingOwner === localStorage.getItem('username') && meet.meetingStatus === "ACTIVE"){
+            <button class="float-end m-0" mat-icon-button (click)="cancelMeet(meet.meetingId)">
+              <mat-icon style="color: red" fontIcon="cancel" matTooltip="cancel"></mat-icon>
+            </button>
+          }
           <h3 class="text-xl font-bold mb-2">Meeting Name: {{meet.meetingName}}</h3>
           <p><strong class="font-semibold">Date:</strong> {{meet.meetingDateTime | date:'dd-MM-yyyy'}}</p>
-          <p><strong class="font-semibold">Time:</strong> {{meet.meetingDateTime | date:'HH:mm':'UTC'}}</p>
+          <p><strong class="font-semibold">Time:</strong> {{meet.meetingDateTime | date:'hh:mm a':'UTC'}}</p>
           <p><strong class="font-semibold">Meeting Description:</strong> {{meet.meetingDescription}}</p>
           <div class="flex gap-4 mt-2">
             @if (meet.meetingStatus=="ACTIVE"){
             <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300">ACTIVE</button>
             }
-            @else{
-            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">ACTIVE</button>
+            @else if(meet.meetingStatus=="CANCELLED"){
+            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">CANCELLED</button>
             }
-            <button
-              (click)="joinMeet(meet.meetingLink)"
-              class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-              Join
-            </button>
+            @if (meet.meetingStatus === "ACTIVE") {
+              <button
+                (click)="joinMeet(meet.meetingLink)"
+                class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+                Join
+              </button>
+            }
+
           </div>
+
         </div>
       }
     </div>

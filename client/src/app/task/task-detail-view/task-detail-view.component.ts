@@ -70,8 +70,8 @@ export class TaskDetailViewComponent implements OnInit{
   }
 
 
-  approveOrReject(progressInfoId:string,resultStatus: string) {
-    this.taskService.approveOrRejectModule(progressInfoId,resultStatus)
+  approveOrReject(taskId:string,progressInfoId:string,resultStatus: string) {
+    this.taskService.approveOrRejectModule(taskId,progressInfoId,resultStatus)
       .subscribe(res => {
         console.log(res);
       })

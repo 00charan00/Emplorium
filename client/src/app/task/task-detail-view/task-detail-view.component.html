@@ -216,10 +216,10 @@
 
       @if(progressInfo.progressStatus === 'IN_REVIEW' && (isAdmin||isTL)){
         <div class="flex gap-1">
-          <button class="px-6 py-2 bg-green-800 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300" (click)="approveOrReject(progressInfo.progressInfoId,'APPROVED')">
+          <button class="px-6 py-2 bg-green-800 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300" (click)="approveOrReject(staffTask.taskId,progressInfo.progressInfoId,'APPROVED')">
             Approve
           </button>
-          <button class="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300" (click)="approveOrReject(progressInfo.progressInfoId,'REJECTED')">
+          <button class="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300" (click)="approveOrReject(staffTask.taskId,progressInfo.progressInfoId,'REJECTED')">
             Reject
           </button>
         </div>

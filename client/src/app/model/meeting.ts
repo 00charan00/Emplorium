@@ -6,6 +6,12 @@ export interface Meeting {
   meetingDateTime: string;
   meetingLink: string;
   meetingOwner: string;
-  meetingStatus:string;
+  meetingStatus:MeetingStatus;
 
+}
+
+export enum MeetingStatus{
+  ACTIVE="ACTIVE",
+  CANCELLED="CANCELLED",
+  COMPLETED="COMPLETED"
 }

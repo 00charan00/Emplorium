@@ -13,13 +13,16 @@ import {
   MatExpansionPanelTitle
 } from '@angular/material/expansion';
 import {StaffBase} from '../model/staff-base';
+import {MatIconButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-meeting',
   imports: [
     MatCheckbox,
     MatExpansionPanelHeader,
-    MatAccordion, MatExpansionPanel, MatExpansionPanelTitle, FormsModule, ReactiveFormsModule, DatePipe, NgIf
+    MatAccordion, MatExpansionPanel, MatExpansionPanelTitle, FormsModule, ReactiveFormsModule, DatePipe, NgIf, MatIconButton, MatIcon, MatTooltip
   ],
   templateUrl: './meeting.component.html'
 })
@@ -44,7 +47,7 @@ export class MeetingComponent implements OnInit {
 
   constructor(private meetingService: MeetingService, private staffService: StaffService, private datePipe: DatePipe) {
     this.currentDateTime = this.getCurrentDateTime();
-    this.currentDateTimeDisplay = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm:ss') || '';
+    this.currentDateTimeDisplay = this.datePipe.transform(new Date(), 'dd-MM-yyyy hh:mm a') || 'Asia/Kolkata';
   }
 
   getCurrentDateTime(): string {
@@ -152,4 +155,12 @@ export class MeetingComponent implements OnInit {
       this.showToast = false;
     }, 3000); // Toast disappears after 3 seconds
   }
+
+  cancelMeet(meetingId: string) {
+    this.meetingService.cancelMeet(meetingId).subscribe(res => {
+        console.log(res);
+      })
+  }
+
+  protected readonly localStorage = localStorage;
 }

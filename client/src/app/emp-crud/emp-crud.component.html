@@ -39,11 +39,11 @@
         </div>
         <div class="text-center mb-2">
           <p class="text-gray-600 text-sm">Email: {{ staff.staffEmail }}</p>
-          @if (teams?.length==0){
+          @if (this.getStaffSpecificTeams(staff.staffEmail)?.length==0){
           <p class="text-gray-600 text-sm">Team Not Assigned</p>
           }
           @else{
-            @for (team of teams;track team.teamId){
+            @for (team of this.getStaffSpecificTeams(staff.staffEmail);track team.teamId){
               <p class="text-gray-600 text-sm">{{team.teamName}}</p>
             }
           }

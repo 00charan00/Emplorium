@@ -30,7 +30,9 @@ export class TeamService {
     const headerVals = new HttpHeaders()
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
-    return this.http.get<Team[]>(url,{headers:headerVals});
+    if(username != null)
+    return this.http.get<Team[]>(url, {headers: headerVals, params: {staffEmail:username}});
+    return null;
   }
 
   createTeam(team:TeamDto){

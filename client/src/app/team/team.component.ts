@@ -51,10 +51,12 @@ export class TeamComponent implements OnInit{
           this.teams = res;
         })
     }else if(this.authService.isAuthenticated()){
-      this.teamService.getMyTeams()
-        .subscribe(res => {
+      let teamGet = this.teamService.getMyTeams();
+      if(teamGet != null) {
+        teamGet.subscribe(res => {
           this.teams = res;
         })
+      }
     }
     this.staffService.getAllStaffBasic()
       .subscribe(res => {

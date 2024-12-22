@@ -23,11 +23,13 @@ export class EmpCrudComponent implements OnInit {
   ngOnInit(): void {
     this.staffService.getAllStaff().subscribe((res) => {
       this.staffs = this.sortStaffs(res);
-
     });
-    this.teamService.getMyTeams().subscribe((res=>{
-      this.teams=res;
-    }))
+    let teamRequest = this.teamService.getAllTeams();
+    if(teamRequest != null) {
+      teamRequest.subscribe((res => {
+        this.teams = res;
+      }))
+    }
   }
 
   // Sorting logic: ROLE_ADMIN first, then ROLE_EMPLOYEE, and sort alphabetically by name
@@ -58,5 +60,11 @@ export class EmpCrudComponent implements OnInit {
 
   addNewStaff() {
     this.dialog.open(StaffAddComponent);
+  }
+
+  getStaffSpecificTeams(mail:string){
+    return this.teams?.filter(tea =>
+      tea.teamLeader.staffEmail === mail || tea.teamMembers.map(st => st.staffEmail).includes(mail)
+    );
   }
 }
