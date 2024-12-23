@@ -7,7 +7,10 @@
       <!-- Upcoming Events List -->
       @if (events != null) {
         @for (event of events; track event.eventId) {
-          <div class="event-card p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+          <div
+            class="event-card p-4 rounded-lg shadow-md mb-4"
+            [ngClass]="{ 'bg-red-200': event.eventStatus === 'CANCELLED', 'bg-gray-100': event.eventStatus !== 'CANCELLED' }"
+          >
             @if(event.eventPoster === localStorage.getItem('username') && event.eventStatus === "ACTIVE"){
               <button class="float-end m-0" mat-icon-button (click)="cancelEvent(event.eventId)">
                 <mat-icon style="color: red" fontIcon="cancel" matTooltip="cancel"></mat-icon>
@@ -18,7 +21,7 @@
             <p><strong class="font-semibold">Date & Time:</strong> {{ event.eventDate | date:'dd/MM/yyyy HH:mm a':'UTC'}} </p>
             <p><strong class="font-semibold">Description:</strong> {{ event.eventDescription }}</p>
             @if (event.eventStatus === "CANCELLED"){
-              <h3 class="text-red-700">CANCELLED</h3>
+              <button class="text-red-600 font-extrabold">CANCELLED</button>
             }
           </div>
         }

@@ -46,8 +46,7 @@ import {MatCard} from '@angular/material/card';
     MatListOption,
     MatProgressSpinner,
     RouterLink,
-    DatePipe,
-    MatCard
+    DatePipe
   ],
   templateUrl: './task.component.html'
 })

@@ -141,7 +141,7 @@
         <div class="text-xl text-yellow-700 font-bold mt-4">
           Module Details:
           @for (modu of staffTask.modules; track $index) {
-            <span class="text-blue-800 font-normal">{{ modu }} | </span>
+            <span class="text-blue-800 font-normal">• {{ modu }} • </span>
           }
         </div>
 
@@ -155,7 +155,7 @@
             <h4 class="text-yellow-700 font-bold mt-4">Team Members:</h4>
             <p class="text-blue-800 font-normal">
               @for (staff of staffTask.team.teamMembers; track staff.staffId) {
-                {{ staff.staffName }} |
+                • {{ staff.staffName }} •
               }
             </p>
           </div>
@@ -246,7 +246,7 @@
 
         <!-- Reference Images -->
         <div class="flex flex-wrap items-center mt-4">
-          <span class="text-yellow-700 font-bold mr-2">Reference Images:</span>
+          <span class="text-yellow-700 font-bold mr-2">Screen Shot Proof:</span>
           @for (picRef of progressInfo.references; track picRef.imageId) {
             <img
               (click)="openPicView(picRef.image)"
@@ -258,7 +258,7 @@
       </div>
     }
 
-    @if (staffTask.taskProgress.toString() != "APPROVED") {
+    @if (staffTask.taskProgress.toString() != "APPROVED" && localStorage.getItem('role')!='ROLE_ADMIN') {
       <button
         type="submit"
         class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300"
@@ -268,7 +268,7 @@
     }
     @if(isAdmin && staffTask.progressPercent == 100 && staffTask.taskProgress.toString() === "IN_REVIEW" && staffTask.taskProgress.toString() != "APPROVED"){
     <div>
-      <button style="background: green;color: white;border-radius: 5px;margin: 5px" mat-raised-button (click)="adminApprove(staffTask.taskId)">+Approve</button>
+      <button style="background: green;color: white;border-radius: 5px;margin: 5px" mat-raised-button (click)="adminApprove(staffTask.taskId)">Approve</button>
     </div>
   }
   </div>

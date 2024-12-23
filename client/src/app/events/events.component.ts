@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventsService} from '../service/events.service';
 import {Events} from '../model/event';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DatePipe, formatDate, NgIf} from '@angular/common';
+import {DatePipe, formatDate, NgClass, NgIf} from '@angular/common';
 import {EventDto} from '../model/event-dto';
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
@@ -10,15 +10,16 @@ import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-events',
-    imports: [
-        ReactiveFormsModule,
-        FormsModule,
-        DatePipe,
-        NgIf,
-        MatIcon,
-        MatIconButton,
-        MatTooltip
-    ],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    DatePipe,
+    NgIf,
+    MatIcon,
+    MatIconButton,
+    MatTooltip,
+    NgClass
+  ],
   templateUrl: './events.component.html'
 })
 export class EventsComponent implements OnInit {

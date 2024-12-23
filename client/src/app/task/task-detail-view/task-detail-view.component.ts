@@ -79,4 +79,6 @@ export class TaskDetailViewComponent implements OnInit{
         console.log(res);
       })
   }
+
+    protected readonly localStorage = localStorage;
 }
