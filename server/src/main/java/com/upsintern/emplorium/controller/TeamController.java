@@ -5,7 +5,6 @@ import com.upsintern.emplorium.dto.TeamDto;
 import com.upsintern.emplorium.entity.Team;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.service.TeamService;
-import jakarta.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

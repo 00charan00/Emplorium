@@ -21,7 +21,13 @@
                     <p class="bg-blue-100 text-black px-4 py-2 rounded-lg transition duration-300 font-bold">{{staff.staffName}}</p>
                   }
                 </div>
+
+                <div>Deadline:
+                  <p class="bg-red-600 text-xs text-white px-4 py-1 rounded-lg transition duration-300 font-normal w-max ">{{task.deadline |  date:'dd/MM/yyyy HH:mm a':'UTC'}}</p>
+                </div>
               </div>
+
+
 
               <div style="display: flex;flex-direction: column">
                 <div style="display: grid">
@@ -68,12 +74,8 @@
           <p style="margin: 5px">Add Module</p>
         </div>
       </div>
-      <label for="deadline-date" class="block mb-2 font-semibold">Deadline</label>
-      <input
-             id="deadline-date"
-             type="date"
-             [min]="currentDateTime"
-             class="w-full p-2 mb-4 border rounded-md"/>
+      <label for="date-time" class="block mb-2 font-semibold">Date & Time:</label>
+      <input id="date-time" [min]="currentDateTime" type="datetime-local" required [formControl]="this.taskDetails.controls.deadline" class="w-full p-2 mb-4 border rounded-md"/>
       <div>
 
         <div style="display:flex;align-items: center;margin: 15px">
@@ -127,6 +129,8 @@
               </form>
             </div>
           </div>
+          } @else if (this.taskDetails.controls.createOrAssign.value?.includes('Assign Existing')){
+
           }
         }
 

@@ -11,7 +11,6 @@ import com.upsintern.emplorium.repository.StaffRepository;
 import com.upsintern.emplorium.responsemodel.LoginRegisterResponse;
 import com.upsintern.emplorium.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

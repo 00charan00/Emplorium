@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class Event {
     String eventName;
     String eventVenue;
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm a")
-    private Date eventDate;
+    private Timestamp eventDate;
     String eventDescription;
     @Enumerated(EnumType.STRING)
     EventStatus eventStatus;

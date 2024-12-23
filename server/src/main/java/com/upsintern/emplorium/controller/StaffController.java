@@ -2,11 +2,11 @@ package com.upsintern.emplorium.controller;
 
 import com.upsintern.emplorium.dto.AdminStaffDto;
 import com.upsintern.emplorium.dto.StaffBase;
+import com.upsintern.emplorium.dto.StaffDto;
 import com.upsintern.emplorium.dto.StaffUpdateDto;
 import com.upsintern.emplorium.entity.Staff;
 import com.upsintern.emplorium.responsemodel.LoginRegisterResponse;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
-import com.upsintern.emplorium.dto.StaffDto;
 import com.upsintern.emplorium.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +30,11 @@ public class StaffController {
     @PostMapping("adminAdd")
     public ResponseEntity<LoginRegisterResponse> addNewStaff(@RequestBody AdminStaffDto staffDto){
         return ResponseEntity.ok(staffService.saveNewStaffByAdmin(staffDto));
+    }
+
+    @GetMapping("home")
+    public String getAppStatus(){
+        return "Application running";
     }
 
     @GetMapping("all")

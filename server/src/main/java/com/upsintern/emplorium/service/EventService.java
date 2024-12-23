@@ -8,6 +8,8 @@ import com.upsintern.emplorium.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +36,6 @@ public class EventService {
     }
 
     public void deleteExpiredEvents() {
-        eventRepository.deleteAllByEventDateBefore(new Date(System.currentTimeMillis()));
+        eventRepository.deleteAllByEventDateBefore(Timestamp.from(Instant.now()));
     }
 }

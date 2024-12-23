@@ -8,13 +8,15 @@ import {TaskService} from '../../service/task.service';
 import {UpdateProgressComponent} from '../update-progress/update-progress.component';
 import {PicViewComponent} from '../pic-view/pic-view.component';
 import {AuthService} from '../../service/auth.service';
+import {MatButton} from '@angular/material/button';
 
 
 @Component({
   selector: 'app-task-detail-view',
   imports: [
     MatProgressSpinner,
-    DatePipe
+    DatePipe,
+    MatButton
   ],
   templateUrl: './task-detail-view.component.html'
 })
@@ -62,16 +64,17 @@ export class TaskDetailViewComponent implements OnInit{
     });
   }
 
-  approveTask() {
-    this.taskService.approveTask(this.staffTask.taskId)
-      .subscribe(res => {
-        console.log(res);
-      });
-  }
 
 
   approveOrReject(taskId:string,progressInfoId:string,resultStatus: string) {
     this.taskService.approveOrRejectModule(taskId,progressInfoId,resultStatus)
+      .subscribe(res => {
+        console.log(res);
+      })
+  }
+
+  adminApprove(taskId:string) {
+    this.taskService.adminApprove(taskId)
       .subscribe(res => {
         console.log(res);
       })

@@ -11,6 +11,8 @@ import com.upsintern.emplorium.repository.TaskRepository;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +37,7 @@ public class TaskService {
     @Autowired
     StaffService staffService;
 
-    public ResponseEntity<ResponseBase> createTask(TaskDto taskDto) {
+    public ResponseEntity<ResponseBase> createTask(TaskDto taskDto, String existingTeamId) {
 
         Task task = new Task();
         task.setTaskTittle(taskDto.getTaskTittle());
@@ -43,6 +45,7 @@ public class TaskService {
         task.setTaskId("Task" + UUID.randomUUID());
         task.setTaskProgress(Task.ProgressStatus.INITIATED);
         task.setModules(taskDto.getModules());
+        task.setDeadline(taskDto.getDeadline());
 
         List<String> modules = taskDto.getModules();
         if (modules != null) {
@@ -54,7 +57,16 @@ public class TaskService {
         }
         List<String> teamMembers = taskDto.getTeamMembers();
         String teamLeader = taskDto.getTeamLeader();
-        if (teamMembers != null && teamLeader != null) {
+        if(existingTeamId != null){
+            Team team = teamService.getTeamById(existingTeamId);
+            task.setTeam(team);
+            task.setTeamAssigned(true);
+            staffService.sendNotificationsToStaffs(
+                    team.getTeamMembers().stream().map(Staff::getStaffId).collect(Collectors.toList()),
+                    task.getTaskDescription(),
+                    "Task Assigned : " + task.getTaskTittle()
+            );
+        }else if (teamMembers != null && teamLeader != null) {
             Team team = teamService.formTeam(new TeamDto(taskDto.getTeamName(), teamMembers, teamLeader));
             task.setTeam(team);
             task.setTeamAssigned(true);
@@ -194,7 +206,7 @@ public class TaskService {
             double completedModuleSize = moduleProgress.values().stream().filter(m -> m.equals(Task.ProgressStatus.IN_REVIEW)).count();
             double progressPercentage = (completedModuleSize / modulesSize) * 100;
             task.setProgressPercent(progressPercentage);
-            if (progressPercentage == 100) task.setTaskProgress(Task.ProgressStatus.DONE);
+            if (progressPercentage == 100) task.setTaskProgress(Task.ProgressStatus.IN_REVIEW);
             else task.setTaskProgress(Task.ProgressStatus.IN_PROGRESS);
 
             taskRepository.save(task);
@@ -216,5 +228,15 @@ public class TaskService {
             return team.getTeamLeader().getStaffId().equals(staffId) ||
                     team.getTeamMembers().stream().map(stf -> stf.getStaffId()).toList().contains(staffId);
         }).toList());
+    }
+
+    public ResponseEntity<ResponseBase> adminApprove(String taskId){
+        Task task = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("no such task"));
+        if(task.getProgressPercent() == 100 && task.getTaskProgress().equals(Task.ProgressStatus.IN_REVIEW)){
+            task.setTaskProgress(Task.ProgressStatus.APPROVED);
+            taskRepository.save(task);
+        }
+        return new ResponseEntity<>(new ResponseBase("Approved Task",true), HttpStatus.ACCEPTED);
+
     }
 }

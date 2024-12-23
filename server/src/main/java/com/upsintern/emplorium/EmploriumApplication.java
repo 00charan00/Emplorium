@@ -13,13 +13,16 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableAsync
-public class StaffSyncApplication implements CommandLineRunner {
+public class EmploriumApplication implements CommandLineRunner {
+
     @Autowired
     StaffService staffService;
 
+
     public static void main(String[] args) {
-        SpringApplication.run(StaffSyncApplication.class, args);
+        SpringApplication.run(EmploriumApplication.class, args);
     }
+
     @Override
     public void run(String... args) throws Exception {
         staffService.createAdminAccount();

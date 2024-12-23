@@ -11,6 +11,7 @@ export interface StaffTask {
   progressPercent:number;
   teamAssigned:boolean;
   progressDetails:ProgressInfo[];
+  deadline:string;
 }
 
 export interface ImageDetail {

@@ -258,7 +258,7 @@
       </div>
     }
 
-    @if (staffTask.taskProgress != ProgressStatus.IN_REVIEW && staffTask.taskProgress != ProgressStatus.APPROVED) {
+    @if (staffTask.taskProgress.toString() != "APPROVED") {
       <button
         type="submit"
         class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300"
@@ -266,6 +266,11 @@
         Add Progress Update
       </button>
     }
+    @if(isAdmin && staffTask.progressPercent == 100 && staffTask.taskProgress.toString() === "IN_REVIEW" && staffTask.taskProgress.toString() != "APPROVED"){
+    <div>
+      <button style="background: green;color: white;border-radius: 5px;margin: 5px" mat-raised-button (click)="adminApprove(staffTask.taskId)">+Approve</button>
+    </div>
+  }
   </div>
 </div>
 

@@ -44,7 +44,7 @@ public class SecurityConfig {
                             req.requestMatchers(staffAdminAuthEndPoints).hasRole("ADMIN");
                             req.requestMatchers(teamAdminAuthEndPoints).hasRole("ADMIN");
                             req.requestMatchers(taskAdminAuthEndPoints).hasRole("ADMIN");
-                            req.requestMatchers("/staff/add","/staff/login").permitAll();
+                            req.requestMatchers("/staff/add","/staff/login","/staff/home").permitAll();
                             req.anyRequest().authenticated();
                         }
                 )

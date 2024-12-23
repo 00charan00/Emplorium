@@ -23,7 +23,8 @@ import {TaskDto} from '../model/task-dto';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatDialog} from '@angular/material/dialog';
 import {RouterLink} from '@angular/router';
-import {DatePipe} from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
+import {MatCard} from '@angular/material/card';
 
 
 @Component({
@@ -44,7 +45,9 @@ import {DatePipe} from '@angular/common';
     MatSelectionList,
     MatListOption,
     MatProgressSpinner,
-    RouterLink
+    RouterLink,
+    DatePipe,
+    MatCard
   ],
   templateUrl: './task.component.html'
 })
@@ -60,6 +63,7 @@ export class TaskComponent implements OnInit{
   staffs: StaffBase[] = [];
   listFiltered: StaffBase[] = this.staffs;
   allTeams:Team[]=[];
+  teamListFiltered = this.allTeams;
 
   tasks:Array<StaffTask>=[];
   taskDetails = new FormGroup({
@@ -67,11 +71,13 @@ export class TaskComponent implements OnInit{
     taskDescription: new FormControl(''),
     // modules: new FormArray<FormGroup>([this.moduleGroup]),
     modules: new FormArray([new FormGroup({moduleName: new FormControl('')})]),
+    deadline: new FormControl(new Date()),
     enableTeamCreate: new FormControl(false),
-    createOrAssign: new FormControl('')
+    createOrAssign: new FormControl(''),
+    existingTeamId: new FormControl('')
   })
 
-  teamAssignOrCreateOptions = ['New Team','Assign Existing'];
+  teamAssignOrCreateOptions = ['New Team'];
   currentDateTime: any;
 
   constructor(private taskService:TaskService,private authService:AuthService,private teamService:TeamService,private staffService:StaffService,private matDialog:MatDialog) {
@@ -89,17 +95,18 @@ export class TaskComponent implements OnInit{
     this.teamService.getAllTeams()
       .subscribe(res => {
         this.allTeams = res;
+        this.teamListFiltered = this.allTeams
       })
-    if(this.authService.isAdministrator()) {
-      this.teams = this.allTeams;
-    }else if(this.authService.isAuthenticated()){
-      let teamGet = this.teamService.getMyTeams();
-      if(teamGet != null) {
-        teamGet.subscribe(res => {
-          this.teams = res;
-        })
-      }
-    }
+    // if(this.authService.isAdministrator()) {
+    //   this.teams = this.allTeams;
+    // }else if(this.authService.isAuthenticated()){
+    //   let teamGet = this.teamService.getMyTeams();
+    //   if(teamGet != null) {
+    //     teamGet.subscribe(res => {
+    //       this.teams = res;
+    //     })
+    //   }
+    // }
     this.staffService.getAllStaffBasic()
       .subscribe(res => {
         this.staffs = res;
@@ -108,10 +115,6 @@ export class TaskComponent implements OnInit{
   }
 
 
-  getCurrentDateTime(): string {
-    const now = new Date();
-    return now.toISOString().slice(0, 16);
-  }
 
 
   createTask(){
@@ -119,11 +122,13 @@ export class TaskComponent implements OnInit{
     let taskTittle = this.taskDetails.controls.taskTittle.value;
     let taskDescription = this.taskDetails.controls.taskDescription.value;
     let moduleList = this.taskDetails.controls.modules.value;
+    let deadlineDate = this.taskDetails.controls.deadline.value;
     let teName = this.teamDetails.controls.teamName.value;
     let teamLeaderId = this.teamDetails.controls.teamLeader.value;
     let teamMembersIds = this.teamDetails.controls.teamMembers.value;
     let enableTeam = this.taskDetails.controls.enableTeamCreate.value;
     let createAssign = this.taskDetails.controls.createOrAssign.value;
+    let existTeamId = this.taskDetails.controls.existingTeamId.value;
     let modules:string[] = [];
     moduleList.forEach(m => {
       if(m != null && m.moduleName != null && m.moduleName != ''){
@@ -131,9 +136,9 @@ export class TaskComponent implements OnInit{
       }
     });
 
-    if(taskTittle != null && taskTittle != '' && taskDescription != null && taskDescription != '' && modules.length != 0){
+    if(taskTittle != null && taskTittle != '' && taskDescription != null && taskDescription != '' && modules.length != 0 && deadlineDate != null){
       let task:TaskDto;
-
+      const formattedDate = formatDate(deadlineDate, 'dd-MM-yyyy HH:mm a', 'en-US');
       if(enableTeam) {
         if (createAssign == 'New Team') {
           if (teName != null && teamLeaderId != null && teamMembersIds != null &&
@@ -148,30 +153,45 @@ export class TaskComponent implements OnInit{
                 modules,
                 teamMembersIds,
                 teamLeaderId,
-                teName
+                teName,
+                formattedDate
               )
               console.log(task);
-              this.postCreateTask(task);
+              this.postCreateTask(task,null);
             }
           } else {
             console.log("Fill all details")
           }
         }else if(createAssign == 'Assign Existing'){
+          if (existTeamId != null && existTeamId != '') {
+              task = new TaskDto(
+                taskTittle,
+                taskDescription,
+                modules,
+                [], '', '',
+                formattedDate
+              )
+              console.log(task);
+              this.postCreateTask(task,existTeamId);
 
+          } else {
+            console.log("Fill all details from in out")
+          }
         }else{
-          console.log("Choose one or remove team");
+          console.log("Select existing team or create new team");
         }
       }else{
         task = new TaskDto(
           taskTittle,
           taskDescription,
           modules,
-          [],'',''
+          [],'','',
+          formattedDate
         )
 
         console.log(task);
 
-        this.postCreateTask(task);
+        this.postCreateTask(task,null);
       }
 
     }else{
@@ -198,6 +218,13 @@ export class TaskComponent implements OnInit{
     );
   }
 
+  filterTeamList(event:any) {
+    let query = event.target.value;
+    this.teamListFiltered = this.allTeams.filter(t =>
+      t.teamName.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
   checkChange(event:any) {
     let valueId = event.target.value;
     if(event.target.checked){
@@ -212,8 +239,9 @@ export class TaskComponent implements OnInit{
   }
 
 
-  postCreateTask(task:TaskDto){
-    this.taskService.createTask(task).subscribe(res => {
+
+  postCreateTask(task:TaskDto,existTeamId:string|null){
+    this.taskService.createTask(task,existTeamId).subscribe(res => {
       console.log(res);
     });
   }

@@ -34,13 +34,16 @@ export class TaskService {
     return null;
   }
 
-  createTask(task:TaskDto){
+  createTask(task:TaskDto,existTeamId:string|null){
     let url = `${this.API_BASE_URL}create`;
     let username = localStorage.getItem('username');
     let pass = localStorage.getItem('password')
     const headerVals = new HttpHeaders()
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
+    if(existTeamId != null){
+      return this.http.post<ResponseBase>(url,task,{headers:headerVals,params:{existingTeamId:existTeamId}});
+    }
     return this.http.post<ResponseBase>(url,task,{headers:headerVals});
   }
 
@@ -115,5 +118,15 @@ export class TaskService {
       .set('Authorization','Basic ' + btoa(username+':'+pass))
       .set('Accept','application/json');
     return this.http.put<ResponseBase>(url,null,{headers:headerVals,params:{taskId:taskId,progressInfoId:progressInfoId,progressStatus:progressStatus}});
+  }
+
+  adminApprove(taskId:string){
+    let url = `${this.API_BASE_URL}approve-task`;
+    let username = localStorage.getItem('username');
+    let pass = localStorage.getItem('password')
+    const headerVals = new HttpHeaders()
+      .set('Authorization','Basic ' + btoa(username+':'+pass))
+      .set('Accept','application/json');
+    return this.http.post(url,null,{headers:headerVals, params:{taskId:taskId}})
   }
 }

@@ -2,11 +2,9 @@ package com.upsintern.emplorium.controller;
 
 
 import com.upsintern.emplorium.dto.TaskDto;
-import com.upsintern.emplorium.entity.Meeting;
 import com.upsintern.emplorium.entity.Task;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.service.TaskService;
-import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +21,11 @@ public class TaskController {
     TaskService taskService;
 
     @PostMapping("create")
-    public ResponseEntity<ResponseBase> createTask(@RequestBody TaskDto taskDto){
-        return taskService.createTask(taskDto);
+    public ResponseEntity<ResponseBase> createTask(
+            @RequestBody TaskDto taskDto,
+            @RequestParam(required = false) String existingTeamId
+    ){
+        return taskService.createTask(taskDto,existingTeamId);
     }
 
     @GetMapping("all")
@@ -95,6 +96,13 @@ public class TaskController {
     @GetMapping("in-review")
     public ResponseEntity<List<Task>> getAllTasksInReview(){
         return taskService.getAllTasksInReview();
+    }
+
+    @PostMapping("approve-task")
+    public ResponseEntity<ResponseBase> AdminApproveTask(
+            @RequestParam String taskId
+    ){
+        return taskService.adminApprove(taskId);
     }
 
 }

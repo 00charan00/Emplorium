@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -15,7 +16,7 @@ public class EventDto {
     String eventName;
     String eventVenue;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm a")
-    private Date eventDate;
+    private Timestamp eventDate;
     String eventDescription;
     String eventPoster;
 }

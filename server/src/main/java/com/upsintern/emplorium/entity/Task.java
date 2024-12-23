@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,6 +33,8 @@ public class Task {
     Set<ProgressInfo> progressDetails;
     @ElementCollection
     List<String> modules;
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm a")
+    Date deadline;
 
     public enum ProgressStatus{
         INITIATED,

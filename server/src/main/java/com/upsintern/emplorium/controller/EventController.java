@@ -4,7 +4,6 @@ import com.upsintern.emplorium.dto.EventDto;
 import com.upsintern.emplorium.entity.Event;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.service.EventService;
-import jakarta.servlet.ServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

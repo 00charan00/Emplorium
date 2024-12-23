@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  emplorium-bk:
+    build:
+      dockerfile: /server/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://emplorium-db:3306/staffsync
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8090:8080"
+    depends_on:
+      - emplorium-db
+    networks:
+      - emplorium-net
+
+  emplorium-fe:
+    build:
+      dockerfile: /client/Dockerfile
+    ports:
+      - "4290:80"
+    depends_on:
+      - emplorium-bk
+    networks:
+      - emplorium-net
+
+  emplorium-db:
+    image: mysql
+    restart: always
+    ports:
+      - "3301:3306"
+    environment:
+      MYSQL_DATABASE: staffsync
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - emplorium-net
+
+
+
+networks:
+  emplorium-net:
+    driver: bridge
