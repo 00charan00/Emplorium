@@ -5,6 +5,7 @@ import com.upsintern.emplorium.entity.Event;
 import com.upsintern.emplorium.repository.EventRepository;
 import com.upsintern.emplorium.responsemodel.ResponseBase;
 import com.upsintern.emplorium.utils.Mapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class EventService {
         eventRepository.save(event);
         return new ResponseBase("Event Cancelled",true);
     }
-
+    @Transactional
     public void deleteExpiredEvents() {
         eventRepository.deleteAllByEventDateBefore(Timestamp.from(Instant.now()));
     }
