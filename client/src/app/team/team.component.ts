@@ -2,31 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Team} from '../model/team';
 import {TeamService} from '../service/team.service';
 import {AuthService} from '../service/auth.service';
-
-import {
-  MatAccordion,
-  MatExpansionPanel,
-  MatExpansionPanelHeader,
-  MatExpansionPanelTitle
-} from '@angular/material/expansion';
-import {MatCheckbox} from '@angular/material/checkbox';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {StaffBase} from '../model/staff-base';
 import {StaffService} from '../service/staff.service';
-import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
 import {TeamDto} from '../model/team-dto';
 
 @Component({
   selector: 'app-team',
   imports: [
-    MatAccordion,
-    MatCheckbox,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    ReactiveFormsModule,
-    MatRadioButton,
-    MatRadioGroup
+    ReactiveFormsModule
   ],
   templateUrl: './team.component.html'
 })
