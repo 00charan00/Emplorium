@@ -1,52 +1,74 @@
 <div class="meeting-page flex flex-col lg:flex-row gap-8 p-8">
+<!--uncomment below if responsive code fails desired job-->
+<!--    <div class="static-meetings flex-1 my-5">-->
+<!--      <div class="meeting-card p-6 bg-white rounded-lg shadow-lg">-->
+<!--        <h2 class="text-2xl font-semibold mb-4">Tasks</h2>-->
+<!--        @for (task of tasks; track task.taskId) {-->
+<!--          <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4" [routerLink]="['/taskinfo',task.taskId]">-->
 
-    <div class="static-meetings flex-1 my-5">
-      <div class="meeting-card p-6 bg-white rounded-lg shadow-lg">
-        <h2 class="text-2xl font-semibold mb-4">Tasks</h2>
-        @for (task of tasks; track task.taskId) {
-          <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4" [routerLink]="['/taskinfo',task.taskId]">
+<!--            <div style="display: flex;justify-content: space-between;align-items: center">-->
+<!--              <div style="display: flex;flex-direction: column">-->
+<!--                <h3 class="text-xl mb-2">Task : <strong>{{task.taskTittle}}</strong></h3>-->
+<!--                <div>Task Description:-->
+<!--                  <p class="text-black px-4 py-2 rounded-lg transition duration-300 font-normal w-max">{{task.taskDescription}}</p>-->
+<!--                </div>-->
+<!--                <div>Team Leader:-->
+<!--                  <p class="bg-red-200 text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{task.team.teamLeader.staffName}}</p>-->
+<!--                </div>-->
+<!--                <p>Team Members:</p>-->
+<!--                <div class="flex gap-4 mt-2">-->
+<!--                  @for (staff of task.team.teamMembers;track staff.staffId){-->
+<!--                    <p class="bg-blue-100 text-black px-4 py-2 rounded-lg transition duration-300 font-bold">{{staff.staffName}}</p>-->
+<!--                  }-->
+<!--                </div>-->
 
-            <div style="display: flex;justify-content: space-between;align-items: center">
-              <div style="display: flex;flex-direction: column">
-                <h3 class="text-xl mb-2">Task : <strong>{{task.taskTittle}}</strong></h3>
-                <div>Task Description:
-                  <p class="text-black px-4 py-2 rounded-lg transition duration-300 font-normal w-max">{{task.taskDescription}}</p>
-                </div>
-                <div>Team Leader:
-                  <p class="bg-red-200 text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{task.team.teamLeader.staffName}}</p>
-                </div>
-                <p>Team Members:</p>
-                <div class="flex gap-4 mt-2">
-                  @for (staff of task.team.teamMembers;track staff.staffId){
-                    <p class="bg-blue-100 text-black px-4 py-2 rounded-lg transition duration-300 font-bold">{{staff.staffName}}</p>
-                  }
-                </div>
+<!--                <div>Deadline:-->
+<!--                  <p class="bg-red-600 text-xs text-white px-4 py-1 rounded-lg transition duration-300 font-normal w-max ">{{task.deadline |  date:'dd/MM/yyyy HH:mm a':'UTC'}}</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        }-->
+<!--      </div>-->
+<!--    </div>-->
 
-                <div>Deadline:
-                  <p class="bg-red-600 text-xs text-white px-4 py-1 rounded-lg transition duration-300 font-normal w-max ">{{task.deadline |  date:'dd/MM/yyyy HH:mm a':'UTC'}}</p>
-                </div>
+
+
+  <div class="static-meetings flex-1 my-5">
+    <div class="meeting-card p-6 bg-white rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Tasks</h2>
+      @for (task of tasks; track task.taskId) {
+        <div class="meeting-card p-4 bg-gray-100 rounded-lg shadow-md mb-4" [routerLink]="['/taskinfo',task.taskId]">
+          <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+            <!-- Task Details Section -->
+            <div class="flex flex-col space-y-2 w-full lg:w-2/3">
+              <h3 class="text-xl mb-2">Task: <strong>{{task.taskTittle}}</strong></h3>
+              <div>Task Description:
+                <p class="text-black px-4 py-2 rounded-lg transition duration-300 font-normal w-max">{{task.taskDescription}}</p>
+              </div>
+              <div>Team Leader:
+                <p class="bg-red-200 text-black px-4 py-2 rounded-lg transition duration-300 font-bold w-max">{{task.team.teamLeader.staffName}}</p>
+              </div>
+              <p>Team Members:</p>
+              <div class="flex gap-4 mt-2 flex-wrap">
+                @for (staff of task.team.teamMembers;track staff.staffId){
+                  <p class="bg-blue-100 text-black px-4 py-2 rounded-lg transition duration-300 font-bold">{{staff.staffName}}</p>
+                }
               </div>
 
-
-
-              <div style="display: flex;flex-direction: column">
-                <div style="display: grid">
-                  <mat-progress-spinner style="grid-column: 1;grid-row: 1;--mdc-circular-progress-active-indicator-color: #dfe7d3" mode="determinate" value="100"></mat-progress-spinner>
-                  <mat-progress-spinner style="grid-column: 1;grid-row: 1;--mdc-circular-progress-active-indicator-color: #4a7301" mode="determinate" value="{{task.progressPercent}}"></mat-progress-spinner>
-                </div>
-                <p>Progress {{task.progressPercent}}%</p>
+              <div>Deadline:
+                <p class="bg-red-600 text-xs text-white px-4 py-1 rounded-lg transition duration-300 font-normal w-max ">{{task.deadline | date:'dd/MM/yyyy HH:mm a':'UTC'}}</p>
               </div>
-
-
             </div>
-
           </div>
-        }
-      </div>
+        </div>
+      }
     </div>
+  </div>
 
 
-<div class="flex-1 my-5">
+
+  <div class="flex-1 my-5">
   <div class="meeting-card p-6 bg-white rounded-lg shadow-lg max-w-sm mx-auto">
     <h2 class="text-2xl font-semibold mb-4">Create New Task</h2>
     <form [formGroup]="taskDetails">

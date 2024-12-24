@@ -20,11 +20,9 @@ import {TeamService} from '../service/team.service';
 import {StaffService} from '../service/staff.service';
 import {MatListOption, MatSelectionList} from '@angular/material/list';
 import {TaskDto} from '../model/task-dto';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatDialog} from '@angular/material/dialog';
 import {RouterLink} from '@angular/router';
 import {DatePipe, formatDate} from '@angular/common';
-import {MatCard} from '@angular/material/card';
 
 
 @Component({
@@ -44,7 +42,6 @@ import {MatCard} from '@angular/material/card';
     MatRadioGroup,
     MatSelectionList,
     MatListOption,
-    MatProgressSpinner,
     RouterLink,
     DatePipe
   ],
