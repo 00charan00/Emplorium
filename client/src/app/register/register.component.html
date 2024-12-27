@@ -1,3 +1,56 @@
+<!--<div class="register-page bg-gray-100 min-h-screen flex items-center justify-center">-->
+<!--  <div class="register-container bg-white shadow-lg rounded-lg p-8 max-w-md w-full">-->
+<!--    <h2 class="text-2xl font-bold text-center mb-6">Register</h2>-->
+<!--    <form class="space-y-4">-->
+<!--      <div>-->
+<!--        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name:</label>-->
+<!--        <input-->
+<!--          id="name"-->
+<!--          type="text"-->
+<!--          [(ngModel)]="name"-->
+<!--          placeholder="Enter your name"-->
+<!--          name="name"-->
+<!--          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"-->
+<!--        />-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email:</label>-->
+<!--        <input-->
+<!--          id="email"-->
+<!--          type="email"-->
+<!--          [(ngModel)]="email"-->
+<!--          placeholder="Enter your email"-->
+<!--          name="email"-->
+<!--          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"-->
+<!--        />-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>-->
+<!--        <input-->
+<!--          id="password"-->
+<!--          type="password"-->
+<!--          [(ngModel)]="password"-->
+<!--          placeholder="Enter your password"-->
+<!--          name="password"-->
+<!--          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"-->
+<!--        />-->
+<!--      </div>-->
+<!--      <button-->
+<!--        type="button"-->
+<!--        (click)="register()"-->
+<!--        class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"-->
+<!--      >-->
+<!--        Register-->
+<!--      </button>-->
+<!--    </form>-->
+<!--    <p class="text-center text-sm text-gray-600 mt-4">-->
+<!--      Already have an account?-->
+<!--      <a routerLink="/login" class="text-blue-500 hover:underline">Login here</a>-->
+<!--    </p>-->
+<!--  </div>-->
+<!--</div>-->
+
+
 <div class="register-page bg-gray-100 min-h-screen flex items-center justify-center">
   <div class="register-container bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
     <h2 class="text-2xl font-bold text-center mb-6">Register</h2>
@@ -12,6 +65,7 @@
           name="name"
           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
+        <p *ngIf="name === ''" class="text-red-500 text-sm">Name is required.</p>
       </div>
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
@@ -23,6 +77,9 @@
           name="email"
           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
+        <p *ngIf="!isValidEmail(email) && email !== ''" class="text-red-500 text-sm">
+          Please enter a valid email.
+        </p>
       </div>
       <div>
         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
@@ -34,6 +91,9 @@
           name="password"
           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
+        <p *ngIf="!isValidPassword(password) && password !== ''" class="text-red-500 text-sm">
+          Password must be at least 8 characters long, include at least one number and one special character.
+        </p>
       </div>
       <button
         type="button"
@@ -49,3 +109,4 @@
     </p>
   </div>
 </div>
+
