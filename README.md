@@ -33,7 +33,7 @@ Database: MySQL
 
 Team Members:
 
-Charan Adithya
+Charan Adhithya
 Muthu Eswari
 Saran Raj
 
@@ -83,9 +83,6 @@ Employees:
 
    Track personal and team-based progress.
 
-Screenshots:
-
-Need to add
 
 Contributing:
 
